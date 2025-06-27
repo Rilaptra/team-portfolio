@@ -7,7 +7,7 @@ import { Moon, Sun } from "lucide-react";
 import { animatePageOut } from "@/utils/animations";
 import useTheme from "next-theme";
 import { useEffect, useState } from "react";
-import { getRandomBorderRadiusValue } from "@/utils/utils";
+import { getRandomBorderRadiusValue } from "@/lib/utils";
 
 const links = [
   {
@@ -45,7 +45,10 @@ export default function Header() {
   }, []);
   return (
     <nav className="fixed z-[99999] flex w-full justify-between">
-      <div></div>
+      <div className="mt-2 ml-4 flex flex-col gap-y-2">
+        {/* <h4>website</h4>
+        <h4>developer</h4> */}
+      </div>
 
       {/* Navigation Route */}
       <ul className="text-onyx dark:text-offwhite flex justify-around gap-3 rounded-b-full bg-gradient-to-b from-slate-200 to-transparent px-7 pt-2 pb-1 font-semibold transition-colors duration-300 dark:from-neutral-600/25">
@@ -55,7 +58,7 @@ export default function Header() {
             onClick={() => handleClick(link.href)}
             style={{ borderRadius: borderRadii || "0" }}
             className={cn(
-              "px-3 py-1 duration-300 ease-in-out hover:cursor-pointer hover:rounded-xl",
+              "px-3 py-1 transition-all duration-300 ease-in-out hover:cursor-pointer hover:rounded-xl",
               params === link.href
                 ? "bg-[#76ABAE]/10 dark:bg-[#76ABAE]/10"
                 : "",
