@@ -44,14 +44,11 @@ export default function Header() {
     setBorderRadii(getRandomBorderRadiusValue());
   }, []);
   return (
-    <nav className="fixed z-[99999] flex w-full justify-between">
-      <div className="mt-2 ml-4 flex flex-col gap-y-2">
-        {/* <h4>website</h4>
-        <h4>developer</h4> */}
-      </div>
+    <nav className="fixed z-[99999] flex w-full">
+      <div className="mt-2 ml-4 flex flex-col gap-y-2"></div>
 
       {/* Navigation Route */}
-      <ul className="text-onyx dark:text-offwhite flex justify-around gap-3 rounded-b-full bg-gradient-to-b from-slate-200 to-transparent px-7 pt-2 pb-1 font-semibold transition-colors duration-300 dark:from-neutral-600/25">
+      <ul className="text-onyx dark:text-offwhite absolute left-[50%] flex max-h-11 -translate-x-[50%] justify-around gap-3 rounded-b-full bg-gradient-to-b from-slate-200 to-transparent px-7 pt-2 pb-1 font-semibold transition-colors duration-300 dark:from-neutral-600/25">
         {links.map((link) => (
           <li
             key={link.name}
@@ -70,7 +67,7 @@ export default function Header() {
       </ul>
 
       {/* Toggle Theme & Hamburger Menu (Mobile) */}
-      <div className="mt-2 mr-4">
+      <div className="absolute top-2 right-4">
         <Button
           variant="outline"
           onClick={toggle}

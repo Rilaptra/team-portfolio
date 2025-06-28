@@ -1,3 +1,4 @@
+// src/app/about/page.tsx
 import About from "@/components/About";
 export async function generateMetadata() {
   return {
