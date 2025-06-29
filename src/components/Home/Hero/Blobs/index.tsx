@@ -134,6 +134,7 @@ export function Blob({
     vx: random(-0.75, 0.75),
     vy: random(-0.75, 0.75),
   });
+  
   const rotation = useRef(0);
   const rotationSpeed = useRef(
     random(0.1, 0.4) * (Math.random() > 0.5 ? 1 : -1),
