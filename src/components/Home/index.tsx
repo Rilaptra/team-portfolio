@@ -9,7 +9,7 @@ import SideBar from "../SideBar";
 export default function Home() {
   return (
     <main>
-      <SideBar />
+      {/* <SideBar /> */}
 
       <Hero />
 

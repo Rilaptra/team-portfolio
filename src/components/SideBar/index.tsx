@@ -1,59 +1,44 @@
 // components/SideBar.tsx (file yang sudah kamu punya)
-import { NavItem } from "@/lib/types"; // Sesuaikan path
-import TreeItem from "./TreeItem"; // Sesuaikan path
+import { NavItem } from "@/lib/types";
+import TreeItem from "./TreeItem";
+import ErrorBoundary from "../Utils/ErrorBoundary";
+import { useEffect, useState } from "react";
 
 // Taruh data navItems di sini (seperti dari langkah 1)
 const navItems: NavItem[] = [
   {
-    id: "getting-started",
-    title: "Getting Started",
-    href: "#start",
-    children: [
-      { id: "intro", title: "Introduction", href: "#intro" },
-      { id: "installation", title: "Installation", href: "#install" },
-    ],
+    title: "Welcome",
+    href: "#hero",
   },
   {
-    id: "core-concepts",
-    title: "Core Concepts",
-    href: "#core",
-    children: [
-      {
-        id: "rendering",
-        title: "Rendering",
-        href: "#rendering",
-        children: [
-          { id: "client", title: "Client Components", href: "#client" },
-          { id: "server", title: "Server Components", href: "#server" },
-        ],
-      },
-      { id: "fetching", title: "Data Fetching", href: "#fetching" },
-    ],
+    title: "About Us",
+    href: "#aboutUs",
   },
   {
-    id: "about",
-    title: "About",
-    href: "#about",
+    title: "Projects",
+    href: "#projects",
+  },
+  {
+    title: "Why Choose Us",
+    href: "#whyChooseUs",
   },
 ];
 
 export default function SideBar() {
+  const [items, setItems] = useState(navItems);
+  useEffect(() => {}, []);
   return (
-    <div className="bg-onyx/30 item-center fixed top-[50%] left-4 z-[999] hidden w-auto max-w-xs -translate-y-[50%] flex-col rounded-xl p-5 text-white lg:flex">
-      <h1 className="mb-2 text-lg font-thin tracking-wide">
-        What's on this page?
-      </h1>
-      <div className="flex flex-col">
-        {navItems.map((item, index) => (
-          <TreeItem
-            key={item.id}
-            item={item}
-            isLast={index === navItems.length - 1}
-            // Untuk level paling atas, prefix-nya kosong
-            prefix=""
-          />
-        ))}
+    <ErrorBoundary>
+      <div className="fixed top-[50%] left-4 z-[999] hidden w-auto max-w-xs -translate-y-[50%] flex-col rounded-xl bg-gradient-to-br from-slate-200/80 to-transparent p-5 backdrop-blur-xs lg:flex 2xl:left-[calc((100vw-1536px)/2+16px)] dark:from-neutral-600/20">
+        <h1 className="dark:text-offwhite text-onyx mb-2 text-lg font-thin tracking-wide">
+          What's on this page?
+        </h1>
+        <div className="flex flex-col">
+          {navItems.map((item, index) => (
+            <TreeItem key={index} item={item} prefix="" />
+          ))}
+        </div>
       </div>
-    </div>
+    </ErrorBoundary>
   );
 }

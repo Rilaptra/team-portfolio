@@ -134,7 +134,7 @@ export function Blob({
     vx: random(-0.75, 0.75),
     vy: random(-0.75, 0.75),
   });
-  
+
   const rotation = useRef(0);
   const rotationSpeed = useRef(
     random(0.1, 0.4) * (Math.random() > 0.5 ? 1 : -1),
@@ -214,12 +214,9 @@ export function Blob({
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
     if (animated) {
-      intervalId = setInterval(
-        () => {
-          updateBorderRadius();
-        },
-        random(2000, 4000),
-      );
+      intervalId = setInterval(() => {
+        updateBorderRadius();
+      }, 2000);
     }
     return () => clearInterval(intervalId);
   }, [animated, updateBorderRadius]);
@@ -231,7 +228,7 @@ export function Blob({
         width: `${blobSize.width}px`,
         height: `${blobSize.height}px`,
         borderRadius: borderRadii,
-        transition: animated ? `border-radius 2000ms ease-in-out` : "none",
+        transition: animated ? `border-radius 2s ease-in-out` : "none",
         filter: style.filter,
         opacity: style.opacity,
         willChange: "transform",
