@@ -5,10 +5,11 @@ import Hero from "./Hero";
 import WhyChooseUs from "./WhyChooseUs";
 import Projects from "./Projects";
 import SideBar from "../SideBar";
+import Main from "../Utils/Main";
 
 export default function Home() {
   return (
-    <main>
+    <Main id="home">
       {/* <SideBar /> */}
 
       <Hero />
@@ -18,6 +19,6 @@ export default function Home() {
       <Projects />
 
       <WhyChooseUs />
-    </main>
+    </Main>
   );
 }

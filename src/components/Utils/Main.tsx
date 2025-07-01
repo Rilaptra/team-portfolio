@@ -2,34 +2,28 @@ import ErrorBoundary from "@/components/Utils/ErrorBoundary";
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 
-interface SectionProps {
+interface MainProps {
   id: string;
   children?: ReactNode;
   className?: string;
-  padding?: boolean;
-  minHeightScreen?: boolean;
 }
 
-export default function Section({
+export default function Main({
   id,
   children = null,
   className = "",
-  padding = true,
-  minHeightScreen = true,
-}: SectionProps) {
+}: MainProps) {
   return (
     <ErrorBoundary>
-      <section
+      <main
         id={id}
         className={cn(
-          "mx-auto max-w-[1536px]",
-          minHeightScreen && "min-h-screen",
-          padding && "px-4",
+          "flex flex-col gap-[100px] md:gap-[125px] lg:gap-[150px]",
           className,
         )}
       >
         {children}
-      </section>
+      </main>
     </ErrorBoundary>
   );
 }
