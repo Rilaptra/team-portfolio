@@ -58,7 +58,7 @@ export default function Blobs({ className, amount, animated }: BlobsProps) {
     return Array.from({ length: amount }).map((_, i) => ({
       key: i,
       size: random(20, 150),
-      gradientClass: random(gradientColorsList),
+      gradientClass: random(gradientColorsList)!,
       // Simpan juga style non-posisi di sini
       initialStyle: {
         filter: `blur(${random(3, 5)}px)`,
