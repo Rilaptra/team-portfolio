@@ -8,7 +8,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <>
+    <div className="overflow-hidden">
       <div
         id="banner-1"
         className="fixed top-0 left-0 z-[999999999] h-1/4 min-w-screen border-transparent bg-neutral-950 dark:bg-neutral-50"
@@ -26,6 +26,6 @@ export default function Template({ children }: { children: React.ReactNode }) {
         className="fixed top-3/4 left-0 z-[999999999] h-1/4 min-w-screen border-transparent bg-neutral-950 dark:bg-neutral-50"
       />
       {children}
-    </>
+    </div>
   );
 }

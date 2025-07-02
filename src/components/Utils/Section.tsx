@@ -1,6 +1,6 @@
 import ErrorBoundary from "@/components/Utils/ErrorBoundary";
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
+import { ReactNode, Ref } from "react";
 
 interface SectionProps {
   id: string;
@@ -8,6 +8,7 @@ interface SectionProps {
   className?: string;
   padding?: boolean;
   minHeightScreen?: boolean;
+  ref?: Ref<HTMLElement>;
 }
 
 export default function Section({
@@ -16,6 +17,7 @@ export default function Section({
   className = "",
   padding = true,
   minHeightScreen = true,
+  ref,
 }: SectionProps) {
   return (
     <ErrorBoundary>
@@ -27,6 +29,7 @@ export default function Section({
           padding && "px-4",
           className,
         )}
+        ref={ref}
       >
         {children}
       </section>

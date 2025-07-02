@@ -6,6 +6,7 @@ import WhyChooseUs from "./WhyChooseUs";
 import Projects from "./Projects";
 import SideBar from "../SideBar";
 import Main from "../Utils/Main";
+import Promotion from "./Promotion";
 
 export default function Home() {
   return (
@@ -19,6 +20,9 @@ export default function Home() {
       <Projects />
 
       <WhyChooseUs />
+
+      <Promotion />
+      
     </Main>
   );
 }
