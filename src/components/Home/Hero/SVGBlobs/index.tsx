@@ -1,19 +1,12 @@
 "use client";
 import { cn, random } from "@/lib/utils";
-import { useId, useMemo, useRef } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+import * as blobv2 from "blobs/v2";
 
 gsap.registerPlugin(useGSAP, MorphSVGPlugin);
-
-const BLOB_SHAPES: string[] = [
-  "M191.25,361.83C252.52,363.85,312.92,332.19,340.75,277.56C366.62,226.76,343.66,169.07,314.31,120.19C286.1,73.21,246.04,29.74,191.25,28.61C134.85,27.44,86.46,65.62,59.03,114.91C32.39,162.78,32.04,219.94,57.89,268.23C85.37,319.55,133.07,359.91,191.25,361.83",
-  "M191.25,371.35C247.98,369.52,266.75,300.38,295.38,251.37C324.47,201.59,373.22,152.35,350.07,99.55C324.18,40.5,255.72,13.72,191.25,13.84C127,13.96,61.1,42.15,33.48,100.16C8.36,152.94,45.4,207.95,74.79,258.48C103.93,308.56,133.34,373.22,191.25,371.35",
-  "M191.25,296.08C235.3,296.82,284.00,295.52,308.94,259.19C336.59,218.91,336.43,163.81,310.43,122.43C285.83,83.26,237.5,71.5,191.25,71.84C145.72,72.17,98.63,85.21,75.06,124.16C50.77,164.3,53.92,216.5,80.19,255.37C103.85,290.38,148.99,295.37,191.25,296.08",
-  "M191.25,314.55C249.59,318.24,321.37,333.86,352.03,284.08C383.23,233.43,339.94,174.07,309.09,123.21C279.94,75.17,247.24,23.71,191.25,19.06C128.15,13.81,63.12,44.23,33.78,100.33C6,153.46,26.75,217.41,62.26,265.72C91.44,305.42,142.07,311.43,191.25,314.55",
-  "M191.25,360.6C244.91,354.09,274.84,301.58,296.8,252.19C314.15,213.17,312.92,170.28,292.55,132.76C271.07,93.19,236.25,59.11,191.25,57.78C144.25,56.38,106.25,88.13,78.95,126.41C44.57,174.64,3.88,231.23,29.49,284.63C57.09,342.2,127.86,368.3,191.25,360.6",
-];
 
 const GRADIENTS: { from: string; to: string }[] = [
   { from: "var(--color-purple-400)", to: "var(--color-indigo-600)" },
@@ -39,10 +32,15 @@ interface BlobsProps {
   floating?: boolean;
 }
 
-/**
- * Komponen untuk merender beberapa blob secara dinamis dengan
- * posisi, ukuran, dan warna acak, serta animasi melayang opsional.
- */
+interface BlobData {
+  id: number;
+  y: number;
+  x: number;
+  size: number;
+  gradientIndex: number;
+  blobIndex: number;
+}
+
 export default function Blobs({
   amount,
   className,
@@ -50,56 +48,113 @@ export default function Blobs({
   floating = true,
 }: BlobsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [blobsGenerated, setBlobsGenerated] = useState<BlobData[] | null>([]);
 
-  const blobs = useMemo(() => {
+  useEffect(() => {
     const totalGradients = GRADIENTS.length;
-    const totalShapes = BLOB_SHAPES.length;
 
-    return Array.from({ length: amount }, (_, i) => ({
-      id: i,
-      top: `${random(75)}%`,
-      left: `${random(75)}%`,
-      size: Math.random() * 120 + 80,
-      gradientIndex: Math.floor(Math.random() * totalGradients) + 1,
-      blobIndex: Math.floor(Math.random() * totalShapes),
-    }));
+    setBlobsGenerated(
+      Array.from({ length: amount }, (_, i) => ({
+        id: i,
+        x: random(containerRef.current!.offsetWidth),
+        y: random(containerRef.current!.offsetHeight),
+        size: random(80, 200),
+        gradientIndex: random(totalGradients - 1),
+        blobIndex: i,
+      })),
+    );
   }, [amount]);
 
   useGSAP(
     () => {
-      if (!floating || !containerRef.current) return;
+      if (!floating || !containerRef.current || !blobsGenerated?.length) return;
 
       const blobElements = gsap.utils.toArray<HTMLDivElement>(
         ".blob-item",
         containerRef.current,
       );
 
-      blobElements.forEach((blob) => {
-        const svgElement = blob.querySelector("svg") as SVGSVGElement;
+      function setVelocity() {
+        blobElements.forEach((blob) => {
+          const speed = random(0.03, 0.07, true);
+          const angle = random(0, 360, true) * (Math.PI / 180);
+          (blob as any).vx = Math.cos(angle) * speed;
+          (blob as any).vy = Math.sin(angle) * speed;
+        });
+      }
 
-        if (!svgElement) return;
-
-        const blobWidth = svgElement.width.baseVal.value;
-        const blobHeight = svgElement.height.baseVal.value;
-
-        const animateBlob = () => {
-          gsap.to(blob, {
-            top:
-              random(0, containerRef.current!.offsetHeight - blobHeight) + "px",
-            left:
-              random(0, containerRef.current!.offsetWidth - blobWidth) + "px",
-            rotation: random(-45, 45),
-            duration: random(10, 20),
-            ease: "none",
-            onComplete: animateBlob,
-          });
-        };
-
-        // Mulai animasi untuk pertama kali
-        animateBlob();
+      blobElements.forEach((blob, i) => {
+        const { x, y } = blobsGenerated[i];
+        gsap.set(blob, { x, y });
       });
+
+      gsap.fromTo(
+        blobElements,
+        {
+          scale: 0,
+          opacity: 0,
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          stagger: 0.3,
+          duration: 1,
+        },
+      );
+
+      setVelocity();
+
+      const updateAnimation: GSAPTickerCallback = (_time, deltaTime) => {
+        blobElements.forEach((blob) => {
+          const neutralBlob = blob as any;
+          const svgElement = blob.querySelector("svg") as SVGSVGElement;
+          const container = {
+            width: containerRef.current!.offsetWidth,
+            height: containerRef.current!.offsetHeight,
+          };
+          const blobProperty = {
+            width: svgElement.width.baseVal.value,
+            height: svgElement.height.baseVal.value,
+          };
+
+          const currentPos = {
+            x: gsap.getProperty(blob, "x") as number,
+            y: gsap.getProperty(blob, "y") as number,
+          };
+
+          currentPos.x += neutralBlob.vx * deltaTime;
+          currentPos.y += neutralBlob.vy * deltaTime;
+
+          if (
+            currentPos.x + blobProperty.width > container.width ||
+            currentPos.x < 0
+          ) {
+            neutralBlob.vx *= -1;
+            currentPos.x = Math.max(
+              0,
+              Math.min(currentPos.x, container.width - blobProperty.width),
+            );
+          }
+
+          if (
+            currentPos.y + blobProperty.height > container.height ||
+            currentPos.y < 0
+          ) {
+            neutralBlob.vy *= -1;
+            currentPos.y = Math.max(
+              0,
+              Math.min(currentPos.y, container.height - blobProperty.height),
+            );
+          }
+
+          gsap.set(blob, { ...currentPos });
+        });
+      };
+
+      gsap.ticker.add(updateAnimation);
+      return () => gsap.ticker.remove(updateAnimation);
     },
-    { scope: containerRef, dependencies: [floating, blobs] }, // Jalankan ulang jika floating atau blobs berubah
+    { scope: containerRef, dependencies: [floating, blobsGenerated] },
   );
 
   return (
@@ -110,21 +165,18 @@ export default function Blobs({
         className,
       )}
     >
-      {blobs.map((blob) => (
-        <div
-          key={blob.id}
-          className="blob-item absolute" // `blob-item` sebagai selector GSAP
-          style={{ top: blob.top, left: blob.left }}
-        >
-          <Blob
-            size={blob.size}
-            gradientIndex={blob.gradientIndex}
-            blobIndex={blob.blobIndex}
-            animated={animated}
-            absolutePosition={false} // Posisi diatur oleh div wrapper
-          />
-        </div>
-      ))}
+      {blobsGenerated &&
+        blobsGenerated.map((blob) => (
+          <div key={blob.id} className="blob-item absolute">
+            <Blob
+              size={blob.size}
+              gradientIndex={blob.gradientIndex}
+              blobIndex={blob.blobIndex}
+              animated={animated}
+              absolutePosition={false}
+            />
+          </div>
+        ))}
     </div>
   );
 }
@@ -178,16 +230,17 @@ export function Blob({
 
       const tl = gsap.timeline();
 
-      function animate(usedIndex?: number) {
-        let randomIndex = Math.floor(Math.random() * BLOB_SHAPES.length);
-        while (randomIndex === usedIndex) {
-          randomIndex = Math.floor(Math.random() * BLOB_SHAPES.length);
-        }
-
+      function animate() {
+        const delay = random(0, 2, true);
         tl.to(blobRef.current, {
-          duration: 3,
-          morphSVG: BLOB_SHAPES[randomIndex],
-          onComplete: () => animate(randomIndex),
+          duration: delay,
+          ease: "sine.inOut",
+          delay,
+          morphSVG: {
+            shape: randomPath(),
+            type: "rotational",
+          },
+          onComplete: animate,
         });
       }
 
@@ -199,7 +252,7 @@ export function Blob({
   return (
     <svg
       className={cn(absolutePosition && "absolute", className)}
-      viewBox="0 0 382.5 382.5"
+      viewBox="0 0 256 256"
       xmlns="http://www.w3.org/2000/svg"
       ref={svgRef}
       width={width}
@@ -207,27 +260,43 @@ export function Blob({
       preserveAspectRatio="none"
     >
       <defs>
-        {GRADIENTS.map(({ from, to }, i) => (
-          <linearGradient
-            key={i}
-            id={`gradient-${i + 1}-${uniqueId}`}
-            gradientTransform="rotate(45)"
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="0%"
-          >
-            <stop offset="0%" stopColor={from} />
-            <stop offset="100%" stopColor={to} />
-          </linearGradient>
-        ))}
+        {(() => {
+          const { from, to } = GRADIENTS[gradientIndex]; // Access directly since gradientIndex is 1-based
+          return (
+            <linearGradient
+              id={`gradient-${gradientIndex}-${uniqueId}`}
+              gradientTransform="rotate(45)"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor={from} />
+              <stop offset="100%" stopColor={to} />
+            </linearGradient>
+          );
+        })()}
       </defs>
       <path
-        d={BLOB_SHAPES[0]}
+        d={randomPath()}
         id={`blob-${blobIndex}`}
         ref={blobRef}
         fill={`url(#gradient-${gradientIndex}-${uniqueId})`}
       />
     </svg>
   );
+}
+
+function randomPath(options?: {
+  size?: number;
+  points?: number;
+  randomness?: number;
+  seed?: number;
+}): string {
+  return blobv2.svgPath({
+    size: options?.size ?? 256,
+    extraPoints: options?.points ?? random(4, 7),
+    seed: options?.seed ?? Math.random(),
+    randomness: options?.randomness ?? 5,
+  });
 }

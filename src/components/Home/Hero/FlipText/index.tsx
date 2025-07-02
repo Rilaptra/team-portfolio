@@ -11,14 +11,14 @@ export default function FlipText() {
   // const words = ["better", "cute", "beautiful", "modern"];
 
   return (
-    <div className="mx-auto flex w-full flex-col overflow-hidden text-center text-4xl font-bold text-neutral-600 uppercase transition-colors duration-300 dark:text-neutral-200">
+    <div className="mx-auto flex w-full flex-col overflow-hidden text-center font-bold text-neutral-600 uppercase transition-colors duration-300 dark:text-neutral-200">
       {/* [Rizqi, Huddin, sava] they are trio developer, powered by AI, AI for all!*/}
       {/* We turn your [Ideas, Products, Sketches, Dreams, Lines of Code, Stories, Solution] into reality */}
-      <span>We build</span>
+      <span className="text-[clamp(1rem, 2vw, 522px">We build</span>
       <div className="relative overflow-visible">
         <FlipWords
           words={words}
-          className="text-[#76ABAE] dark:text-[#76ABAE]"
+          className="text-4xl text-[#76ABAE] dark:text-[#76ABAE]"
           duration={5000}
         />
       </div>

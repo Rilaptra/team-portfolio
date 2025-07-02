@@ -1,36 +1,50 @@
 import Section from "@/components/Utils/Section";
 import { HoverEffect } from "@/components/Ui/card-hover";
+import {
+  ShieldMinus,
+  TrendingUp,
+  Zap,
+  Blocks,
+  MessageSquare,
+  Handshake,
+} from "lucide-react";
 
 export const projects = [
   {
-    title: "Stripe",
+    icon: <ShieldMinus className="h-12 w-12" />,
+    title: "Keamanan Terjamin",
     description:
-      "A technology company that builds economic infrastructure for the internet.",
+      " Kami membangun website dengan fokus utama pada keamanan. Dengan praktik koding modern dan proteksi berlapis, data bisnis dan kepercayaan pelanggan Anda akan selalu aman dari ancaman siber.",
   },
   {
-    title: "Netflix",
+    icon: <TrendingUp className="h-12 w-12" />,
+    title: "Mudah Ditemukan (SEO)",
     description:
-      "A streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.",
+      "Website Anda dirancang sejak awal agar mudah ditemukan di mesin pencari seperti Google. Struktur yang SEO-friendly memastikan bisnis Anda menjangkau lebih banyak pelanggan potensial secara organik.",
   },
   {
-    title: "Google",
+    icon: <Zap className="h-12 w-12" />,
+    title: "Performa & Kecepatan Optimal",
     description:
-      "A multinational technology company that specializes in Internet-related services and products.",
+      "Kecepatan adalah kunci pengalaman pengguna dan konversi.  Kami mengoptimalkan setiap aspek, dari kode hingga gambar, untuk memastikan website Anda dimuat secepat kilat di semua perangkat.",
   },
   {
-    title: "Meta",
+    icon: <Blocks className="h-12 w-12" />,
+    title: "Solusi Sesuai Visi Anda",
     description:
-      "A technology company that focuses on building products that advance Facebook's mission of bringing the world closer together.",
+      " Kami tidak menawarkan solusi instan, melainkan membangun website yang benar-benar mewakili visi Anda. Setiap elemen dirancang khusus untuk memenuhi kebutuhan unik dan tujuan bisnis Anda.",
   },
   {
-    title: "Amazon",
+    icon: <MessageSquare className="h-12 w-12" />,
+    title: "Komunikasi Transparan",
     description:
-      "A multinational technology company focusing on e-commerce, cloud computing, digital streaming, and artificial intelligence.",
+      "Nikmati proses pengembangan yang bebas stres dengan komunikasi yang jelas dan terbuka. Anda akan selalu menerima pembaruan rutin, memastikan proyek berjalan sesuai rencana dan harapan.",
   },
   {
-    title: "Microsoft",
+    icon: <Handshake className="h-12 w-12" />,
+    title: "Dukungan Jangka Panjang",
     description:
-      "A multinational technology company that develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services.",
+      "Kerja sama kita tidak berhenti saat website diluncurkan. Saya siap menyediakan dukungan purna jual untuk memastikan website Anda tetap aman, cepat, dan berfungsi optimal.",
   },
 ];
 export default function WhyChooseUs() {
@@ -38,8 +52,10 @@ export default function WhyChooseUs() {
     <Section id="whyChooseUs" className="flex w-full">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-center px-10">
         <div className="flex flex-col items-center">
-          <h1 className="mt-10 flex text-3xl font-bold">Why Choose Us</h1>
-          <h4 className="mt-5 flex max-w-4xl text-xl font-bold">
+          <h1 className="mt-10 flex text-3xl font-bold text-gray-700 dark:text-white">
+            Why Choose Us
+          </h1>
+          <h4 className="mt-5 flex max-w-4xl text-xl font-bold text-gray-700 dark:text-white">
             We're more than just a web development agency. We're your partners
           </h4>
         </div>

@@ -8,9 +8,9 @@ export function cn(...inputs: ClassValue[]) {
 export function random<T>(array: readonly T[]): T | undefined;
 export function random<T>(object: Record<string, T>): T | undefined;
 export function random(max: number): number;
-export function random(max: number, floatNumber: true): number;
+export function random(max: number, floatNumber: boolean): number;
 export function random(min: number, max: number): number;
-export function random(min: number, max: number, floatNumber: true): number;
+export function random(min: number, max: number, floatNumber: boolean): number;
 export function random<T>(
   arg1: readonly T[] | Record<string, T> | number,
   arg2?: number | boolean,

@@ -22,7 +22,7 @@ export default function Section({
       <section
         id={id}
         className={cn(
-          "mx-auto max-w-[1536px]",
+          "mx-auto flex max-w-[1536px] flex-col gap-10",
           minHeightScreen && "min-h-screen",
           padding && "px-4",
           className,

@@ -1,7 +1,12 @@
 "use client";
-import React, { useRef } from "react";
-import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
+import React, { useRef, useEffect, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// --- Daftarin plugin GSAP ---
+gsap.registerPlugin(ScrollTrigger);
+
+// --- Komponen Utama ---
 export const ContainerScroll = ({
   titleComponent,
   children,
@@ -10,12 +15,12 @@ export const ContainerScroll = ({
   children: React.ReactNode;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-  });
-  const [isMobile, setIsMobile] = React.useState(false);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
-  React.useEffect(() => {
+  // Efek untuk deteksi mobile (tetap sama)
+  useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
@@ -26,13 +31,42 @@ export const ContainerScroll = ({
     };
   }, []);
 
-  const scaleDimensions = () => {
-    return isMobile ? [0.7, 0.9] : [1.05, 1];
-  };
+  // Efek untuk animasi GSAP
+  useEffect(() => {
+    const scaleDimensions = isMobile ? [0.7, 0.9] : [1.05, 1];
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
-  const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
+    // Bikin timeline GSAP yang di-trigger oleh scroll
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top", // Animasi mulai saat bagian atas kontainer ketemu atas viewport
+        end: "bottom bottom", // Selesai saat bagian bawah kontainer ketemu bawah viewport
+        scrub: 1, // Bikin animasi smooth, ngikutin scroll
+      },
+    });
+
+    // Animasi untuk Header: translasi ke atas
+    timeline.fromTo(
+      headerRef.current,
+      { y: 0 }, // dari
+      { y: -100, ease: "none" }, // ke
+      0, // posisi di timeline (mulai dari detik 0)
+    );
+
+    // Animasi untuk Card: rotasi 3D dan scaling
+    timeline.fromTo(
+      cardRef.current,
+      { rotateX: 20, scale: scaleDimensions[0] }, // dari
+      { rotateX: 0, scale: scaleDimensions[1], ease: "none" }, // ke
+      0, // posisi di timeline (jalan barengan sama header)
+    );
+
+    // Cleanup function buat bersihin ScrollTrigger pas komponen unmount
+    return () => {
+      timeline.kill();
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, [isMobile]); // Re-run efek ini kalo status isMobile berubah
 
   return (
     <div
@@ -42,46 +76,38 @@ export const ContainerScroll = ({
       <div
         className="relative w-full py-10 md:py-40"
         style={{
-          perspective: "1000px",
+          perspective: "1000px", // Penting untuk efek rotasi 3D (rotateX)
         }}
       >
-        <Header translate={translate} titleComponent={titleComponent} />
-        <Card rotate={rotate} translate={translate} scale={scale}>
-          {children}
-        </Card>
+        <Header ref={headerRef} titleComponent={titleComponent} />
+        <Card ref={cardRef}>{children}</Card>
       </div>
     </div>
   );
 };
 
-export const Header = ({ translate, titleComponent }: any) => {
+// --- Komponen Header (diubah jadi pakai forwardRef) ---
+export const Header = React.forwardRef<
+  HTMLDivElement,
+  { titleComponent: React.ReactNode }
+>(({ titleComponent }, ref) => {
   return (
-    <motion.div
-      style={{
-        translateY: translate,
-      }}
-      className="div mx-auto max-w-5xl text-center"
-    >
+    <div ref={ref} className="div mx-auto max-w-5xl text-center">
       {titleComponent}
-    </motion.div>
+    </div>
   );
-};
+});
+Header.displayName = "Header";
 
-export const Card = ({
-  rotate,
-  scale,
-  children,
-}: {
-  rotate: MotionValue<number>;
-  scale: MotionValue<number>;
-  translate: MotionValue<number>;
-  children: React.ReactNode;
-}) => {
+// --- Komponen Card (diubah jadi pakai forwardRef) ---
+export const Card = React.forwardRef<
+  HTMLDivElement,
+  { children: React.ReactNode }
+>(({ children }, ref) => {
   return (
-    <motion.div
+    <div
+      ref={ref}
       style={{
-        rotateX: rotate,
-        scale,
         boxShadow:
           "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
       }}
@@ -90,6 +116,7 @@ export const Card = ({
       <div className="h-full w-full overflow-hidden rounded-2xl bg-gray-100 md:rounded-2xl md:p-4 dark:bg-zinc-900">
         {children}
       </div>
-    </motion.div>
+    </div>
   );
-};
+});
+Card.displayName = "Card";

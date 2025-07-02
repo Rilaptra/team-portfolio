@@ -1,7 +1,8 @@
-import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
+"use client";
 
-import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { useRef } from "react";
+import { gsap } from "gsap";
 
 export const HoverEffect = ({
   items,
@@ -10,47 +11,65 @@ export const HoverEffect = ({
   items: {
     title: string;
     description: string;
-    // link: string;
+    icon: React.ReactNode;
   }[];
   className?: string;
 }) => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const backgroundRef = useRef<HTMLSpanElement>(null);
+
+  // Fungsi untuk trigger animasi saat mouse masuk ke salah satu card
+  const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const card = e.currentTarget;
+    gsap.to(backgroundRef.current, {
+      opacity: 1,
+      top: card.offsetTop,
+      left: card.offsetLeft,
+      width: card.offsetWidth,
+      height: card.offsetHeight,
+      duration: 0.3,
+      ease: "power3.inOut",
+    });
+  };
+
+  // Fungsi untuk menghilangkan background saat mouse keluar dari area grid
+  const handleMouseLeave = () => {
+    gsap.to(backgroundRef.current, {
+      opacity: 0,
+      duration: 0.3,
+      ease: "power3.inOut",
+    });
+  };
 
   return (
     <div
       className={cn(
-        "grid grid-cols-1 py-10 md:grid-cols-2 lg:grid-cols-3",
+        "relative grid grid-cols-1 py-10 md:grid-cols-2 lg:grid-cols-3", // Tambah 'relative'
         className,
       )}
+      onMouseLeave={handleMouseLeave} // Cukup satu event listener di kontainer utama
     >
+      {/* Satu elemen background yang akan dianimasikan */}
+      <span
+        ref={backgroundRef}
+        style={{ opacity: 0 }} // Mulai dari tidak terlihat
+        className="absolute inset-0 block rounded-3xl bg-neutral-200 dark:bg-slate-800/[0.8]"
+      />
+
       {items.map((item, idx) => (
         <a
-          // href={item?.link}
-          // key={item?.link}
           key={idx}
           className="group relative block h-full w-full p-2"
-          onMouseEnter={() => setHoveredIndex(idx)}
-          onMouseLeave={() => setHoveredIndex(null)}
+          onMouseEnter={handleMouseEnter} // Setiap item punya trigger-nya sendiri
         >
-          <AnimatePresence>
-            {hoveredIndex === idx && (
-              <motion.span
-                className="absolute inset-0 block h-full w-full rounded-3xl bg-neutral-200 dark:bg-slate-800/[0.8]"
-                layoutId="hoverBackground"
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: { duration: 0.15 },
-                }}
-                exit={{
-                  opacity: 0,
-                  transition: { duration: 0.15, delay: 0.2 },
-                }}
-              />
-            )}
-          </AnimatePresence>
+          {/* Komponen Card dan isinya tidak perlu diubah */}
           <Card>
-            <CardTitle>{item.title}</CardTitle>
+            <CardIcon
+              className="border-transparent group-hover:border-gray-500 group-hover:text-gray-500 dark:group-hover:border-blue-900 dark:group-hover:text-blue-900"
+              border
+            >
+              {item.icon}
+            </CardIcon>
+            <CardTitle className="">{item.title}</CardTitle>
             <CardDescription>{item.description}</CardDescription>
           </Card>
         </a>
@@ -58,6 +77,11 @@ export const HoverEffect = ({
     </div>
   );
 };
+
+// ============================================================================
+// KOMPONEN-KOMPONEN DI BAWAH INI TIDAK PERLU DIUBAH SAMA SEKALI
+// Mereka hanya untuk styling dan tidak mengandung logika animasi.
+// ============================================================================
 
 export const Card = ({
   className,
@@ -69,7 +93,7 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "relative z-20 h-full w-full overflow-hidden rounded-2xl border border-transparent bg-black p-4 group-hover:border-slate-700 dark:border-white/[0.2]",
+        "relative z-20 h-full w-full overflow-hidden rounded-2xl border border-transparent bg-indigo-200 p-4 dark:border-white/[0.2] dark:bg-black",
         className,
       )}
     >
@@ -79,6 +103,7 @@ export const Card = ({
     </div>
   );
 };
+
 export const CardTitle = ({
   className,
   children,
@@ -87,11 +112,17 @@ export const CardTitle = ({
   children: React.ReactNode;
 }) => {
   return (
-    <h4 className={cn("mt-4 font-bold tracking-wide text-zinc-100", className)}>
+    <h4
+      className={cn(
+        "mt-4 text-center font-bold tracking-wide text-gray-800 dark:text-zinc-100",
+        className,
+      )}
+    >
       {children}
     </h4>
   );
 };
+
 export const CardDescription = ({
   className,
   children,
@@ -102,11 +133,35 @@ export const CardDescription = ({
   return (
     <p
       className={cn(
-        "mt-8 text-sm leading-relaxed tracking-wide text-zinc-400",
+        "mt-8 text-center text-sm leading-relaxed tracking-wide text-gray-600 dark:text-zinc-400",
         className,
       )}
     >
       {children}
     </p>
+  );
+};
+
+export const CardIcon = ({
+  className,
+  border,
+  children,
+}: {
+  className?: string;
+  border?: boolean;
+  children: React.ReactNode;
+}) => {
+  const borderClass = border ? "border" : "";
+
+  return (
+    <div
+      className={cn(
+        "mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-slate-800 p-4 text-white dark:bg-zinc-800",
+        className,
+        borderClass,
+      )}
+    >
+      {children}
+    </div>
   );
 };

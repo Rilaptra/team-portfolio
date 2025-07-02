@@ -7,10 +7,10 @@ export default function Projects() {
   return (
     <Section
       id="projects"
-      className="mx-auto h-screen max-w-4xl"
+      className="mx-auto h-screen max-w-5xl"
       padding={false}
     >
-      <h1 className="flex justify-center pb-4 text-3xl font-bold text-gray-500">
+      <h1 className="flex justify-center text-3xl font-bold text-gray-500">
         Our Mini Projects
       </h1>
 
@@ -19,7 +19,7 @@ export default function Projects() {
           {cardsTop.map((item, i) => (
             <div
               key={i}
-              className="mr-6 h-[250px] w-[300px] flex-shrink-0 overflow-hidden rounded-2xl bg-white p-4 pt-2 pb-4 shadow-lg hover:shadow-xl dark:bg-neutral-800"
+              className="mr-6 mb-5 h-[250px] w-[300px] flex-shrink-0 overflow-hidden rounded-2xl bg-white pt-2 pb-2 shadow-lg hover:shadow-xl dark:bg-neutral-800"
             >
               <Image
                 src={item.image}
@@ -89,7 +89,7 @@ export default function Projects() {
           ))}
         </Marquee>
       </div>
-      <div className="flex justify-center pt-4">
+      <div className="flex justify-center">
         <Link href="/contact">
           <button className="rounded-md bg-gray-500 px-4 py-2 text-white hover:bg-gray-600 dark:bg-purple-900/20">
             make website
@@ -113,28 +113,28 @@ const cardsTop: CardItem[] = [
     title: "Top 1",
     // desc: "Deskripsi atas 1",
     link: "",
-    image: "path/to/image1.jpg",
+    image: "https://placehold.co/200x100.webp",
     techStack: ["Laravel", "Vue.js", "PostgreSQL"],
   },
   {
     title: "Top 2",
     // desc: "Deskripsi atas 2",
     link: "",
-    image: "path/to/image2.jpg",
+    image: "https://placehold.co/200x100.webp",
     techStack: ["Next.js", "Tailwind CSS", "TypeScript"],
   },
   {
     title: "Top 3",
     // desc: "Deskripsi atas 3",
     link: "",
-    image: "path/to/image3.jpg",
+    image: "https://placehold.co/200x100.webp",
     techStack: ["React", "Redux", "Node.js"],
   },
   {
     title: "Top 4",
     // desc: "Deskripsi atas 4",
     link: "",
-    image: "path/to/image4.jpg",
+    image: "https://placehold.co/200x100.webp",
     techStack: ["Angular", "RxJS", "MongoDB"],
   },
 ];
@@ -143,25 +143,25 @@ const cardsBottom: CardItem[] = [
   {
     title: "Bottom 1",
     // desc: "Deskripsi bawah 1",
-    image: "path/to/image5.jpg",
+    image: "https://placehold.co/200x100.webp",
     techStack: ["Flutter", "Dart", "Firebase"],
   },
   {
     title: "Bottom 2",
     // desc: "Deskripsi bawah 2",
-    image: "path/to/image6.jpg",
+    image: "https://placehold.co/200x100.webp",
     techStack: ["Ruby", "HTML/CSS", "PostgreSQL"],
   },
   {
     title: "Bottom 3",
     // desc: "Deskripsi bawah 3",
-    image: "path/to/image7.jpg",
+    image: "https://placehold.co/200x100.webp",
     techStack: ["Django", "Python", "MySQL"],
   },
   {
     title: "Bottom 4",
     // desc: "Deskripsi bawah 4",
-    image: "path/to/image8.jpg",
+    image: "https://placehold.co/200x100.webp",
     techStack: ["Go", "Gin", "Redis"],
   },
 ];
