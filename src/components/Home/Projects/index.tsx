@@ -10,7 +10,7 @@ export default function Projects() {
       className="mx-auto h-screen max-w-5xl"
       padding={false}
     >
-      <h1 className="flex justify-center text-3xl font-bold text-gray-500">
+      <h1 className="flex justify-center text-3xl font-bold dark:text-white text-black">
         Our Mini Projects
       </h1>
 
@@ -19,31 +19,48 @@ export default function Projects() {
           {cardsTop.map((item, i) => (
             <div
               key={i}
-              className="mr-6 mb-5 h-[250px] w-[300px] flex-shrink-0 overflow-hidden rounded-2xl bg-white pt-2 pb-2 shadow-lg hover:shadow-xl dark:bg-neutral-800"
+              className="group relative mr-6 mb-5 h-[250px] w-[300px] flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-xl dark:bg-neutral-800"
             >
               <Image
                 src={item.image}
                 alt={item.title}
-                width={200}
-                height={100}
-                className="mb-4 h-32 w-full rounded-md object-cover"
+                width={300}
+                height={250}
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 loading="lazy"
                 unoptimized
               />
-              <h3 className="pb-2 text-lg font-semibold text-gray-600 dark:text-gray-300">
-                {item.title}
-              </h3>
-              {item.techStack.map((tech, j) => (
-                <span
-                  key={j}
-                  className="mr-2 rounded-md bg-gray-200 px-2 py-1 text-xs font-semibold text-purple-900 dark:bg-purple-900/20 dark:text-gray-300"
-                >
-                  {tech}
-                </span>
-              ))}
-              <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                {item.desc}
-              </p>
+
+              <div
+                className="
+                  absolute bottom-0 left-0 right-0 h-full
+                  bg-gradient-to-t from-black/90 via-black/70 to-transparent
+                  p-4
+                  flex flex-col justify-end
+                  transform translate-y-1/2 
+                  opacity-0 group-hover:translate-y-0 group-hover:opacity-100
+                  transition-all duration-500 ease-in-out
+                "
+              >
+                <div>
+                  <h3 className="mb-2 text-lg font-bold text-white">
+                    {item.title}
+                  </h3>
+                  <p className="mb-3 text-sm text-gray-300">
+                    {item.desc}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {item.techStack.map((tech, j) => (
+                      <span
+                        key={j}
+                        className="rounded-md bg-white/10 px-2 py-1 text-xs font-semibold text-white"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
         </Marquee>
@@ -58,40 +75,55 @@ export default function Projects() {
           {cardsBottom.map((item, i) => (
             <div
               key={i}
-              className="mr-6 h-[250px] w-[300px] flex-shrink-0 overflow-hidden rounded-2xl bg-white p-4 pt-2 pb-4 shadow-lg hover:shadow-xl dark:bg-neutral-800"
+              className="group relative mr-6 mb-5 h-[250px] w-[300px] flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-xl dark:bg-neutral-800"
             >
               <Image
                 src={item.image}
                 alt={item.title}
-                width={200}
-                height={100}
-                className="mb-4 h-32 w-full rounded-md object-cover"
+                width={300}
+                height={250}
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 loading="lazy"
                 unoptimized
               />
-              <h3 className="pb-2 text-lg font-semibold text-gray-600 dark:text-gray-300">
-                {item.title}
-              </h3>
-              {item.techStack.map((tech, j) => (
-                <span
-                  key={j}
-                  className="mr-2 rounded-md bg-gray-200 px-2 py-1 text-xs font-semibold text-purple-900 dark:bg-purple-900/20 dark:text-gray-300"
-                >
-                  {tech}
-                </span>
-              ))}
-              {item?.desc && (
-                <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                  {item?.desc}
-                </p>
-              )}
+
+              <div
+                className="
+                  absolute bottom-0 left-0 right-0 h-full
+                  bg-gradient-to-t from-black/90 via-black/70 to-transparent
+                  p-4
+                  flex flex-col justify-end
+                  transform translate-y-1/2 
+                  opacity-0 group-hover:translate-y-0 group-hover:opacity-100
+                  transition-all duration-500 ease-in-out
+                "
+              >
+                <div>
+                  <h3 className="mb-2 text-lg font-bold text-white">
+                    {item.title}
+                  </h3>
+                  <p className="mb-3 text-sm text-gray-300">
+                    {item.desc}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {item.techStack.map((tech, j) => (
+                      <span
+                        key={j}
+                        className="rounded-md bg-white/10 px-2 py-1 text-xs font-semibold text-white"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
         </Marquee>
       </div>
       <div className="flex justify-center">
         <Link href="/contact">
-          <button className="rounded-md bg-gray-500 px-4 py-2 text-white hover:bg-gray-600 dark:bg-purple-900/20">
+          <button className="rounded-md dark:bg-black/50 border border-gray-300 dark:border-gray-600 font-semibold shadow-lg px-4 py-2 dark:text-white text-black dark:bg-black transition duration-300 ease-in-out hover:translate-y-[-4px] hover:shadow-xl">
             make website
           </button>
         </Link>
@@ -102,39 +134,39 @@ export default function Projects() {
 
 interface CardItem {
   title: string;
-  desc?: string; // Optional, karena kamu pakai komentar di data
+  desc?: string;
   image: string;
   techStack: string[];
-  link?: string; // Optional karena hanya digunakan di cardsTop
+  link?: string;
 }
 
 const cardsTop: CardItem[] = [
   {
-    title: "Top 1",
-    // desc: "Deskripsi atas 1",
+    title: "SIMNA - Grade Management",
+    desc: "A dashboard for teachers to manage student grades with automatic calculation from imported spreadsheet data.",
     link: "",
-    image: "https://placehold.co/200x100.webp",
-    techStack: ["Laravel", "Vue.js", "PostgreSQL"],
+    image: "/Home/tidar_porto1.jpg",
+    techStack: ["Next.js", "TypeScript", "Tailwind"],
   },
   {
-    title: "Top 2",
-    // desc: "Deskripsi atas 2",
+    title: "Venice Klinik Website",
+    desc: "Elegant company profile website for a beauty clinic, showcasing services and customer testimonials.",
     link: "",
-    image: "https://placehold.co/200x100.webp",
-    techStack: ["Next.js", "Tailwind CSS", "TypeScript"],
+    image: "/Home/venice_porto1.jpg",
+    techStack: ["Next.js", "Tailwind CSS"],
   },
   {
-    title: "Top 3",
-    // desc: "Deskripsi atas 3",
+    title: "Full-Stack WhatsApp Bot",
+    desc: "An automated WhatsApp bot solution with an interactive management dashboard.",
     link: "",
-    image: "https://placehold.co/200x100.webp",
-    techStack: ["React", "Redux", "Node.js"],
+    image: "/Home/botwhatsapp.jpg",
+    techStack: ["React", "Node.js", "Express"],
   },
   {
-    title: "Top 4",
-    // desc: "Deskripsi atas 4",
+    title: "Project Keempat",
+    desc: "A brief description for the fourth project will appear here on hover.",
     link: "",
-    image: "https://placehold.co/200x100.webp",
+    image: "https://placehold.co/300x250.webp",
     techStack: ["Angular", "RxJS", "MongoDB"],
   },
 ];
@@ -142,25 +174,25 @@ const cardsTop: CardItem[] = [
 const cardsBottom: CardItem[] = [
   {
     title: "Bottom 1",
-    // desc: "Deskripsi bawah 1",
+    desc: "",
     image: "https://placehold.co/200x100.webp",
     techStack: ["Flutter", "Dart", "Firebase"],
   },
   {
     title: "Bottom 2",
-    // desc: "Deskripsi bawah 2",
+    desc: "",
     image: "https://placehold.co/200x100.webp",
     techStack: ["Ruby", "HTML/CSS", "PostgreSQL"],
   },
   {
     title: "Bottom 3",
-    // desc: "Deskripsi bawah 3",
+    desc: "",
     image: "https://placehold.co/200x100.webp",
     techStack: ["Django", "Python", "MySQL"],
   },
   {
     title: "Bottom 4",
-    // desc: "Deskripsi bawah 4",
+    desc: "",
     image: "https://placehold.co/200x100.webp",
     techStack: ["Go", "Gin", "Redis"],
   },

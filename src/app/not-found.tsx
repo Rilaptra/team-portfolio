@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Metadata } from "next";
+import SwitchPage from "@/components/Utils/SwitchPage";
 
 export const metadata: Metadata = {
   title: "Portfolio | 404 Not Found",
@@ -16,12 +16,9 @@ export default function NotFound() {
       <p className="text-muted-foreground mb-8 text-lg">
         The page you are looking for does not exist.
       </p>
-      <Link
-        href="/"
-        className="text-primary-foreground bg-primary hover:bg-primary/90 focus:ring-primary inline-flex items-center rounded-md border border-transparent px-6 py-3 text-base font-medium shadow-sm transition-colors duration-200 focus:ring-2 focus:ring-offset-2 focus:outline-none"
-      >
+      <SwitchPage variant="default" href="/" className="text-primary-foreground bg-primary hover:bg-primary/90 focus:ring-primary inline-flex items-center rounded-md border border-transparent px-6 py-3 text-base font-medium shadow-sm transition-colors duration-200 focus:ring-2 focus:ring-offset-2 focus:outline-none">
         Go back home
-      </Link>
+      </SwitchPage>
     </div>
   );
 }

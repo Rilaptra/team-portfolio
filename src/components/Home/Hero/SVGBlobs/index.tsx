@@ -231,11 +231,9 @@ export function Blob({
       const tl = gsap.timeline();
 
       function animate() {
-        const delay = random(0, 2, true);
         tl.to(blobRef.current, {
-          duration: delay,
-          ease: "sine.inOut",
-          delay,
+          duration: 2,
+          ease: "none",
           morphSVG: {
             shape: randomPath(),
             type: "rotational",
@@ -244,7 +242,7 @@ export function Blob({
         });
       }
 
-      animate(); // Langsung panggil animasi
+      animate();
     },
     { scope: svgRef, dependencies: [animated] },
   );
@@ -258,6 +256,7 @@ export function Blob({
       width={width}
       height={height}
       preserveAspectRatio="none"
+      style={{opacity: 0.8}}
     >
       <defs>
         {(() => {
@@ -295,7 +294,7 @@ function randomPath(options?: {
 }): string {
   return blobv2.svgPath({
     size: options?.size ?? 256,
-    extraPoints: options?.points ?? random(4, 7),
+    extraPoints: options?.points ?? 4,
     seed: options?.seed ?? Math.random(),
     randomness: options?.randomness ?? 5,
   });
