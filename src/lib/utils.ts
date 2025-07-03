@@ -1,4 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
+import { ImageLoader, ImageLoaderProps } from "next/image";
+import path from "path";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -53,4 +55,15 @@ export function getRandomBorderRadiusValue(min = 10, max = 35) {
   const br = random(min, max);
   const bl = random(min, max);
   return `${tl}px ${tr}px ${br}px ${bl}px`;
+}
+
+export default function convertToWebP({
+  src,
+  width,
+  quality,
+}: ImageLoaderProps) {
+  if (src.endsWith(".webp")) return src;
+  if (src.startsWith("https://")) return src;
+  const fileName = path.basename(src);
+  return `/webp/${fileName}.webp?w=${width}&q=${quality || 75}`;
 }

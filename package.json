@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "concurrently \"next dev --turbopack\" \"node scripts/dev-watcher.js\"",
+    "prebuild": "if exist \"scripts\\convert-images.js\" (node scripts\\convert-images.js) else (echo 'File scripts/convert-images.js tidak ditemukan, diskip.') & echo 'Prebuild scripts selesai.'",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -33,6 +34,8 @@
     "@types/react-dom": "^19",
     "prettier": "^3.6.0",
     "prettier-plugin-tailwindcss": "^0.6.13",
+    "chokidar": "^4.0.3",
+    "concurrently": "^9.2.0",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.4",
     "typescript": "^5"

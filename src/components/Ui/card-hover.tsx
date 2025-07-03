@@ -67,7 +67,7 @@ export const HoverEffect = ({
           <Card
             className={cn(
               "relative z-20 h-full w-full overflow-hidden rounded-2xl bg-indigo-200 p-0",
-              "border-transparent dark:border-white/[0.2] bg-white border-gray-300 dark:bg-black",
+              "dark:border-white/[0.2] bg-white border-gray-300 dark:bg-black",
             )}
           >
             <CardContent className="relative z-50 p-8 text-center">

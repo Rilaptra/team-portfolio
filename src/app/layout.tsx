@@ -13,6 +13,15 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   title: "Portfolio | Home",
   description: "Team Portfolio",
+  metadataBase: new URL("https://80ab-140-213-168-209.ngrok-free.app"),
+  openGraph: {
+    title: "Portfolio | Home",
+    description: "Team Portfolio",
+    images: "/images/Logo/SHR_logo.png",
+    type: "website",
+    url: "https://80ab-140-213-168-209.ngrok-free.app",
+    siteName: "Portfolio",
+  }
 };
 
 export default function RootLayout({
