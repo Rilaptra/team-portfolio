@@ -1,6 +1,6 @@
 "use client"; // Diperlukan untuk hook dan interaktivitas
 
-import { useRef, } from "react";
+import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -17,57 +17,66 @@ export default function Promotion() {
   const paragraphRef = useRef<HTMLParagraphElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    if (!sectionRef.current || !headlineRef.current || !paragraphRef.current || !buttonRef.current) return;
-    const el = sectionRef.current;
+  useGSAP(
+    () => {
+      if (
+        !sectionRef.current ||
+        !headlineRef.current ||
+        !paragraphRef.current ||
+        !buttonRef.current
+      )
+        return;
+      const el = sectionRef.current;
 
-    // Animasi akan dipicu saat section ini masuk ke viewport
-    let tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: el,
-        start: "top 80%", // Mulai animasi saat 80% bagian atas section terlihat
-        toggleActions: "play none none none",
-      },
-    });
+      // Animasi akan dipicu saat section ini masuk ke viewport
+      let tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          toggleActions: "restart none none reset",
+          // markers: true,
+        },
+      });
 
-    // 1. Animasikan setiap kata pada headline agar muncul satu per satu
-    // Kita target 'span' di dalam headlineRef
-    tl.from(
-      ".headlineText",
-      {
-        y: 100,
-        opacity: 0,
-        stagger: 0.2,
-        duration: 0.8,
-        ease: "power3.out",
-      },
-      "start", // Label untuk memulai animasi secara bersamaan
-    );
+      // 1. Animasikan setiap kata pada headline agar muncul satu per satu
+      // Kita target 'span' di dalam headlineRef
+      tl.from(
+        ".headlineText",
+        {
+          y: 100,
+          opacity: 0,
+          stagger: 0.2,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "start", // Label untuk memulai animasi secara bersamaan
+      );
 
-    // 2. Animasikan paragraf setelah headline mulai muncul
-    tl.from(
-      paragraphRef.current,
-      {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      },
-      "start+=0.3", // Mulai 0.3 detik setelah label 'start'
-    );
+      // 2. Animasikan paragraf setelah headline mulai muncul
+      tl.from(
+        paragraphRef.current,
+        {
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "start+=0.3", // Mulai 0.3 detik setelah label 'start'
+      );
 
-    // 3. Animasikan tombol agar muncul terakhir
-    tl.from(
-      buttonRef.current,
-      {
-        scale: 0.5,
-        opacity: 0,
-        duration: 0.5,
-        ease: "back.out(1.7)",
-      },
-      "start+=0.6", // Mulai 0.6 detik setelah label 'start'
-    );
-  }, {scope: sectionRef});
+      // 3. Animasikan tombol agar muncul terakhir
+      tl.from(
+        buttonRef.current,
+        {
+          scale: 0.5,
+          opacity: 0,
+          duration: 0.5,
+          ease: "back.out(1.7)",
+        },
+        "start+=0.6", // Mulai 0.6 detik setelah label 'start'
+      );
+    },
+    { scope: sectionRef },
+  );
 
   const headlineText = "Siap Membangun Proyek Impian Anda?";
 
@@ -79,17 +88,11 @@ export default function Promotion() {
           ref={headlineRef}
           className="text-foreground text-4xl font-bold tracking-tight sm:text-5xl"
         >
-          {/* 
-            Setiap kata dibungkus dengan span agar bisa dianimasikan secara individual oleh GSAP.
-            'overflow-hidden' pada parent-nya menyembunyikan kata saat bergerak dari bawah.
-          */}
-          {/* <div className="overflow-hidden"> */}
-            {headlineText.split(" ").map((word, index) => (
-              <span key={index} className="headlineText inline-block">
-                {word} 
-              </span>
-            ))}
-          {/* </div> */}
+          {headlineText.split(" ").map((word, index) => (
+            <span key={index} className="headlineText inline-block">
+              {word}&nbsp;
+            </span>
+          ))}
         </h2>
         <p
           ref={paragraphRef}
@@ -100,7 +103,7 @@ export default function Promotion() {
         </p>
         <div ref={buttonRef} className="mt-10">
           <SwitchPage href="/contact">
-              Hubungi Kami <ArrowRight className="ml-2 h-5 w-5" />
+            Hubungi Kami <ArrowRight className="ml-2 h-5 w-5" />
           </SwitchPage>
         </div>
       </div>

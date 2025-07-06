@@ -1,53 +1,55 @@
-import React from 'react';
-import Link from 'next/link';
-import { Code, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import React from "react";
+import Link from "next/link";
+import { Code, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import Logo from "../icons/Logo";
 
 type NavLink = {
   label: string;
 };
 
 const companyLinks: NavLink[] = [
-  { label: 'Tentang Kami' },
-  { label: 'Karir' },
-  { label: 'Blog' },
+  { label: "Tentang Kami" },
+  { label: "Karir" },
+  { label: "Blog" },
 ];
 
 const serviceLinks: NavLink[] = [
-  { label: 'Website Development' },
-  { label: 'SEO Optimization' },
-  { label: 'UI/UX Design' },
-  { label: 'Website Maintenance' },
-  { label: 'Website Security' },
+  { label: "Website Development" },
+  { label: "SEO Optimization" },
+  { label: "UI/UX Design" },
+  { label: "Website Maintenance" },
+  { label: "Website Security" },
 ];
 
 const supportLinks: NavLink[] = [
-  { label: 'Pusat Bantuan' },
-  { label: 'Dokumentasi' },
-  { label: 'Status Layanan' },
+  { label: "Pusat Bantuan" },
+  { label: "Dokumentasi" },
+  { label: "Status Layanan" },
 ];
 
 const legalLinks: NavLink[] = [
-  { label: 'Kebijakan Privasi' },
-  { label: 'Syarat & Ketentuan' },
+  { label: "Kebijakan Privasi" },
+  { label: "Syarat & Ketentuan" },
 ];
 
 const socialLinks: NavLink[] = [
-  { label: 'Facebook' },
-  { label: 'Twitter' },
-  { label: 'Instagram' },
-  { label: 'LinkedIn' },
-]
+  { label: "Facebook" },
+  { label: "Twitter" },
+  { label: "Instagram" },
+  { label: "LinkedIn" },
+];
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-transparent dark:text-white text-neutral-700">
-      <div className="mx-auto max-w-screen-xl px-4 pb-8 pt-16 sm:px-6 lg:px-8">
+    <footer className="bg-transparent text-neutral-700 dark:text-white">
+      <div className="mx-auto max-w-screen-xl px-4 pt-16 pb-8 sm:px-6 lg:px-8">
         <div className="lg:flex lg:justify-between">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center gap-2">
-              <Code size={28} className="text-blue-400" />
+              <Logo size={28} />
+              {/* <Code size={28} className="text-blue-400" /> */}
               <span className="text-xl font-bold">ShareProject</span>
             </Link>
             <p className="mt-4 max-w-xs text-neutral-400">
@@ -59,7 +61,10 @@ const Footer = () => {
               <p className="font-bold">Perusahaan</p>
               <nav className="mt-4 space-y-2">
                 {companyLinks.map((link) => (
-                  <div key={link.label} className="block text-neutral-400 transition hover:text-black cursor-pointer dark:hover:text-white">
+                  <div
+                    key={link.label}
+                    className="block cursor-pointer text-neutral-400 transition hover:text-black dark:hover:text-white"
+                  >
                     {link.label}
                   </div>
                 ))}
@@ -70,7 +75,10 @@ const Footer = () => {
               <p className="font-bold">Layanan</p>
               <nav className="mt-4 space-y-2">
                 {serviceLinks.map((link) => (
-                  <div key={link.label} className="block text-neutral-400 transition cursor-pointer hover:text-black dark:hover:text-white">
+                  <div
+                    key={link.label}
+                    className="block cursor-pointer text-neutral-400 transition hover:text-black dark:hover:text-white"
+                  >
                     {link.label}
                   </div>
                 ))}
@@ -81,7 +89,10 @@ const Footer = () => {
               <p className="font-bold">Dukungan</p>
               <nav className="mt-4 space-y-2">
                 {supportLinks.map((link) => (
-                  <div key={link.label} className="block text-neutral-400 transition cursor-pointer  hover:text-black dark:hover:text-white">
+                  <div
+                    key={link.label}
+                    className="block cursor-pointer text-neutral-400 transition hover:text-black dark:hover:text-white"
+                  >
                     {link.label}
                   </div>
                 ))}
@@ -92,7 +103,10 @@ const Footer = () => {
               <p className="font-bold">Legal</p>
               <nav className="mt-4 space-y-2">
                 {legalLinks.map((link) => (
-                  <div key={link.label} className="block text-neutral-400 transition cursor-pointer hover:text-black dark:hover:text-white">
+                  <div
+                    key={link.label}
+                    className="block cursor-pointer text-neutral-400 transition hover:text-black dark:hover:text-white"
+                  >
                     {link.label}
                   </div>
                 ))}

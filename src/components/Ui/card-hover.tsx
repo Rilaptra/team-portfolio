@@ -23,6 +23,7 @@ export const HoverEffect = ({
 }) => {
   const backgroundRef = useRef<HTMLSpanElement>(null);
 
+  // Fungsi hover tidak berubah
   const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const card = e.currentTarget;
     gsap.to(backgroundRef.current, {
@@ -46,16 +47,16 @@ export const HoverEffect = ({
 
   return (
     <div
+      id="card-hover-container"
       className={cn(
-        "relative grid grid-cols-1 py-10 md:grid-cols-2 lg:grid-cols-3",
+        "relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
         className,
       )}
       onMouseLeave={handleMouseLeave}
     >
       <span
         ref={backgroundRef}
-        style={{ opacity: 0 }}
-        className="absolute inset-0 block rounded-3xl bg-blue-900/50 dark:bg-slate-800/[0.8]"
+        className="absolute inset-0 block rounded-3xl bg-blue-900/50 opacity-0 dark:bg-slate-800/[0.8]"
       />
 
       {items.map((item, idx) => (
@@ -67,7 +68,7 @@ export const HoverEffect = ({
           <Card
             className={cn(
               "relative z-20 h-full w-full overflow-hidden rounded-2xl bg-indigo-200 p-0",
-              "dark:border-white/[0.2] bg-white border-gray-300 dark:bg-black",
+              "border-gray-300 bg-white dark:border-white/[0.2] dark:bg-black",
             )}
           >
             <CardContent className="relative z-50 p-8 text-center">

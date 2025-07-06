@@ -11,7 +11,6 @@ export default function Hero() {
       <div className="flex">
         <div className="flex-1">
           <FlipText />
-          <span>flip text 1</span>
         </div>
         {/* <div className="flex-1">
           <FlipText />

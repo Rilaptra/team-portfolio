@@ -11,7 +11,7 @@ export default function Projects() {
       className="mx-auto h-screen max-w-5xl"
       padding={false}
     >
-      <h1 className="flex justify-center text-3xl font-bold dark:text-white text-black">
+      <h1 className="flex justify-center text-3xl font-bold text-black dark:text-white">
         Our Mini Projects
       </h1>
 
@@ -29,32 +29,18 @@ export default function Projects() {
                 alt={item.title}
                 width={300}
                 height={250}
-                // <-- PERUBAHAN 2: Menambahkan group-focus untuk efek zoom
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 group-focus:scale-110"
                 loading="lazy"
                 loader={convertToWebP}
+                unoptimized
               />
 
-              <div
-                // <-- PERUBAHAN 3: Menambahkan group-focus untuk memunculkan overlay
-                className="
-                  absolute bottom-0 left-0 right-0 h-full
-                  bg-gradient-to-t from-black/90 via-black/70 to-transparent
-                  p-4
-                  flex flex-col justify-end
-                  transform translate-y-1/2 
-                  opacity-0 group-hover:translate-y-0 group-hover:opacity-100
-                  group-focus:translate-y-0 group-focus:opacity-100
-                  transition-all duration-500 ease-in-out
-                "
-              >
+              <div className="absolute inset-0 flex translate-y-1/2 transform flex-col justify-end bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4 opacity-0 transition-all duration-500 ease-in-out group-hover:translate-y-0 group-hover:opacity-100 group-focus:translate-y-0 group-focus:opacity-100">
                 <div>
                   <h3 className="mb-2 text-lg font-bold text-white">
                     {item.title}
                   </h3>
-                  <p className="mb-3 text-sm text-gray-300">
-                    {item.desc}
-                  </p>
+                  <p className="mb-3 text-sm text-gray-300">{item.desc}</p>
                   <div className="flex flex-wrap gap-2">
                     {item.techStack.map((tech, j) => (
                       <span
@@ -90,42 +76,27 @@ export default function Projects() {
                 alt={item.title}
                 width={300}
                 height={250}
-                // <-- PERUBAHAN 2: Menambahkan group-focus untuk efek zoom
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 group-focus:scale-110"
                 loading="lazy"
                 loader={convertToWebP}
+                unoptimized
               />
 
-              <div
-                // <-- PERUBAHAN 3: Menambahkan group-focus untuk memunculkan overlay
-                className="
-                  absolute bottom-0 left-0 right-0 h-full
-                  bg-gradient-to-t from-black/90 via-black/70 to-transparent
-                  p-4
-                  flex flex-col justify-end
-                  transform translate-y-1/2 
-                  opacity-0 group-hover:translate-y-0 group-hover:opacity-100
-                  group-focus:translate-y-0 group-focus:opacity-100
-                  transition-all duration-500 ease-in-out
-                "
-              >
-                <div>
-                  <h3 className="mb-2 text-lg font-bold text-white">
-                    {item.title}
-                  </h3>
-                  <p className="mb-3 text-sm text-gray-300">
-                    {item.desc}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {item.techStack.map((tech, j) => (
-                      <span
-                        key={j}
-                        className="rounded-md bg-white/10 px-2 py-1 text-xs font-semibold text-white"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+              {/* <-- PERUBAHAN 3: Menambahkan group-focus untuk memunculkan overlay */}
+              <div className="absolute inset-0 flex translate-y-1/2 transform flex-col justify-end bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4 opacity-0 transition-all duration-500 ease-in-out group-hover:translate-y-0 group-hover:opacity-100 group-focus:translate-y-0 group-focus:opacity-100">
+                <h3 className="mb-2 text-lg font-bold text-white">
+                  {item.title}
+                </h3>
+                <p className="mb-3 text-sm text-gray-300">{item.desc}</p>
+                <div className="flex flex-wrap gap-2">
+                  {item.techStack.map((tech, j) => (
+                    <span
+                      key={j}
+                      className="rounded-md bg-white/10 px-2 py-1 text-xs font-semibold text-white"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -134,7 +105,7 @@ export default function Projects() {
       </div>
       <div className="flex justify-center">
         <Link href="/contact">
-          <button className="rounded-md border border-gray-300 dark:border-gray-600 font-semibold shadow-lg px-4 py-2 dark:text-white text-black dark:bg-black transition duration-300 ease-in-out hover:translate-y-[-4px] hover:shadow-xl">
+          <button className="rounded-md border border-gray-300 px-4 py-2 font-semibold text-black shadow-lg transition duration-300 ease-in-out hover:translate-y-[-4px] hover:shadow-xl dark:border-gray-600 dark:bg-black dark:text-white">
             make website
           </button>
         </Link>
