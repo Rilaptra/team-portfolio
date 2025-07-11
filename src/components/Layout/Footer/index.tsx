@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Code, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
-import Logo from "../icons/Logo";
+import Logo from "../../icons/Logo";
 
 type NavLink = {
   label: string;

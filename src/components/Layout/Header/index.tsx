@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { usePathname, useRouter } from "next/navigation";
-import { Button } from "../Ui/button";
+import { Button } from "../../Ui/button";
 import { Moon, Sun } from "lucide-react";
 import { animatePageOut } from "@/lib/animations";
 import useTheme from "next-theme";
@@ -13,14 +13,17 @@ const links = [
   {
     name: "Home",
     href: "/",
+    className: "from-(--color-emerald-400) to-(--color-teal-600)",
   },
   {
     name: "About",
     href: "/about",
+    className: "from-(--color-amber-400) to-(--color-orange-600)",
   },
   {
     name: "Contact",
     href: "/contact",
+    className: "from-(--color-teal-400) to-(--color-cyan-600)",
   },
 ];
 export default function Header() {
@@ -58,8 +61,10 @@ export default function Header() {
               onClick={() => handleClick(link.href)}
               style={{ borderRadius: borderRadii || "0" }}
               className={cn(
-                "px-3 py-1 transition-all duration-300 ease-in-out hover:cursor-pointer hover:rounded-xl",
-                params === link.href ? "bg-black/5 dark:bg-white/10" : "",
+                "bg-linear-to-br px-3 py-1 transition-all duration-300 ease-in-out hover:cursor-pointer hover:rounded-xl",
+                params === link.href
+                  ? "bg-black/5 dark:bg-white/10 " + link.className
+                  : "",
               )}
             >
               <p className="font-normal select-none">{link.name}</p>

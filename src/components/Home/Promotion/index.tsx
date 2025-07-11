@@ -102,7 +102,10 @@ export default function Promotion() {
           menjadi solusi digital yang nyata dan berfungsi.
         </p>
         <div ref={buttonRef} className="mt-10">
-          <SwitchPage href="/contact">
+          <SwitchPage
+            href="/contact"
+            className="transition-all duration-300 hover:translate-y-[-5px] hover:scale-105"
+          >
             Hubungi Kami <ArrowRight className="ml-2 h-5 w-5" />
           </SwitchPage>
         </div>

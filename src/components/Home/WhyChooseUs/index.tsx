@@ -11,10 +11,27 @@ import {
   MessageSquare,
   Handshake,
 } from "lucide-react";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
 
-// Daftarkan plugin di luar komponen agar tidak berulang
 export default function WhyChooseUs() {
   const divContainerRef = useRef<HTMLDivElement>(null);
+  useGSAP(
+    () => {
+      gsap.from(".gsap-title", {
+        scrollTrigger: {
+          trigger: ".gsap-title",
+          toggleActions: "play reset play reverse",
+          endTrigger: ".card-hover-container",
+        },
+        opacity: 0,
+        y: -50,
+        duration: 0.5,
+        stagger: 0.2,
+      });
+    },
+    { scope: divContainerRef },
+  );
   return (
     <Section id="whyChooseUs" className="flex w-full">
       <div
@@ -25,7 +42,7 @@ export default function WhyChooseUs() {
           <h1 className="gsap-title mt-10 flex text-3xl font-bold text-black dark:text-white">
             Why Choose Us
           </h1>
-          <h4 className="gsap-title mt-5 flex max-w-5xl text-center text-lg font-semibold text-black dark:text-white">
+          <h4 className="gsap-title text-md mt-5 flex max-w-5xl text-center leading-tight font-medium text-black dark:text-white">
             Kami lebih dari sekadar agensi pengembangan web kami adalah mitra
             strategis Anda. Kami menggabungkan keahlian teknis dengan pemahaman
             mendalam tentang bisnis Anda untuk menciptakan solusi digital yang

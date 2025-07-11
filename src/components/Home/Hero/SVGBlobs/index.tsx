@@ -68,6 +68,7 @@ export default function Blobs({
   useGSAP(
     () => {
       if (!floating || !containerRef.current || !blobsGenerated?.length) return;
+      if (!animated) return;
 
       const blobElements = gsap.utils.toArray<HTMLDivElement>(
         ".blob-item",
@@ -233,7 +234,7 @@ export function Blob({
       function animate() {
         tl.to(blobRef.current, {
           duration: 2,
-          ease: "none",
+          ease: "circle.inOut",
           morphSVG: {
             shape: randomPath(),
             type: "rotational",
@@ -256,7 +257,7 @@ export function Blob({
       width={width}
       height={height}
       preserveAspectRatio="none"
-      style={{opacity: 0.8}}
+      style={{ opacity: 0.8 }}
     >
       <defs>
         {(() => {

@@ -21,17 +21,17 @@ export default function Section({
 }: SectionProps) {
   return (
     <ErrorBoundary>
-      <section
-        id={id}
-        className={cn(
-          "mx-auto flex max-w-[1536px] flex-col gap-10",
-          minHeightScreen && "min-h-screen",
-          padding && "px-4",
-          className,
-        )}
-        ref={ref}
-      >
-        {children}
+      <section id={id} ref={ref}>
+        <div
+          className={cn(
+            "mx-auto flex max-w-[1536px] flex-col gap-10",
+            minHeightScreen && "min-h-screen",
+            padding && "px-4",
+            className,
+          )}
+        >
+          {children}
+        </div>
       </section>
     </ErrorBoundary>
   );

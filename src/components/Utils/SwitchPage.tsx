@@ -2,44 +2,45 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { animatePageOut } from "@/lib/animations";
-import { Button } from "@/components/Ui/button";
+import { Button, buttonVariants } from "@/components/Ui/button";
+import { VariantProps } from "class-variance-authority";
 
-export default function SwitchPage({
-  children,
-  href = "/",
-  className,
-  noButton = false,
-  variant,
-}: {
-  children: React.ReactNode;
-  href: string;
-  noButton?: boolean;
-  className?: string;
-  variant?:
-    | "default"
-    | "destructive"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | "link"
-    | null;
-}) {
+export default function SwitchPage(
+  {
+    children,
+    className,
+    href = "/",
+    ...props
+  }: React.ComponentProps<"button"> &
+    VariantProps<typeof buttonVariants> & {
+      asChild?: boolean;
+    } & {
+      href: string;
+    },
+  // {
+  // children: React.ReactNode;
+  // href: string;
+  // className?: string;
+  // props?: typeof Button
+  // ref?: React.Ref<HTMLButtonElement>;
+  // variant?:
+  //   | "default"
+  //   | "destructive"
+  //   | "outline"
+  //   | "secondary"
+  //   | "ghost"
+  //   | "link"
+  //   | null;
+  // }
+) {
   const router = useRouter();
-  if (noButton) {
-    return (
-      <span
-        onClick={() => animatePageOut(href, router)}
-        className={`${className} cursor-pointer`}
-      >
-        {children}
-      </span>
-    );
-  }
   return (
     <Button
+      // ref={ref}
+      {...props}
       onClick={() => animatePageOut(href, router)}
       className={`${className} cursor-pointer`}
-      variant={variant}
+      // variant={variant}
     >
       {children}
     </Button>

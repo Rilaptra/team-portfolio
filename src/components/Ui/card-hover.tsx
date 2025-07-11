@@ -9,6 +9,7 @@ import {
   CardDescription,
   CardTitle,
 } from "@/components/Ui/card";
+import { useGSAP } from "@gsap/react";
 
 export const HoverEffect = ({
   items,
@@ -22,6 +23,7 @@ export const HoverEffect = ({
   className?: string;
 }) => {
   const backgroundRef = useRef<HTMLSpanElement>(null);
+  const container = useRef<HTMLDivElement>(null);
 
   // Fungsi hover tidak berubah
   const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -45,11 +47,29 @@ export const HoverEffect = ({
     });
   };
 
+  useGSAP(
+    () => {
+      gsap.from(".card-hover-item", {
+        scrollTrigger: {
+          trigger: container.current,
+          // markers: true,
+          toggleActions: "play reset play reverse",
+        },
+        opacity: 0,
+        scale: 0.8,
+        duration: 0.5,
+        ease: "back.out",
+        stagger: 0.15,
+      });
+    },
+    { scope: container },
+  );
+
   return (
     <div
-      id="card-hover-container"
+      ref={container}
       className={cn(
-        "relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
+        "card-hover-container relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
         className,
       )}
       onMouseLeave={handleMouseLeave}

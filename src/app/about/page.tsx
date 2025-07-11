@@ -1,11 +1,14 @@
 // src/app/about/page.tsx
-import About from "@/components/About";
-export async function generateMetadata() {
+import Abouts from "@/components/About";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Portfolio | About",
+    title: "Portfolio | About Us",
+    description: "Kenali tim developer di balik ShareProject.",
   };
 }
 
-export default function () {
-  return <About />;
+export default function AboutPage() {
+  return <Abouts />;
 }

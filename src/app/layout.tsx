@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Montserrat } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/Layout/Header";
+import Footer from "@/components/Layout/Footer";
 import Providers from "../components/Utils/providers";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
+  variable: "--font-geist",
+  subsets: ["latin"],
+});
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
 });
 
@@ -21,7 +25,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://80ab-140-213-168-209.ngrok-free.app",
     siteName: "Portfolio",
-  }
+  },
 };
 
 export default function RootLayout({
@@ -33,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} antialiased transition-colors duration-500`}
+        className={`${montserrat.variable} ${geistSans.variable} antialiased transition-colors duration-500`}
       >
         <Providers>
           <Header />

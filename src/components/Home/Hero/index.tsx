@@ -8,17 +8,17 @@ export default function Hero() {
       id="hero"
       className="flex min-h-screen items-center justify-center px-4 pt-10"
     >
-      <div className="flex">
+      <div className="flex w-full">
         <div className="flex-1">
           <FlipText />
         </div>
         {/* <div className="flex-1">
           <FlipText />
-          <span>flip text 2</span>
         </div> */}
       </div>
-      <Blobs amount={10} animated floating />
-      {/* <Blobs amount={1} /> */}
+      {/* blobs bikin laptopku lag. bentar ku disable */}
+      {/* solusi : animated = false */}
+      <Blobs amount={10} animated={true} floating />
     </Section>
   );
 }
