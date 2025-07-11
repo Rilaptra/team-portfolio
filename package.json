@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "dev:watch": "concurrently 'next dev --turbopack' 'node scripts/dev-watcher.js'",
-    "prebuild": "if exist 'scripts\\convert-images.js' (node scripts\\convert-images.js) else (echo 'File scripts/convert-images.js tidak ditemukan, diskip.') & echo 'Prebuild scripts selesai.'",
+    "prebuild": "node -e \"process.exit(require('fs').existsSync('scripts/convert-images.js') ? 0 : 1)\" && node scripts/convert-images.js || echo 'File scripts/convert-images.js tidak ditemukan, diskip.' ; echo 'Prebuild scripts selesai.'",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
