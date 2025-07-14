@@ -40,17 +40,19 @@ const ProjectCard = ({ cardData }: { cardData: CardItem }) => {
       />
       <div className="absolute inset-0 flex translate-y-1/2 transform flex-col justify-end bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4 opacity-0 transition-all duration-500 ease-in-out group-hover:translate-y-0 group-hover:opacity-100 group-focus:translate-y-0 group-focus:opacity-100">
         <div>
-          <h3 className="mb-2 text-lg font-bold text-white">
+          <h3 className="mb-2 text-[14px] font-bold text-white lg:text-lg">
             {cardData.title}
           </h3>
           {cardData.desc && (
-            <p className="mb-3 text-sm text-gray-300">{cardData.desc}</p>
+            <p className="mb-3 text-[12px] text-gray-300 lg:text-sm">
+              {cardData.desc}
+            </p>
           )}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1 lg:gap-2">
             {cardData.techStack.map((tech) => (
               <span
                 key={tech} // Gunakan `tech` sebagai key yang unik dalam scope ini
-                className="rounded-md bg-white/10 px-2 py-1 text-xs font-semibold text-white"
+                className="rounded-md bg-white/10 px-1 py-0.5 text-[10px] font-semibold text-white lg:px-2 lg:py-1 lg:text-xs"
               >
                 {tech}
               </span>
@@ -64,7 +66,7 @@ const ProjectCard = ({ cardData }: { cardData: CardItem }) => {
   return (
     <div
       tabIndex={0}
-      className="project-card group relative mr-6 mb-5 h-[250px] w-[300px] flex-shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-xl focus:outline-none dark:bg-neutral-800"
+      className="project-card group relative mr-6 mb-5 h-[200px] w-[250px] flex-shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-xl focus:outline-none lg:h-[250px] lg:w-[300px] dark:bg-neutral-800"
     >
       {/* Refactor 2: Logika kondisional untuk Link dibungkus di sini */}
       {cardData.href ? (
@@ -114,14 +116,14 @@ export default function Projects() {
     <Section
       id="projects"
       ref={sectionRef}
-      className="mx-auto mt-10 h-screen w-full max-w-5xl"
+      className="mx-auto min-h-screen w-full max-w-5xl"
       padding={false}
     >
-      <h1 className="mx-auto flex items-center justify-center text-3xl font-bold text-black dark:text-white">
+      <h1 className="mx-auto flex items-center justify-center text-lg font-bold text-black lg:text-3xl dark:text-white">
         Our Mini Projects
       </h1>
 
-      <div className="h-[570px] space-y-6 bg-transparent">
+      <div className="h-[500px] space-y-6 bg-transparent px-5 lg:h-[570px]">
         {/* --- MARQUEE ATAS --- */}
         <Marquee
           speed={10}

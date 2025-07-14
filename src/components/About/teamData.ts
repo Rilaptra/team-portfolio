@@ -130,8 +130,8 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: "Muhammad Sava Alfarisy.",
-    role: "Front-End Developer & Animation Wizard",
-    bio: "Memiliki mata yang tajam untuk detail dan keahlian dalam membuat animasi web yang hidup. Mengubah desain statis menjadi pengalaman yang interaktif dan menyenangkan.",
+    role: "junior programmer & cyber security enthusiast  ",
+    bio: "mampu membuat web dan mengamankan web ",
     image: "https://placehold.co/384x384/222831/EEEEEE.webp?text=MS",
     socials: {
       github: "https://github.com/username",

@@ -103,7 +103,7 @@ export const HoverEffect = ({
 
               <CardTitle
                 className={cn(
-                  "mt-4 font-bold tracking-wide text-gray-800 dark:text-zinc-100",
+                  "lg:text-md mt-4 text-sm font-bold tracking-wide text-gray-800 dark:text-zinc-100",
                 )}
               >
                 {item.title}
@@ -111,7 +111,7 @@ export const HoverEffect = ({
 
               <CardDescription
                 className={cn(
-                  "mt-8 text-sm leading-relaxed tracking-wide text-gray-600 dark:text-zinc-400",
+                  "lg:text-md mt-8 text-xs leading-relaxed tracking-wide text-gray-600 dark:text-zinc-400",
                 )}
               >
                 {item.description}

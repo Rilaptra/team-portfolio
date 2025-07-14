@@ -39,10 +39,10 @@ export default function WhyChooseUs() {
         className="mx-auto flex max-w-6xl flex-col items-center justify-center px-10"
       >
         <div className="gsap-title-container flex flex-col items-center">
-          <h1 className="gsap-title mt-10 flex text-3xl font-bold text-black dark:text-white">
+          <h1 className="gsap-title mt-10 flex text-lg font-bold text-black lg:text-3xl dark:text-white">
             Why Choose Us
           </h1>
-          <h4 className="gsap-title text-md mt-5 flex max-w-5xl text-center leading-tight font-thin text-black dark:text-white">
+          <h4 className="gsap-title font-small mt-5 flex max-w-5xl text-center text-xs text-black lg:text-[17px] dark:text-white">
             Kami lebih dari sekadar agensi pengembangan web kami adalah mitra
             strategis Anda. Kami menggabungkan keahlian teknis dengan pemahaman
             mendalam tentang bisnis Anda untuk menciptakan solusi digital yang

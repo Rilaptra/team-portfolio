@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/Ui/button";
 import Section from "@/components/Utils/Section";
 import { Blob } from "../Hero/SVGBlobs";
 import { MoveRight } from "lucide-react";
@@ -29,7 +28,7 @@ export default function AboutUs() {
         scrollTrigger: {
           trigger: container.current,
           start: "top 70%",
-          toggleActions: "restart reset restart reset",
+          toggleActions: "play reverse play reverse",
         },
         duration: 0.5,
         ease: "power2.out",
@@ -41,7 +40,7 @@ export default function AboutUs() {
         scrollTrigger: {
           trigger: container.current,
           start: "top 70%",
-          toggleActions: "restart reset restart reset",
+          toggleActions: "play reverse play reverse",
         },
         duration: 0.3,
         stagger: 0.1,
@@ -141,7 +140,7 @@ export default function AboutUs() {
               gradientIndex={0}
               size={320}
               animated
-              className="top-1/2 right-0 -z-[1] mx-auto -translate-y-1/2 ease-in-out"
+              className="top-1/2 right-1/2 -z-[1] mx-auto translate-x-1/2 -translate-y-1/2 ease-in-out lg:right-0 lg:translate-x-0"
             />
           )}
         </div>

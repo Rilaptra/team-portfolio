@@ -111,7 +111,6 @@ export function ProfileCard() {
                   trigger: section,
                   start: "top 85%",
                   toggleActions: "play reverse play reverse",
-                  markers: true,
                 },
               });
             });

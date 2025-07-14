@@ -3,9 +3,9 @@
 import { cn } from "@/lib/utils";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "../../Ui/button";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Menu, X } from "lucide-react"; // Import Menu dan X
 import { animatePageOut } from "@/lib/animations";
-import useTheme from "next-theme";
+import useTheme from "next-theme"; // Asumsi ini dari 'next-themes'
 import { useEffect, useState } from "react";
 import { getRandomBorderRadiusValue } from "@/lib/utils";
 
@@ -13,76 +13,154 @@ const links = [
   {
     name: "Home",
     href: "/",
-    className: "from-(--color-emerald-400) to-(--color-teal-600)",
+    className: "from-purple-400 to-indigo-600", // Disesuaikan untuk Tailwind CSS
   },
   {
     name: "About",
     href: "/about",
-    className: "from-(--color-amber-400) to-(--color-orange-600)",
+    className: "from-amber-400 to-orange-600",
   },
   {
     name: "Contact",
     href: "/contact",
-    className: "from-(--color-teal-400) to-(--color-cyan-600)",
+    className: "from-teal-400 to-cyan-600",
   },
 ];
+
 export default function Header() {
   const router = useRouter();
   const params = usePathname();
-  const { theme, toggle } = useTheme();
+  const { theme, setTheme } = useTheme(); // Sesuaikan dengan hook 'next-themes'
 
   const [mounted, setMounted] = useState(false);
   const [borderRadii, setBorderRadii] = useState<string | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State untuk menu mobile
 
-  const handleClick = (href: string) => {
+  const handleLinkClick = (href: string) => {
     setBorderRadii(getRandomBorderRadiusValue());
+    setIsMenuOpen(false); // Tutup menu setelah link diklik
 
     if (params !== href) {
       animatePageOut(href, router);
     }
   };
 
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
   useEffect(() => {
     setMounted(true);
     setBorderRadii(getRandomBorderRadiusValue());
   }, []);
+
+  // Efek untuk mencegah scroll body saat menu mobile terbuka
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isMenuOpen]);
+
   return (
-    <nav className="fixed z-[99999] flex w-full">
-      <div className="mt-2 ml-4 flex flex-col gap-y-2"></div>
+    <>
+      {/* 🍔 Navigasi Utama */}
+      <nav className="fixed top-0 z-50 flex w-full items-center justify-between p-4 md:justify-center">
+        {/* Navigasi Desktop (Tengah) - Hilang di mobile */}
+        <div className="absolute top-0 left-1/2 hidden -translate-x-1/2 md:block">
+          <div className="absolute inset-0 rounded-b-full bg-gradient-to-b from-slate-200/80 to-transparent backdrop-blur-sm dark:from-neutral-800/50"></div>
+          <ul className="text-onyx dark:text-offwhite relative z-10 flex max-h-11 justify-around gap-3 px-7 pt-2 pb-1 font-semibold transition-colors duration-300">
+            {links.map((link) => (
+              <li
+                key={link.name}
+                onClick={() => handleLinkClick(link.href)}
+                style={{ borderRadius: borderRadii || "0" }}
+                className={cn(
+                  "px-3 py-1 transition-all duration-300 ease-in-out hover:cursor-pointer hover:rounded-xl md:bg-transparent md:bg-gradient-to-br",
+                  params === link.href
+                    ? `bg-black/5 dark:bg-white/10 ${link.className}`
+                    : "from-transparent to-transparent",
+                )}
+              >
+                <p className="font-normal select-none">{link.name}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      {/* Kontainer Utama untuk Navigasi */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2">
-        <div className="absolute inset-0 rounded-b-full bg-gradient-to-b from-slate-200/80 to-transparent backdrop-blur-xs dark:from-neutral-700/50"></div>
+        {/* Kontrol Kanan (Theme Toggle & Hamburger) */}
+        <div className="absolute top-2 right-4 flex items-center gap-2">
+          <Button
+            variant="outline"
+            onClick={toggleTheme}
+            className="h-auto rounded-full p-2 hover:cursor-pointer"
+          >
+            {mounted && (
+              <span>
+                {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+              </span>
+            )}
+          </Button>
 
-        <ul className="text-onyx dark:text-offwhite relative z-10 flex max-h-11 justify-around gap-3 px-7 pt-2 pb-1 font-semibold transition-colors duration-300">
-          {links.map((link) => (
-            <li
-              key={link.name}
-              onClick={() => handleClick(link.href)}
-              style={{ borderRadius: borderRadii || "0" }}
-              className={cn(
-                "bg-linear-to-br px-3 py-1 transition-all duration-300 ease-in-out hover:cursor-pointer hover:rounded-xl",
-                params === link.href
-                  ? "bg-black/5 dark:bg-white/10 " + link.className
-                  : "",
-              )}
-            >
-              <p className="font-normal select-none">{link.name}</p>
-            </li>
-          ))}
+          {/* Tombol Hamburger - Hanya muncul di mobile */}
+          <Button
+            variant="outline"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="h-auto rounded-full p-2 hover:cursor-pointer md:hidden"
+          >
+            <span>{isMenuOpen ? <X size={20} /> : <Menu size={20} />}</span>
+          </Button>
+        </div>
+      </nav>
+
+      {/* 📱 Panel Menu Mobile */}
+      <div
+        className={cn(
+          "fixed top-0 right-0 z-40 h-full w-64 bg-slate-100/80 backdrop-blur-lg transition-transform duration-500 ease-in-out md:hidden dark:bg-neutral-900/80",
+          isMenuOpen ? "translate-x-0" : "translate-x-full",
+        )}
+      >
+        <ul className="flex h-full flex-col items-center justify-center gap-6">
+          {links.map((link, index) => {
+            const isActive = params === link.href; // Cek apakah link sedang aktif
+
+            return (
+              <li
+                key={link.name}
+                onClick={() => handleLinkClick(link.href)}
+                className="group transform transition-all duration-300 ease-in-out" // Tambahkan 'group' di sini
+                style={{
+                  transitionDelay: `${index * 100 + 150}ms`,
+                  transform: isMenuOpen ? "translateX(0)" : "translateX(20px)",
+                  opacity: isMenuOpen ? 1 : 0,
+                }}
+              >
+                <p
+                  className={cn(
+                    "cursor-pointer text-xl font-semibold transition-colors duration-200",
+                    // Jika aktif, langsung terapkan gradien
+                    isActive
+                      ? `bg-gradient-to-br bg-clip-text text-transparent ${link.className}`
+                      : // Jika tidak aktif, terapkan gradien hanya saat di-hover
+                        `group-hover:bg-gradient-to-br group-hover:bg-clip-text group-hover:text-transparent ${link.className}`,
+                  )}
+                >
+                  {link.name}
+                </p>
+              </li>
+            );
+          })}
         </ul>
       </div>
 
-      {/* Toggle Theme & Hamburger Menu (Mobile) */}
-      <div className="absolute top-2 right-4">
-        <Button
-          variant="outline"
-          onClick={toggle}
-          className="h-auto rounded-full p-2 hover:cursor-pointer"
-        >
-          {mounted && <span>{theme === "light" ? <Moon /> : <Sun />}</span>}
-        </Button>
-      </div>
-    </nav>
+      {/* Overlay saat menu mobile terbuka */}
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black/30 md:hidden"
+          onClick={() => setIsMenuOpen(false)}
+        ></div>
+      )}
+    </>
   );
 }

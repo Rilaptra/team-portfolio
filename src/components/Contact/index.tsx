@@ -87,7 +87,7 @@ ${message}
       <div ref={containerRef} className="mx-auto w-full max-w-4xl">
         <div className="text-center">
           <h1 className="contact-gsap text-4xl font-bold tracking-tight text-black transition-colors duration-300 sm:text-5xl dark:text-white">
-            Get <span className="text-teal-500">In</span> Touch
+            Get <span className="text-teal-400">In</span> Touch
           </h1>
           <p className="contact-gsap text-muted-foreground mt-4 text-lg">
             Kami siap membantu mewujudkan ide Anda. Kirimkan pesan kepada kami.
