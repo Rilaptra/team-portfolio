@@ -194,27 +194,27 @@ const cardsTop: CardItem[] = [
 
 const cardsBottom: CardItem[] = [
   {
-    title: "coming soon 1",
+    title: "To-Work List App",
     desc: "",
-    image: "https://placehold.co/300x250/999999/333333.webp?text=Coming soon",
-    techStack: ["Flutter", "Dart", "Firebase"],
+    image: "/images/Home/toworklist.png",
+    techStack: ["coming soon"],
   },
   {
     title: "coming soon 2",
     desc: "",
-    image: "https://placehold.co/300x250/999999/333333.webp?text=Coming soon",
-    techStack: ["Ruby", "HTML/CSS", "PostgreSQL"],
+    image: "https://placehold.co/300x250/bbbbbb/555555.webp?text=Coming soon",
+    techStack: ["coming soon"],
   },
   {
     title: "coming soon 3",
     desc: "",
-    image: "https://placehold.co/300x250/999999/333333.webp?text=Coming soon",
-    techStack: ["Django", "Python", "MySQL"],
+    image: "https://placehold.co/300x250/bbbbbb/555555.webp?text=Coming soon",
+    techStack: ["coming soon"],
   },
   {
     title: "coming soon 4",
     desc: "",
-    image: "https://placehold.co/300x250/999999/333333.webp?text=Coming soon",
-    techStack: ["Go", "Gin", "Redis"],
+    image: "https://placehold.co/300x250/bbbbbb/555555.webp?text=Coming soon",
+    techStack: ["coming soon"],
   },
 ];

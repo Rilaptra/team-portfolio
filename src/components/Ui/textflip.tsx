@@ -101,7 +101,7 @@ export const FlipWords = ({
     <div
       ref={containerRef}
       className={cn(
-        "relative z-10 inline-block text-left text-neutral-900 dark:text-neutral-100",
+        "relative z-10 inline-block text-left text-[10px] text-neutral-900 lg:text-[32px] dark:text-neutral-100",
         className,
       )}
     >
@@ -112,7 +112,7 @@ export const FlipWords = ({
         {words[currentIndex].split(" ").map((word, wordIndex) => (
           <span
             key={`${word}-${wordIndex}`}
-            className="word-span inline-block whitespace-nowrap"
+            className="word-span inline-block text-[20px] whitespace-nowrap lg:text-[32px]"
           >
             {word.split("").map((letter, letterIndex) => (
               <span

@@ -42,7 +42,7 @@ export default function WhyChooseUs() {
           <h1 className="gsap-title mt-10 flex text-3xl font-bold text-black dark:text-white">
             Why Choose Us
           </h1>
-          <h4 className="gsap-title text-md mt-5 flex max-w-5xl text-center leading-tight font-medium text-black dark:text-white">
+          <h4 className="gsap-title text-md mt-5 flex max-w-5xl text-center leading-tight font-thin text-black dark:text-white">
             Kami lebih dari sekadar agensi pengembangan web kami adalah mitra
             strategis Anda. Kami menggabungkan keahlian teknis dengan pemahaman
             mendalam tentang bisnis Anda untuk menciptakan solusi digital yang

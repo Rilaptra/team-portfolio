@@ -16,9 +16,7 @@ export default function Abouts() {
         </p>
       </div>
 
-      <div className="mx-auto mt-16">
-        <ProfileCard />
-      </div>
+      <ProfileCard />
     </Section>
   );
 }

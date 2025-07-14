@@ -6,6 +6,7 @@ export interface Project {
   url: string;
   description: string;
   stack: string[];
+  preview_type?: "iframe" | "image"; // Tambahkan properti ini
 }
 
 export interface TeamMember {
@@ -53,10 +54,18 @@ export const teamMembers: TeamMember[] = [
       },
       {
         title: "E-Commerce Dashboard",
-        url: "https://erzysh.vercel.app",
+        url: "https://eshmarket.vercel.app",
         description:
           "Panel admin untuk mengelola produk, pesanan, dan analitik penjualan pada platform e-commerce.",
         stack: ["React", "TypeScript", "Recharts"],
+      },
+      // Proyek Baru dengan Gambar
+      {
+        title: "Old Portfolio Design",
+        url: "/images/Home/botwhatsapp.jpg", // Ganti dengan path gambar Anda
+        preview_type: "image", // Tandai sebagai gambar
+        description: "Mockup desain untuk versi portofolio pribadi sebelumnya.",
+        stack: ["Figma", "UI/UX"],
       },
       {
         title: "AI Chatbot Interface",
@@ -67,6 +76,7 @@ export const teamMembers: TeamMember[] = [
       },
     ],
   },
+  // ... sisa data team member lainnya tidak berubah
   {
     name: "Solahuddin Ahmad",
     role: "Back-End & IoT Specialist",

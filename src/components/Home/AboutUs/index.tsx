@@ -23,56 +23,56 @@ export default function AboutUs() {
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({
+      gsap.from(".gsap-about-subtitle", {
+        opacity: 0,
+        y: 20,
         scrollTrigger: {
           trigger: container.current,
           start: "top 70%",
-          toggleActions: "restart reverse play reverse",
+          toggleActions: "restart reset restart reset",
         },
-      });
-
-      tl.from(".gsap-about-subtitle", {
-        opacity: 0,
-        y: 20,
         duration: 0.5,
         ease: "power2.out",
       });
 
-      tl.from(
-        ".gsap-about-title-word .word",
-        {
-          y: "100%",
-          opacity: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "power3.out",
+      gsap.from(".gsap-about-title-word .word", {
+        y: "100%",
+        opacity: 0,
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top 70%",
+          toggleActions: "restart reset restart reset",
         },
-        "-=0.3",
-      );
+        duration: 0.3,
+        stagger: 0.1,
+        ease: "power3.out",
+      });
 
-      tl.from(
-        ".gsap-about-desc-word .word",
-        {
-          y: "100%",
-          opacity: 0,
-          duration: 0.2,
-          stagger: 0.03,
-          ease: "power2.out",
+      gsap.from(".gsap-about-desc-word .word", {
+        y: "100%",
+        opacity: 0,
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top 70%",
+          toggleActions: "restart reset restart reset",
         },
-        "-=0.2",
-      );
+        duration: 0.2,
+        stagger: 0.03,
+        ease: "power2.out",
+      });
 
       // 4. Targetkan animasi ke buttonRef.current
-      tl.from(
-        buttonRef.current,
-        {
-          opacity: 0,
-          scale: 0.5,
-          duration: 0.5,
-          ease: "back.out(1.7)",
+      gsap.from(buttonRef.current, {
+        opacity: 0,
+        scale: 0.5,
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top 70%",
+          toggleActions: "restart reset restart reset",
         },
-        "-=0.2",
-      );
+        duration: 0.5,
+        ease: "back.out",
+      });
     },
     { scope: container },
   );
@@ -81,9 +81,9 @@ export default function AboutUs() {
     <Section id="aboutUs" minHeightScreen={false} className="w-full">
       <div
         ref={container}
-        className="mx-auto grid max-w-screen-lg grid-cols-1 items-center gap-12 md:grid-cols-2"
+        className="relative mx-auto grid max-w-[550px] grid-cols-1 items-center gap-12 lg:max-w-screen-lg lg:grid-cols-2"
       >
-        <div className="flex flex-col gap-4 text-center md:text-left">
+        <div className="flex flex-col gap-4 text-center text-[15px] lg:text-left">
           <h2 className="gsap-about-subtitle text-muted-foreground text-sm font-semibold tracking-widest uppercase">
             WHO WE ARE
           </h2>
@@ -106,7 +106,7 @@ export default function AboutUs() {
           </h3>
 
           <p
-            className="gsap-about-desc-word text-muted-foreground mt-2"
+            className="gsap-about-desc-word text-onyx dark:text-offwhite mt-2 font-thin"
             style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)" }}
           >
             {"Kami adalah tim fullstack developer yang bersemangat memecahkan masalah kompleks dengan teknologi terkini. Bagi kami, software terbaik lahir dari kemitraan yang erat dan pemahaman mendalam akan tujuan bisnis Anda."
@@ -127,21 +127,21 @@ export default function AboutUs() {
           >
             <SwitchPage
               href="/about"
-              variant="outline"
-              className="mt-4 flex items-center self-center md:self-start"
+              // variant="outline"
+              className="mx-auto mt-4 flex items-center transition-all duration-300 hover:translate-y-[-5px] hover:scale-105 lg:mx-0 lg:self-start"
             >
               Learn More <MoveRight className="ml-2 h-4 w-4" />
             </SwitchPage>
           </div>
         </div>
-        <div className="relative mx-auto flex w-full items-center justify-center">
+        <div className="absolute mx-auto flex w-full items-center justify-center lg:relative lg:mx-0 lg:ml-auto">
           {mounted && (
             <Blob
               blobIndex={100}
               gradientIndex={0}
               size={320}
               animated
-              className="top-1/2 left-1/2 -z-[1] -translate-x-1/2 -translate-y-1/2 ease-in-out"
+              className="top-1/2 right-0 -z-[1] mx-auto -translate-y-1/2 ease-in-out"
             />
           )}
         </div>

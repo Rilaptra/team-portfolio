@@ -16,6 +16,7 @@ import {
   Github,
   Linkedin,
   Instagram,
+  FileImage, // Impor ikon baru untuk fallback gambar
 } from "lucide-react";
 import convertToWebP from "@/lib/utils";
 gsap.registerPlugin(ScrollTrigger);
@@ -42,7 +43,6 @@ export function ProfileCard() {
   const [modalData, setModalData] = useState<TeamMember | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Deteksi ukuran layar
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -50,36 +50,27 @@ export function ProfileCard() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // GSAP untuk animasi responsif
   useGSAP(
     () => {
-      // 1. Buat instance matchMedia
       let mm = gsap.matchMedia();
-
-      // 2. Tambahkan breakpoint dan animasinya
       mm.add(
         {
           isDesktop: "(min-width: 768px)",
           isMobile: "(max-width: 767px)",
         },
         (context) => {
-          // Ambil variabel dari context
           let { isDesktop, isMobile } = context.conditions as {
             isDesktop: boolean;
             isMobile: boolean;
           };
-
           if (isDesktop) {
-            // --- LOGIKA ANIMASI DESKTOP ---
             const sections = gsap.utils.toArray<HTMLElement>(
               ".horizontal-section",
             );
             const wrapper = wrapperRef.current;
             if (!wrapper || sections.length === 0) return;
-
             const totalWidth = wrapper.scrollWidth;
             const viewWidth = window.innerWidth;
-
             const horizontalScroll = gsap.to(wrapper, {
               x: () => `-${totalWidth - viewWidth}px`,
               ease: "none",
@@ -90,7 +81,6 @@ export function ProfileCard() {
                 end: () => `+=${totalWidth - viewWidth}`,
               },
             });
-
             sections.forEach((section) => {
               gsap.from(section.querySelectorAll(".gsap-reveal"), {
                 y: 50,
@@ -100,15 +90,13 @@ export function ProfileCard() {
                 scrollTrigger: {
                   trigger: section,
                   containerAnimation: horizontalScroll,
-                  start: "left 70%",
-                  toggleActions: "play reverse play reverse", // Animasi lebih smooth saat scroll bolak-balik
+                  start: "left 85%",
+                  end: "right 15%",
+                  toggleActions: "play reverse play reverse",
                 },
               });
             });
-          }
-
-          if (isMobile) {
-            // --- LOGIKA ANIMASI MOBILE ---
+          } else if (isMobile) {
             const sections = gsap.utils.toArray<HTMLElement>(
               ".horizontal-section",
             );
@@ -122,7 +110,8 @@ export function ProfileCard() {
                 scrollTrigger: {
                   trigger: section,
                   start: "top 85%",
-                  toggleActions: "play reverse play reverse", // Animasi lebih smooth saat scroll bolak-balik
+                  toggleActions: "play reverse play reverse",
+                  markers: true,
                 },
               });
             });
@@ -133,7 +122,6 @@ export function ProfileCard() {
     { scope: containerRef },
   );
 
-  // GSAP untuk modal (tidak berubah)
   useGSAP(() => {
     if (modalData) {
       gsap.set(modalRef.current, { display: "flex" });
@@ -156,13 +144,13 @@ export function ProfileCard() {
   }, [modalData]);
 
   return (
-    <>
+    <div className="mx-auto">
       <div ref={containerRef} className="w-full md:h-screen md:overflow-hidden">
         <div
           ref={wrapperRef}
           className="flex flex-col md:h-full md:flex-row"
           style={{
-            width: isMobile ? "100%" : `${teamMembers.length * 100}vw`,
+            width: isMobile ? "100%" : `${teamMembers.length * 100 + 1}vw`,
           }}
         >
           {teamMembers.map((member) => {
@@ -173,7 +161,6 @@ export function ProfileCard() {
                 className="horizontal-section flex w-full flex-col items-center justify-center px-4 py-16 md:h-screen md:w-screen md:flex-row md:p-8"
               >
                 <div className="grid w-full max-w-6xl grid-cols-1 items-center gap-8 md:grid-cols-5 md:gap-12">
-                  {/* === KOLOM KIRI (GAMBAR, ROLE, SOSMED) === */}
                   <div className="col-span-1 flex flex-col items-center gap-4 md:col-span-2">
                     <div className="gsap-reveal relative aspect-square w-full max-w-sm overflow-hidden">
                       <Image
@@ -205,8 +192,6 @@ export function ProfileCard() {
                       </div>
                     </div>
                   </div>
-
-                  {/* === KOLOM KANAN (NAMA, BIO, PROYEK) === */}
                   <div className="col-span-1 flex flex-col md:col-span-3">
                     <h2 className="gsap-reveal text-4xl font-black md:text-6xl">
                       {member.name
@@ -223,7 +208,6 @@ export function ProfileCard() {
                     <p className="gsap-reveal text-muted-foreground mt-4 text-base md:mt-6 md:text-lg">
                       {member.bio}
                     </p>
-
                     <div className="gsap-reveal mt-6 md:mt-8">
                       <h4 className="mb-4 font-semibold">Proyek Unggulan</h4>
                       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -237,7 +221,6 @@ export function ProfileCard() {
                         ))}
                       </div>
                     </div>
-
                     <div className="gsap-reveal mt-6">
                       <Button onClick={() => setModalData(member)}>
                         Lihat Semua Proyek
@@ -250,7 +233,6 @@ export function ProfileCard() {
           })}
         </div>
       </div>
-      {/* Modal untuk semua project */}
       <div
         ref={modalRef}
         className="bg-background/80 fixed inset-0 z-[9999] hidden items-center justify-center p-4 backdrop-blur-sm"
@@ -304,22 +286,24 @@ export function ProfileCard() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
-// Komponen untuk menampilkan preview project (tidak berubah)
+// --- Komponen ProjectPreview yang Di-upgrade ---
 const ProjectPreview = ({ project }: { project: Project }) => {
-  const [loadFailed, setLoadFailed] = useState(false);
+  const [isIframeLoadFailed, setIframeLoadFailed] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-  return (
-    <a
-      href={project.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group hover:ring-primary relative block aspect-video w-full overflow-hidden rounded-lg border bg-slate-100 shadow-sm transition-all duration-300 hover:shadow-xl hover:ring-2 dark:bg-neutral-800"
-    >
-      {loadFailed ? (
+  // Cek apakah URL adalah gambar atau harus menggunakan iframe
+  const isImagePreview =
+    project.preview_type === "image" ||
+    project.url.match(/\.(jpeg|jpg|gif|png|webp)$/);
+
+  // Konten untuk iframe
+  const IframeContent = () => (
+    <>
+      {isIframeLoadFailed ? (
         <div className="bg-muted flex h-full w-full flex-col items-center justify-center p-4 text-center">
           <Globe className="text-muted-foreground h-8 w-8" />
           <p className="mt-2 text-sm font-semibold">
@@ -333,13 +317,56 @@ const ProjectPreview = ({ project }: { project: Project }) => {
           className="pointer-events-none h-full w-full scale-[1.01] transform border-0"
           loading="lazy"
           sandbox="allow-scripts allow-same-origin"
-          onError={() => setLoadFailed(true)}
-        ></iframe>
+          onError={() => setIframeLoadFailed(true)}
+        />
       )}
       <div className="absolute inset-0 bg-black/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="bg-background/50 absolute top-2 right-2 flex items-center gap-1 rounded-full p-1 pl-3 text-xs opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
         Kunjungi <ArrowUpRight className="h-3 w-3" />
       </div>
+    </>
+  );
+
+  // Konten untuk gambar
+  const ImageContent = () => (
+    <>
+      <Image
+        src={project.url}
+        alt={project.title}
+        layout="fill"
+        objectFit="cover"
+        className="transition-transform duration-500 group-hover:scale-110"
+        loader={project.url.startsWith("https") ? undefined : convertToWebP}
+        unoptimized={project.url.startsWith("https")}
+        onError={(e) => {
+          e.currentTarget.style.display = "none";
+          setImageLoaded(false);
+        }}
+        onLoad={() => {
+          setImageLoaded(true);
+        }}
+      />
+      {/* Fallback jika gambar gagal dimuat */}
+      {!imageLoaded && (
+        <div className="bg-muted absolute inset-0 flex items-center justify-center">
+          <FileImage className="text-muted-foreground h-10 w-10" />
+        </div>
+      )}
+      <div className="absolute inset-0 bg-black/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="bg-background/50 absolute top-2 right-2 flex items-center gap-1 rounded-full p-1 pl-3 text-xs opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+        Lihat Gambar <ArrowUpRight className="h-3 w-3" />
+      </div>
+    </>
+  );
+
+  return (
+    <a
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group hover:ring-primary relative block aspect-video w-full overflow-hidden rounded-lg border bg-slate-100 shadow-sm transition-all duration-300 hover:shadow-xl hover:ring-2 dark:bg-neutral-800"
+    >
+      {isImagePreview ? <ImageContent /> : <IframeContent />}
     </a>
   );
 };

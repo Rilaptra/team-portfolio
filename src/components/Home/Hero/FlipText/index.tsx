@@ -31,7 +31,7 @@ export default function FlipText({
           duration={5000}
         />
       </div>
-      <span className="mt-2 block text-sm font-normal text-neutral-500 dark:text-neutral-400">
+      <span className="mt-2 block text-[15px] font-normal text-neutral-500 lg:text-sm dark:text-neutral-400">
         {spanTwoText}
       </span>
       {/* about us, read below */}

@@ -5,12 +5,13 @@ import Logo from "../../icons/Logo";
 
 type NavLink = {
   label: string;
+  href?: string;
 };
 
-const companyLinks: NavLink[] = [
-  { label: "Tentang Kami" },
-  { label: "Karir" },
-  { label: "Blog" },
+const websiteLinks: NavLink[] = [
+  { label: "Beranda", href: "/" },
+  { label: "Tentang Kami", href: "/about" },
+  { label: "Kontak", href: "/contact" },
 ];
 
 const serviceLinks: NavLink[] = [
@@ -58,15 +59,16 @@ const Footer = () => {
           </div>
           <div className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-4 lg:mt-0 lg:gap-16">
             <div className="text-sm">
-              <p className="font-bold">Perusahaan</p>
+              <p className="font-bold">Website</p>
               <nav className="mt-4 space-y-2">
-                {companyLinks.map((link) => (
-                  <div
+                {websiteLinks.map((link) => (
+                  <Link
                     key={link.label}
+                    href={link?.href || "/"}
                     className="block cursor-pointer text-neutral-400 transition hover:text-black dark:hover:text-white"
                   >
                     {link.label}
-                  </div>
+                  </Link>
                 ))}
               </nav>
             </div>
