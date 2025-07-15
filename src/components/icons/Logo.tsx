@@ -1,3 +1,4 @@
+// src/components/icons/Logo.tsx
 import { SVGLogoProps } from "@/lib/types";
 
 export default function Logo({ size, className }: SVGLogoProps) {

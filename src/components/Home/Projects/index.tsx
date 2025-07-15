@@ -1,3 +1,4 @@
+// src/components/Home/Projects/index.tsx
 "use client";
 
 import { useRef, useState } from "react";
@@ -7,14 +8,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Section from "@/components/Utils/Section";
 import Marquee from "react-fast-marquee";
 import Image from "next/image";
-import Link from "next/link";
-import convertToWebP from "@/lib/utils";
+import { Link } from "@/i18n/navigation";
+import { convertToWebP } from "@/lib/utils";
 import SwitchPage from "@/components/Utils/SwitchPage";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- Data & Tipe dipindah ke atas untuk kejelasan ---
 interface CardItem {
   title: string;
   desc?: string;
@@ -23,8 +24,7 @@ interface CardItem {
   href?: string;
 }
 
-// Refactor 1: Buat komponen ProjectCard yang bisa dipakai ulang
-// -----------------------------------------------------------
+// Komponen ProjectCard tidak perlu diubah, karena sudah menerima data dari props
 const ProjectCard = ({ cardData }: { cardData: CardItem }) => {
   const CardContent = (
     <>
@@ -51,7 +51,7 @@ const ProjectCard = ({ cardData }: { cardData: CardItem }) => {
           <div className="flex flex-wrap gap-1 lg:gap-2">
             {cardData.techStack.map((tech) => (
               <span
-                key={tech} // Gunakan `tech` sebagai key yang unik dalam scope ini
+                key={tech}
                 className="rounded-md bg-white/10 px-1 py-0.5 text-[10px] font-semibold text-white lg:px-2 lg:py-1 lg:text-xs"
               >
                 {tech}
@@ -68,7 +68,6 @@ const ProjectCard = ({ cardData }: { cardData: CardItem }) => {
       tabIndex={0}
       className="project-card group relative mr-6 mb-5 h-[200px] w-[250px] flex-shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-xl focus:outline-none lg:h-[250px] lg:w-[300px] dark:bg-neutral-800"
     >
-      {/* Refactor 2: Logika kondisional untuk Link dibungkus di sini */}
       {cardData.href ? (
         <Link
           href={cardData.href}
@@ -86,8 +85,66 @@ const ProjectCard = ({ cardData }: { cardData: CardItem }) => {
 
 // --- Komponen Utama ---
 export default function Projects() {
+  const t = useTranslations("Home.Projects");
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isMarqueeActive, setIsMarqueeActive] = useState(false);
+
+  // Data sekarang digabung dengan terjemahan
+  const cardsTop: CardItem[] = [
+    {
+      title: t("cards.tidar.title"),
+      desc: t("cards.tidar.desc"),
+      image: "/webp/Home/tidar_porto1.webp",
+      techStack: ["Next.js", "TypeScript", "Tailwind"],
+      href: "https://tidarresto.com",
+    },
+    {
+      title: t("cards.venice.title"),
+      desc: t("cards.venice.desc"),
+      image: "/webp/Home/venice_porto1.webp",
+      techStack: ["Next.js", "Tailwind CSS"],
+      href: "https://klinik-venice.vercel.app",
+    },
+    {
+      title: t("cards.whatsapp.title"),
+      desc: t("cards.whatsapp.desc"),
+      image: "/webp/Home/botwhatsapp.webp",
+      techStack: ["React", "Node.js", "Express"],
+    },
+    {
+      title: t("cards.suksesmulya.title"),
+      desc: t("cards.suksesmulya.desc"),
+      image: "webp/Home/suksesmulya.webp",
+      techStack: ["Tailwindcss", "Nextjs", "React"],
+    },
+  ];
+
+  const cardsBottom: CardItem[] = [
+    {
+      title: t("cards.towork.title"),
+      desc: t("cards.towork.desc"),
+      image: "/images/Home/toworklist.png",
+      techStack: ["coming soon"],
+    },
+    {
+      title: t("cards.comingsoon2.title"),
+      desc: t("cards.comingsoon2.desc"),
+      image: "https://placehold.co/300x250/bbbbbb/555555.webp?text=Coming soon",
+      techStack: ["coming soon"],
+    },
+    {
+      title: t("cards.comingsoon3.title"),
+      desc: t("cards.comingsoon3.desc"),
+      image: "https://placehold.co/300x250/bbbbbb/555555.webp?text=Coming soon",
+      techStack: ["coming soon"],
+    },
+    {
+      title: t("cards.comingsoon4.title"),
+      desc: t("cards.comingsoon4.desc"),
+      image: "https://placehold.co/300x250/bbbbbb/555555.webp?text=Coming soon",
+      techStack: ["coming soon"],
+    },
+  ];
 
   useGSAP(
     () => {
@@ -120,24 +177,21 @@ export default function Projects() {
       padding={false}
     >
       <h1 className="mx-auto flex items-center justify-center text-lg font-bold text-black lg:text-3xl dark:text-white">
-        Our Mini Projects
+        {t("title")}
       </h1>
 
       <div className="h-[500px] space-y-6 bg-transparent px-5 lg:h-[570px]">
-        {/* --- MARQUEE ATAS --- */}
         <Marquee
           speed={10}
           direction="right"
           pauseOnHover
           play={isMarqueeActive}
         >
-          {/* Refactor 3: Gunakan komponen ProjectCard */}
           {cardsTop.map((item) => (
             <ProjectCard key={item.title} cardData={item} />
           ))}
         </Marquee>
 
-        {/* --- MARQUEE BAWAH --- */}
         <Marquee
           speed={10}
           direction="left"
@@ -145,7 +199,6 @@ export default function Projects() {
           pauseOnHover
           play={isMarqueeActive}
         >
-          {/* Refactor 3: Gunakan komponen ProjectCard lagi */}
           {cardsBottom.map((item) => (
             <ProjectCard key={item.title} cardData={item} />
           ))}
@@ -157,66 +210,9 @@ export default function Projects() {
           href="/contact"
           className="transition-all duration-300 hover:translate-y-[-5px] hover:scale-105"
         >
-          Buat Website <ArrowRight className="ml-2 h-5 w-5" />
+          {t("button")} <ArrowRight className="ml-2 h-5 w-5" />
         </SwitchPage>
       </div>
     </Section>
   );
 }
-
-// --- Data untuk proyek (tidak berubah) ---
-const cardsTop: CardItem[] = [
-  {
-    title: "Tidar Resto Website",
-    desc: "A responsive website company profile with nextjs and tailwindcss , with cms .",
-    image: "/webp/Home/tidar_porto1.webp",
-    techStack: ["Next.js", "TypeScript", "Tailwind"],
-    href: "https://tidarresto.com",
-  },
-  {
-    title: "Venice Klinik Website",
-    desc: "Elegant company profile website for a beauty clinic, showcasing services and customer testimonials.",
-    image: "/webp/Home/venice_porto1.webp",
-    techStack: ["Next.js", "Tailwind CSS"],
-    href: "https://klinik-venice.vercel.app",
-  },
-  {
-    title: "Full-Stack WhatsApp Bot",
-    desc: "An automated WhatsApp bot solution with an interactive management dashboard.",
-    image: "/webp/Home/botwhatsapp.webp",
-    techStack: ["React", "Node.js", "Express"],
-  },
-  {
-    title: "Sukses Mulya Website",
-    desc: "A responsive website company profile with nextjs and tailwindcss , with cms .",
-    image: "webp/Home/suksesmulya.webp",
-    techStack: ["Tailwindcss", "Nextjs", "React"],
-  },
-];
-
-const cardsBottom: CardItem[] = [
-  {
-    title: "To-Work List App",
-    desc: "",
-    image: "/images/Home/toworklist.png",
-    techStack: ["coming soon"],
-  },
-  {
-    title: "coming soon 2",
-    desc: "",
-    image: "https://placehold.co/300x250/bbbbbb/555555.webp?text=Coming soon",
-    techStack: ["coming soon"],
-  },
-  {
-    title: "coming soon 3",
-    desc: "",
-    image: "https://placehold.co/300x250/bbbbbb/555555.webp?text=Coming soon",
-    techStack: ["coming soon"],
-  },
-  {
-    title: "coming soon 4",
-    desc: "",
-    image: "https://placehold.co/300x250/bbbbbb/555555.webp?text=Coming soon",
-    techStack: ["coming soon"],
-  },
-];
