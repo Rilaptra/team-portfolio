@@ -1,4 +1,4 @@
-import { getRequestConfig } from "next-intl/server";
+import { getRequestConfig, getTimeZone } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { routing } from "./routing";
 
@@ -8,6 +8,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const locale = hasLocale(routing.locales, requested)
     ? requested
     : routing.defaultLocale;
+
+  // console.log(await getTimeZone());
 
   return {
     locale,

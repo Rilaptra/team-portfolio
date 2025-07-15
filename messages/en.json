@@ -170,11 +170,11 @@
         "id": "sava",
         "name": "Muhammad Sava Alfarisy.",
         "role": "Junior Programmer & Cyber Security Enthusiast",
-        "bio": "Able to create and secure websites.",
+        "bio": "A Junior Programmer and Cyber Security Enthusiast focused on developing interactive and secure websites. Passionate about application security and exploring web vulnerabilities.",
         "projects": {
           "p1": {
-            "title": "3D Product Configurator",
-            "description": "An interactive 3D product configurator that allows for real-time customization using Three.js."
+            "title": "Certificate of Appreciation",
+            "description": "Discovered a security vulnerability on the Indonesian National Armed Forces Headquarters website and reported it ethically."
           },
           "p2": {
             "title": "Interactive Storytelling Site",
@@ -189,6 +189,7 @@
     "greeting": "I'm SHR.ai, your virtual assistant. How can I help you?",
     "inputPlaceholder": "Type your message...",
     "resetButton": "Reset Conversation",
+    "closeButton": "Close Conversation",
     "errorMessage": "Oops, something went wrong. Please try again later."
   },
   "Footer": {

@@ -363,8 +363,7 @@ const ProjectPreview = ({
         src={project.url}
         alt={project.title}
         fill
-        objectFit="cover"
-        className="transition-transform duration-500 group-hover:scale-110"
+        className="object-cover transition-transform duration-500 group-hover:scale-110"
         loader={project.url.startsWith("https") ? undefined : convertToWebP}
         unoptimized={project.url.startsWith("https")}
         onError={() => setImageLoaded(false)}

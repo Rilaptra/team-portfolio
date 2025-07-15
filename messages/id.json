@@ -189,6 +189,7 @@
     "greeting": "Saya SHR.ai, asisten virtual Anda. Ada yang bisa saya bantu?",
     "inputPlaceholder": "Ketik pesan Anda...",
     "resetButton": "Reset Percakapan",
+    "closeButton": "Tutup Percakapan",
     "errorMessage": "Waduh, sepertinya ada masalah. Coba lagi nanti ya."
   },
   "Footer": {

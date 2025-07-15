@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { usePathname, useRouter } from "next/navigation";
 import { Button } from "../../Ui/button";
 import { Moon, Sun, Menu, X } from "lucide-react"; // Import Menu dan X
 import { animatePageOut } from "@/lib/animations";
@@ -9,18 +8,20 @@ import useTheme from "next-theme"; // Asumsi ini dari 'next-themes'
 import { useEffect, useState } from "react";
 import { getRandomBorderRadiusValue } from "@/lib/utils";
 import { Globe } from "lucide-react"; // Ikon baru
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/Ui/dropdown-menu";
+import { useRouter, usePathname } from "@/i18n/navigation";
 
 export default function Header() {
   const t = useTranslations("Navbar");
   const router = useRouter();
-  const params = usePathname();
+  const locale = useLocale();
+  const pathname = usePathname();
   const { theme, setTheme } = useTheme(); // Sesuaikan dengan hook 'next-themes'
 
   const [mounted, setMounted] = useState(false);
@@ -47,15 +48,14 @@ export default function Header() {
 
   const handleLocaleChange = (newLocale: string) => {
     // Ganti segmen locale di pathname
-    const newPath = `/${newLocale}${params.substring(3)}`;
-    router.replace(newPath);
+    router.push(pathname, { locale: newLocale });
   };
 
   const handleLinkClick = (href: string) => {
     setBorderRadii(getRandomBorderRadiusValue());
     setIsMenuOpen(false); // Tutup menu setelah link diklik
 
-    if (params !== href) {
+    if (pathname !== href) {
       animatePageOut(href, router);
     }
   };
@@ -93,7 +93,7 @@ export default function Header() {
                 style={{ borderRadius: borderRadii || "0" }}
                 className={cn(
                   "px-3 py-1 transition-all duration-300 ease-in-out hover:cursor-pointer hover:rounded-xl md:bg-transparent md:bg-gradient-to-br",
-                  params === link.href
+                  pathname === link.href
                     ? `bg-black/5 dark:bg-white/10 ${link.className}`
                     : "from-transparent to-transparent",
                 )}
@@ -112,23 +112,39 @@ export default function Header() {
                 variant="outline"
                 className="h-auto rounded-full p-2 hover:cursor-pointer"
               >
-                <Globe size={20} />
+                <span>
+                  <Globe size={20} />
+                </span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem
                 onClick={() => handleLocaleChange("en")}
-                disabled={params.startsWith("/en")}
+                disabled={locale == "en"}
                 className="cursor-pointer"
               >
                 English
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => handleLocaleChange("id")}
-                disabled={params.startsWith("/id")}
+                disabled={locale == "id"}
                 className="cursor-pointer"
               >
                 Indonesia
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => handleLocaleChange("ar-PS")}
+                disabled={locale == "ar-PS"}
+                className="cursor-pointer"
+              >
+                Free Palestine
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => handleLocaleChange("hi-IN")}
+                disabled={locale == "hi-IN"}
+                className="cursor-pointer"
+              >
+                India
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -164,7 +180,7 @@ export default function Header() {
       >
         <ul className="flex h-full flex-col items-center justify-center gap-6">
           {links.map((link, index) => {
-            const isActive = params === link.href; // Cek apakah link sedang aktif
+            const isActive = pathname === link.href; // Cek apakah link sedang aktif
 
             return (
               <li
