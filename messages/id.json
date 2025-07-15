@@ -1,0 +1,233 @@
+{
+  "Navbar": {
+    "home": "Beranda",
+    "about": "Tentang",
+    "contact": "Kontak"
+  },
+  "Home": {
+    "Hero": {
+      "spanOneText": "Kami membangun",
+      "spanTwoText": "Disesuaikan dengan kebutuhan Anda. Dibangun untuk performa.",
+      "words": [
+        "website canggih",
+        "chatbot profesional",
+        "solusi IoT",
+        "tools kustom",
+        "sistem yang aman"
+      ]
+    },
+    "AboutUs": {
+      "subtitle": "SIAPA KAMI",
+      "title": "Share Project - Arsitek Solusi Digital.",
+      "description": "Kami adalah tim fullstack developer yang bersemangat memecahkan masalah kompleks dengan teknologi terkini. Bagi kami, software terbaik lahir dari kemitraan yang erat dan pemahaman mendalam akan tujuan bisnis Anda.",
+      "button": "Pelajari Lebih Lanjut"
+    },
+    "WhyChooseUs": {
+      "title": "Kenapa Memilih Kami",
+      "Desk": " Karena kami lebih dari sekadar agensi pengembangan web kami adalah mitra strategis Anda. Kami menggabungkan keahlian teknis dengan pemahaman mendalam tentang bisnis Anda untuk menciptakan solusi digital yang tidak hanya terlihat hebat, tetapi juga memberikan hasil nyata.",
+      "CardsTitle": [
+        "Keamanan Terjamin",
+        "Mudah diteukan di pencarian google",
+        "Performa dan kecepatan optimal",
+        "menawarkan solusi sesuai kebutuhan",
+        "Komunikasi transparan",
+        "Dukungan jangka panjang"
+      ],
+      "CardDesk": [
+        "Kami membangun website dengan fokus utama pada keamanan. Dengan praktik koding modern dan proteksi berlapis, data bisnis dan kepercayaan pelanggan Anda akan selalu aman dari ancaman siber.",
+        "Website Anda dirancang sejak awal agar mudah ditemukan di mesin pencari seperti Google. Struktur yang SEO-friendly memastikan bisnis Anda menjangkau lebih banyak pelanggan potensial secara organik.",
+        "Kecepatan adalah kunci pengalaman pengguna dan konversi. Kami mengoptimalkan setiap aspek, dari kode hingga gambar, untuk memastikan website Anda dimuat secepat kilat di semua perangkat.",
+        "Kami tidak menawarkan solusi instan, melainkan membangun website yang benar-benar mewakili visi Anda. Setiap elemen dirancang khusus untuk memenuhi kebutuhan unik dan tujuan bisnis Anda.",
+        "Nikmati proses pengembangan yang bebas stres dengan komunikasi yang jelas dan terbuka. Anda akan selalu menerima pembaruan rutin, memastikan proyek berjalan sesuai rencana dan harapan.",
+        "Kerja sama kita tidak berhenti saat website diluncurkan. Saya siap menyediakan dukungan purna jual untuk memastikan website Anda tetap aman, cepat, dan berfungsi optimal."
+      ]
+    },
+    "Projects": {
+      "title": "Proyek Mini Kami",
+      "button": "Buat Website",
+      "cards": {
+        "tidar": {
+          "title": "Website Tidar Resto",
+          "desc": "Website profil perusahaan responsif dengan Next.js dan Tailwind CSS, dilengkapi CMS."
+        },
+        "venice": {
+          "title": "Website Klinik Venice",
+          "desc": "Website profil perusahaan elegan untuk klinik kecantikan, menampilkan layanan dan testimoni pelanggan."
+        },
+        "whatsapp": {
+          "title": "Bot WhatsApp Full-Stack",
+          "desc": "Solusi bot WhatsApp otomatis dengan dasbor manajemen yang interaktif."
+        },
+        "suksesmulya": {
+          "title": "Website Sukses Mulya",
+          "desc": "Website profil perusahaan responsif dengan Next.js dan Tailwind CSS, dilengkapi CMS."
+        },
+        "towork": {
+          "title": "Aplikasi To-Work List",
+          "desc": ""
+        },
+        "comingsoon2": {
+          "title": "Segera Hadir 2",
+          "desc": ""
+        },
+        "comingsoon3": {
+          "title": "Segera Hadir 3",
+          "desc": ""
+        },
+        "comingsoon4": {
+          "title": "Segera Hadir 4",
+          "desc": ""
+        }
+      }
+    },
+    "Promotion": {
+      "headline": "Siap Membangun Proyek Impian Anda?",
+      "paragraph": "Jangan ragu untuk berdiskusi. Kami siap mengubah ide brilian Anda menjadi solusi digital yang nyata dan berfungsi.",
+      "button": "Hubungi Kami"
+    }
+  },
+  "Contact": {
+    "title": "Hubungi Kami",
+    "titleColored": "Hubungi",
+    "subtitle": "Kami siap membantu mewujudkan ide Anda. Kirimkan pesan kepada kami.",
+    "details": {
+      "email": "Email",
+      "phone": "Telepon",
+      "location": "Lokasi"
+    },
+    "form": {
+      "nameLabel": "Nama",
+      "emailLabel": "Email",
+      "messageLabel": "Pesan",
+      "button": "Kirim Pesan",
+      "emailSubject": "Pesan dari Portofolio - {name}",
+      "emailBody": "Halo,\n\nAnda menerima pesan baru dari formulir kontak di website Anda:\n\n--------------------------------\nNama Pengirim: {name}\nEmail Pengirim: {email}\n--------------------------------\n\nIsi Pesan:\n{message}"
+    }
+  },
+  "AboutPage": {
+    "title": "Temui Tim Kami",
+    "subtitle": "Kami adalah trio developer yang berkolaborasi untuk mengubah ide-ide kompleks menjadi solusi digital yang elegan dan efisien.",
+    "profileCard": {
+      "featuredProjects": "Proyek Unggulan",
+      "viewAllProjects": "Lihat Semua Proyek",
+      "modalTitle": "Proyek oleh {name}",
+      "modalSubtitle": "Klik pada pratinjau untuk mengunjungi situs.",
+      "previewErrorTitle": "Tidak dapat memuat pratinjau",
+      "previewErrorSubtitle": "(Mungkin diblokir)",
+      "visitSite": "Kunjungi",
+      "viewImage": "Lihat Gambar"
+    },
+    "team": [
+      {
+        "id": "rizqi",
+        "name": "Rizqi Lasheva Purnama Putra",
+        "role": "Full-Stack Developer",
+        "bio": "Seorang developer yang bersemangat dalam menciptakan solusi digital yang fungsional dan simpel. Fokus pada clean code dan pengalaman pengguna yang intuitif.",
+        "projects": {
+          "p1": {
+            "title": "Personal Portfolio v1",
+            "description": "Portofolio pribadi yang menampilkan proyek-proyek kunci dengan desain interaktif menggunakan Next.js dan GSAP."
+          },
+          "p2": {
+            "title": "E-Commerce Dashboard",
+            "description": "Panel admin untuk mengelola produk, pesanan, dan analitik penjualan pada platform e-commerce."
+          },
+          "p3": {
+            "title": "Desain Portofolio Lama",
+            "description": "Mockup desain untuk versi portofolio pribadi sebelumnya."
+          },
+          "p4": {
+            "title": "Antarmuka AI Chatbot",
+            "description": "UI untuk chatbot cerdas yang terintegrasi dengan API pemrosesan bahasa alami."
+          }
+        }
+      },
+      {
+        "id": "solahuddin",
+        "name": "Solahuddin Ahmad",
+        "role": "Back-End & IoT Specialist",
+        "bio": "Ahli dalam membangun arsitektur server yang andal dan solusi IoT yang inovatif. Senang mengoprek perangkat keras dan menghubungkannya ke dunia digital.",
+        "projects": {
+          "p1": {
+            "title": "Smart Home Controller",
+            "description": "Sistem kontrol perangkat rumah pintar berbasis ESP32 dengan dashboard web real-time."
+          },
+          "p2": {
+            "title": "WhatsApp API Gateway",
+            "description": "Gateway untuk mengirim dan menerima pesan WhatsApp secara terprogram untuk notifikasi otomatis."
+          },
+          "p3": {
+            "title": "Inventory Management API",
+            "description": "REST API untuk sistem manajemen inventaris gudang dengan autentikasi JWT."
+          },
+          "p4": {
+            "title": "Weather Station Logger",
+            "description": "Mengumpulkan data dari sensor cuaca dan mengirimkannya ke cloud untuk dianalisis."
+          }
+        }
+      },
+      {
+        "id": "sava",
+        "name": "Muhammad Sava Alfarisy.",
+        "role": "Junior Programmer & Cyber Security Enthusiast",
+        "bio": "Junior Programmer dan Cyber Security Enthusiast yang fokus pada pengembangan web interaktif dan aman. Memiliki minat dalam keamanan aplikasi dan eksplorasi celah keamanan web.",
+        "projects": {
+          "p1": {
+            "title": "Sertifikat apresiasi",
+            "description": "Menemukan celah keamanan pada website mabes TNI dan melaporkannya secara etis "
+          },
+          "p2": {
+            "title": "Interactive Storytelling Site",
+            "description": "Website naratif dengan animasi scroll-triggered yang imersif untuk kampanye brand."
+          }
+        }
+      }
+    ]
+  },
+  "Chatbot": {
+    "greetingTitle": "Halo!",
+    "greeting": "Saya SHR.ai, asisten virtual Anda. Ada yang bisa saya bantu?",
+    "inputPlaceholder": "Ketik pesan Anda...",
+    "resetButton": "Reset Percakapan",
+    "errorMessage": "Waduh, sepertinya ada masalah. Coba lagi nanti ya."
+  },
+  "Footer": {
+    "tagline": "Tingkatkan Bisnis, Mulai dari Website Anda!",
+    "copyright": "SHRProject. Hak Cipta Dilindungi.",
+    "nav": {
+      "website": {
+        "title": "Website",
+        "links": {
+          "home": "Beranda",
+          "about": "Tentang Kami",
+          "contact": "Kontak"
+        }
+      },
+      "services": {
+        "title": "Layanan",
+        "links": {
+          "development": "Website Development",
+          "seo": "SEO Optimization",
+          "design": "UI/UX Design",
+          "maintenance": "Website Maintenance",
+          "security": "Website Security"
+        }
+      },
+      "support": {
+        "title": "Dukungan",
+        "links": {
+          "help": "Pusat Bantuan",
+          "docs": "Dokumentasi",
+          "status": "Status Layanan"
+        }
+      },
+      "legal": {
+        "title": "Legal",
+        "links": {
+          "privacy": "Kebijakan Privasi",
+          "terms": "Syarat & Ketentuan"
+        }
+      }
+    }
+  }
+}

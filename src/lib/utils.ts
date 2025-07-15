@@ -57,7 +57,7 @@ export function getRandomBorderRadiusValue(min = 10, max = 35) {
   return `${tl}px ${tr}px ${br}px ${bl}px`;
 }
 
-export default function convertToWebP({ src }: ImageLoaderProps) {
+export function convertToWebP({ src }: ImageLoaderProps) {
   if (src.endsWith(".webp")) return src;
   if (src.startsWith("https://")) return src;
   if (src.startsWith("/images/"))

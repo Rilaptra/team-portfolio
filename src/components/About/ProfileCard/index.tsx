@@ -6,7 +6,11 @@ import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { teamMembers, TeamMember, Project } from "./../teamData";
+import {
+  teamData,
+  TeamMember as TeamMemberData,
+  Project as ProjectData,
+} from "./../teamData"; // Import data statis
 import { Badge } from "../../Ui/badge";
 import { Button } from "../../Ui/button";
 import {
@@ -16,12 +20,22 @@ import {
   Github,
   Linkedin,
   Instagram,
-  FileImage, // Impor ikon baru untuk fallback gambar
+  FileImage,
 } from "lucide-react";
-import convertToWebP from "@/lib/utils";
+import { convertToWebP } from "@/lib/utils";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+
 gsap.registerPlugin(ScrollTrigger);
 
-// Fungsi untuk mendapatkan ikon berdasarkan nama sosial media
+// Tipe gabungan antara data statis dan terjemahan
+interface TeamMember extends TeamMemberData {
+  name: string;
+  role: string;
+  bio: string;
+  projects: (ProjectData & { title: string; description: string })[];
+}
+
 const SocialIcon = ({ name }: { name: string }) => {
   switch (name.toLowerCase()) {
     case "github":
@@ -35,13 +49,29 @@ const SocialIcon = ({ name }: { name: string }) => {
   }
 };
 
-// Komponen utama
 export function ProfileCard() {
+  const t = useTranslations("AboutPage");
   const containerRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const [modalData, setModalData] = useState<TeamMember | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Menggabungkan data statis dengan terjemahan
+  const translatedTeamMembers: TeamMember[] = teamData.map((member) => {
+    const translatedMember = t.raw(`team`).find((m: any) => m.id === member.id);
+    return {
+      ...member,
+      name: translatedMember.name,
+      role: translatedMember.role,
+      bio: translatedMember.bio,
+      projects: member.projects.map((p) => ({
+        ...p,
+        title: translatedMember.projects[p.id].title,
+        description: translatedMember.projects[p.id].description,
+      })),
+    };
+  });
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -50,19 +80,14 @@ export function ProfileCard() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Logika GSAP tetap sama
   useGSAP(
     () => {
       let mm = gsap.matchMedia();
       mm.add(
-        {
-          isDesktop: "(min-width: 768px)",
-          isMobile: "(max-width: 767px)",
-        },
+        { isDesktop: "(min-width: 768px)", isMobile: "(max-width: 767px)" },
         (context) => {
-          let { isDesktop, isMobile } = context.conditions as {
-            isDesktop: boolean;
-            isMobile: boolean;
-          };
+          let { isDesktop } = context.conditions as { isDesktop: boolean };
           if (isDesktop) {
             const sections = gsap.utils.toArray<HTMLElement>(
               ".horizontal-section",
@@ -96,7 +121,7 @@ export function ProfileCard() {
                 },
               });
             });
-          } else if (isMobile) {
+          } else {
             const sections = gsap.utils.toArray<HTMLElement>(
               ".horizontal-section",
             );
@@ -149,10 +174,12 @@ export function ProfileCard() {
           ref={wrapperRef}
           className="flex flex-col md:h-full md:flex-row"
           style={{
-            width: isMobile ? "100%" : `${teamMembers.length * 100 + 1}vw`,
+            width: isMobile
+              ? "100%"
+              : `${translatedTeamMembers.length * 100 + 1}vw`,
           }}
         >
-          {teamMembers.map((member) => {
+          {translatedTeamMembers.map((member) => {
             const isRizqi = member.name.includes("Rizqi");
             return (
               <div
@@ -177,7 +204,7 @@ export function ProfileCard() {
                       </p>
                       <div className="mt-2 flex gap-4">
                         {Object.entries(member.socials).map(([name, url]) => (
-                          <a
+                          <Link
                             key={name}
                             href={url}
                             target="_blank"
@@ -186,7 +213,7 @@ export function ProfileCard() {
                             className="text-muted-foreground hover:text-foreground transition-colors"
                           >
                             <SocialIcon name={name} />
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -208,7 +235,9 @@ export function ProfileCard() {
                       {member.bio}
                     </p>
                     <div className="gsap-reveal mt-6 md:mt-8">
-                      <h4 className="mb-4 font-semibold">Proyek Unggulan</h4>
+                      <h4 className="mb-4 font-semibold">
+                        {t("profileCard.featuredProjects")}
+                      </h4>
                       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         {member.projects.slice(0, 2).map((p) => (
                           <div key={p.title}>
@@ -222,7 +251,7 @@ export function ProfileCard() {
                     </div>
                     <div className="gsap-reveal mt-6">
                       <Button onClick={() => setModalData(member)}>
-                        Lihat Semua Proyek
+                        {t("profileCard.viewAllProjects")}
                       </Button>
                     </div>
                   </div>
@@ -246,10 +275,10 @@ export function ProfileCard() {
               <div className="flex items-start justify-between">
                 <div>
                   <h2 className="text-2xl font-bold md:text-3xl">
-                    Proyek oleh {modalData.name}
+                    {t("profileCard.modalTitle", { name: modalData.name })}
                   </h2>
                   <p className="text-muted-foreground text-sm md:text-base">
-                    Klik pada pratinjau untuk mengunjungi situs.
+                    {t("profileCard.modalSubtitle")}
                   </p>
                 </div>
                 <Button
@@ -289,26 +318,28 @@ export function ProfileCard() {
   );
 }
 
-// --- Komponen ProjectPreview yang Di-upgrade ---
-const ProjectPreview = ({ project }: { project: Project }) => {
+const ProjectPreview = ({
+  project,
+}: {
+  project: ProjectData & { title: string; description: string };
+}) => {
+  const t = useTranslations("AboutPage.profileCard");
   const [isIframeLoadFailed, setIframeLoadFailed] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Cek apakah URL adalah gambar atau harus menggunakan iframe
   const isImagePreview =
     project.preview_type === "image" ||
     project.url.match(/\.(jpeg|jpg|gif|png|webp)$/);
 
-  // Konten untuk iframe
   const IframeContent = () => (
     <>
       {isIframeLoadFailed ? (
         <div className="bg-muted flex h-full w-full flex-col items-center justify-center p-4 text-center">
           <Globe className="text-muted-foreground h-8 w-8" />
-          <p className="mt-2 text-sm font-semibold">
-            Tidak dapat memuat pratinjau
+          <p className="mt-2 text-sm font-semibold">{t("previewErrorTitle")}</p>
+          <p className="text-muted-foreground text-xs">
+            {t("previewErrorSubtitle")}
           </p>
-          <p className="text-muted-foreground text-xs">(Mungkin diblokir)</p>
         </div>
       ) : (
         <iframe
@@ -321,31 +352,24 @@ const ProjectPreview = ({ project }: { project: Project }) => {
       )}
       <div className="absolute inset-0 bg-black/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="bg-background/50 absolute top-2 right-2 flex items-center gap-1 rounded-full p-1 pl-3 text-xs opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-        Kunjungi <ArrowUpRight className="h-3 w-3" />
+        {t("visitSite")} <ArrowUpRight className="h-3 w-3" />
       </div>
     </>
   );
 
-  // Konten untuk gambar
   const ImageContent = () => (
     <>
       <Image
         src={project.url}
         alt={project.title}
-        layout="fill"
+        fill
         objectFit="cover"
         className="transition-transform duration-500 group-hover:scale-110"
         loader={project.url.startsWith("https") ? undefined : convertToWebP}
         unoptimized={project.url.startsWith("https")}
-        onError={(e) => {
-          e.currentTarget.style.display = "none";
-          setImageLoaded(false);
-        }}
-        onLoad={() => {
-          setImageLoaded(true);
-        }}
+        onError={() => setImageLoaded(false)}
+        onLoad={() => setImageLoaded(true)}
       />
-      {/* Fallback jika gambar gagal dimuat */}
       {!imageLoaded && (
         <div className="bg-muted absolute inset-0 flex items-center justify-center">
           <FileImage className="text-muted-foreground h-10 w-10" />
@@ -353,7 +377,7 @@ const ProjectPreview = ({ project }: { project: Project }) => {
       )}
       <div className="absolute inset-0 bg-black/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="bg-background/50 absolute top-2 right-2 flex items-center gap-1 rounded-full p-1 pl-3 text-xs opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-        Lihat Gambar <ArrowUpRight className="h-3 w-3" />
+        {t("viewImage")} <ArrowUpRight className="h-3 w-3" />
       </div>
     </>
   );

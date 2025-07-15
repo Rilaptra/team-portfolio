@@ -1,0 +1,233 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "Home": {
+    "Hero": {
+      "spanOneText": "We build",
+      "spanTwoText": "Tailored to your needs. Built to perform.",
+      "words": [
+        "powerful websites",
+        "professional chatbots",
+        "IoT solutions",
+        "custom tools",
+        "secure systems"
+      ]
+    },
+    "WhyChooseUs": {
+      "title": "Why Choose Us",
+      "Desk": "We are more than just a web development agency — we are your strategic partner. We combine technical expertise with a deep understanding of your business to create digital solutions that not only look great but also deliver real results.",
+      "CardsTitle": [
+        "Guaranteed Security",
+        "Easily Found on Google Search",
+        "Optimal Performance and Speed",
+        "Tailored Solutions to Your Needs",
+        "Transparent Communication",
+        "Long-Term Support"
+      ],
+      "CardDesk": [
+        "We build websites with a strong focus on security. Using modern coding practices and layered protection, your business data and customer trust will always be safe from cyber threats.",
+        "Your website is designed from the ground up to be easily found on search engines like Google. An SEO-friendly structure ensures your business reaches more potential customers organically.",
+        "Speed is key to user experience and conversion. We optimize every aspect, from code to images, to ensure your website loads lightning-fast on all devices.",
+        "We don’t offer one-size-fits-all solutions — we build websites that truly reflect your vision. Every element is crafted specifically to meet your unique needs and business goals.",
+        "Enjoy a stress-free development process with clear and open communication. You’ll always receive regular updates to ensure the project stays on track and aligned with your expectations.",
+        "Our collaboration doesn’t end when the website goes live. We provide ongoing support to keep your website secure, fast, and fully functional over time."
+      ]
+    },
+    "AboutUs": {
+      "subtitle": "WHO WE ARE",
+      "title": "Share Project - Architects of Digital Solutions.",
+      "description": "We are a team of full-stack developers passionate about solving complex problems with the latest technology. For us, the best software is born from a close partnership and a deep understanding of your business goals.",
+      "button": "Learn More"
+    },
+    "Projects": {
+      "title": "Our Mini Projects",
+      "button": "Create a Website",
+      "cards": {
+        "tidar": {
+          "title": "Tidar Resto Website",
+          "desc": "A responsive website company profile with nextjs and tailwindcss , with cms ."
+        },
+        "venice": {
+          "title": "Venice Klinik Website",
+          "desc": "Elegant company profile website for a beauty clinic, showcasing services and customer testimonials."
+        },
+        "whatsapp": {
+          "title": "Full-Stack WhatsApp Bot",
+          "desc": "An automated WhatsApp bot solution with an interactive management dashboard."
+        },
+        "suksesmulya": {
+          "title": "Sukses Mulya Website",
+          "desc": "A responsive website company profile with nextjs and tailwindcss , with cms ."
+        },
+        "towork": {
+          "title": "To-Work List App",
+          "desc": ""
+        },
+        "comingsoon2": {
+          "title": "coming soon 2",
+          "desc": ""
+        },
+        "comingsoon3": {
+          "title": "coming soon 3",
+          "desc": ""
+        },
+        "comingsoon4": {
+          "title": "coming soon 4",
+          "desc": ""
+        }
+      }
+    },
+    "Promotion": {
+      "headline": "Ready to Build Your Dream Project?",
+      "paragraph": "Don't hesitate to discuss. We are ready to turn your brilliant ideas into real and functional digital solutions.",
+      "button": "Contact Us"
+    }
+  },
+  "Contact": {
+    "title": "Get In Touch",
+    "titleColored": "In",
+    "subtitle": "We're ready to help bring your ideas to life. Send us a message.",
+    "details": {
+      "email": "Email",
+      "phone": "Phone",
+      "location": "Location"
+    },
+    "form": {
+      "nameLabel": "Name",
+      "emailLabel": "Email",
+      "messageLabel": "Message",
+      "button": "Send Message",
+      "emailSubject": "Message from Portfolio - {name}",
+      "emailBody": "Hello,\n\nYou have received a new message from your website's contact form:\n\n--------------------------------\nSender Name: {name}\nSender Email: {email}\n--------------------------------\n\nMessage:\n{message}"
+    }
+  },
+  "AboutPage": {
+    "title": "Meet Our Team",
+    "subtitle": "We are a trio of developers collaborating to transform complex ideas into elegant and efficient digital solutions.",
+    "profileCard": {
+      "featuredProjects": "Featured Projects",
+      "viewAllProjects": "View All Projects",
+      "modalTitle": "Projects by {name}",
+      "modalSubtitle": "Click on the preview to visit the site.",
+      "previewErrorTitle": "Could not load preview",
+      "previewErrorSubtitle": "(Maybe blocked)",
+      "visitSite": "Visit",
+      "viewImage": "View Image"
+    },
+    "team": [
+      {
+        "id": "rizqi",
+        "name": "Rizqi Lasheva Purnama Putra",
+        "role": "Full-Stack Developer",
+        "bio": "A developer who is passionate about creating functional and simple digital solutions. Focuses on clean code and intuitive user experience.",
+        "projects": {
+          "p1": {
+            "title": "Personal Portfolio v1",
+            "description": "A personal portfolio showcasing key projects with an interactive design using Next.js and GSAP."
+          },
+          "p2": {
+            "title": "E-Commerce Dashboard",
+            "description": "Admin panel to manage products, orders, and sales analytics on an e-commerce platform."
+          },
+          "p3": {
+            "title": "Old Portfolio Design",
+            "description": "Design mockup for a previous version of the personal portfolio."
+          },
+          "p4": {
+            "title": "AI Chatbot Interface",
+            "description": "UI for a smart chatbot integrated with a natural language processing API."
+          }
+        }
+      },
+      {
+        "id": "solahuddin",
+        "name": "Solahuddin Ahmad",
+        "role": "Back-End & IoT Specialist",
+        "bio": "An expert in building reliable server architectures and innovative IoT solutions. Enjoys tinkering with hardware and connecting it to the digital world.",
+        "projects": {
+          "p1": {
+            "title": "Smart Home Controller",
+            "description": "An ESP32-based smart home device control system with a real-time web dashboard."
+          },
+          "p2": {
+            "title": "WhatsApp API Gateway",
+            "description": "A gateway to programmatically send and receive WhatsApp messages for automated notifications."
+          },
+          "p3": {
+            "title": "Inventory Management API",
+            "description": "A REST API for a warehouse inventory management system with JWT authentication."
+          },
+          "p4": {
+            "title": "Weather Station Logger",
+            "description": "Collects data from weather sensors and sends it to the cloud for analysis."
+          }
+        }
+      },
+      {
+        "id": "sava",
+        "name": "Muhammad Sava Alfarisy.",
+        "role": "Junior Programmer & Cyber Security Enthusiast",
+        "bio": "Able to create and secure websites.",
+        "projects": {
+          "p1": {
+            "title": "3D Product Configurator",
+            "description": "An interactive 3D product configurator that allows for real-time customization using Three.js."
+          },
+          "p2": {
+            "title": "Interactive Storytelling Site",
+            "description": "A narrative website with immersive scroll-triggered animations for a brand campaign."
+          }
+        }
+      }
+    ]
+  },
+  "Chatbot": {
+    "greetingTitle": "Hello!",
+    "greeting": "I'm SHR.ai, your virtual assistant. How can I help you?",
+    "inputPlaceholder": "Type your message...",
+    "resetButton": "Reset Conversation",
+    "errorMessage": "Oops, something went wrong. Please try again later."
+  },
+  "Footer": {
+    "tagline": "Elevate Your Business, Starting with Your Website!",
+    "copyright": "SHRProject. All Rights Reserved.",
+    "nav": {
+      "website": {
+        "title": "Website",
+        "links": {
+          "home": "Home",
+          "about": "About Us",
+          "contact": "Contact"
+        }
+      },
+      "services": {
+        "title": "Services",
+        "links": {
+          "development": "Website Development",
+          "seo": "SEO Optimization",
+          "design": "UI/UX Design",
+          "maintenance": "Website Maintenance",
+          "security": "Website Security"
+        }
+      },
+      "support": {
+        "title": "Support",
+        "links": {
+          "help": "Help Center",
+          "docs": "Documentation",
+          "status": "Service Status"
+        }
+      },
+      "legal": {
+        "title": "Legal",
+        "links": {
+          "privacy": "Privacy Policy",
+          "terms": "Terms & Conditions"
+        }
+      }
+    }
+  }
+}

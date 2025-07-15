@@ -8,26 +8,17 @@ import { animatePageOut } from "@/lib/animations";
 import useTheme from "next-theme"; // Asumsi ini dari 'next-themes'
 import { useEffect, useState } from "react";
 import { getRandomBorderRadiusValue } from "@/lib/utils";
-
-const links = [
-  {
-    name: "Home",
-    href: "/",
-    className: "from-purple-400 to-indigo-600", // Disesuaikan untuk Tailwind CSS
-  },
-  {
-    name: "About",
-    href: "/about",
-    className: "from-amber-400 to-orange-600",
-  },
-  {
-    name: "Contact",
-    href: "/contact",
-    className: "from-teal-400 to-cyan-600",
-  },
-];
+import { Globe } from "lucide-react"; // Ikon baru
+import { useTranslations } from "next-intl";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/Ui/dropdown-menu";
 
 export default function Header() {
+  const t = useTranslations("Navbar");
   const router = useRouter();
   const params = usePathname();
   const { theme, setTheme } = useTheme(); // Sesuaikan dengan hook 'next-themes'
@@ -35,6 +26,30 @@ export default function Header() {
   const [mounted, setMounted] = useState(false);
   const [borderRadii, setBorderRadii] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State untuk menu mobile
+
+  const links = [
+    {
+      name: t("home"),
+      href: "/",
+      className: "from-purple-400 to-indigo-600", // Disesuaikan untuk Tailwind CSS
+    },
+    {
+      name: t("about"),
+      href: "/about",
+      className: "from-amber-400 to-orange-600",
+    },
+    {
+      name: t("contact"),
+      href: "/contact",
+      className: "from-teal-400 to-cyan-600",
+    },
+  ];
+
+  const handleLocaleChange = (newLocale: string) => {
+    // Ganti segmen locale di pathname
+    const newPath = `/${newLocale}${params.substring(3)}`;
+    router.replace(newPath);
+  };
 
   const handleLinkClick = (href: string) => {
     setBorderRadii(getRandomBorderRadiusValue());
@@ -91,6 +106,32 @@ export default function Header() {
 
         {/* Kontrol Kanan (Theme Toggle & Hamburger) */}
         <div className="absolute top-2 right-4 flex items-center gap-2">
+          <DropdownMenu modal={false}>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                className="h-auto rounded-full p-2 hover:cursor-pointer"
+              >
+                <Globe size={20} />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem
+                onClick={() => handleLocaleChange("en")}
+                disabled={params.startsWith("/en")}
+                className="cursor-pointer"
+              >
+                English
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => handleLocaleChange("id")}
+                disabled={params.startsWith("/id")}
+                className="cursor-pointer"
+              >
+                Indonesia
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <Button
             variant="outline"
             onClick={toggleTheme}

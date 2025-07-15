@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
 import { Geist, Montserrat } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
-import Providers from "../components/Utils/providers";
+import Providers from "@/components/Utils/providers";
+
+// i18n support
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { notFound } from "next/navigation";
+import { routing } from "@/i18n/routing";
+import Chatbot from "@/components/Chatbot";
 
 const geistSans = Geist({
   variable: "--font-geist",
@@ -28,22 +34,31 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body
         className={`${montserrat.variable} ${geistSans.variable} antialiased transition-colors duration-500`}
       >
-        <Providers>
-          <Header />
-          {children}
-          <Footer />
-        </Providers>
+        <NextIntlClientProvider>
+          <Providers>
+            <Header />
+            {children}
+            <Chatbot />
+            <Footer />
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -1,3 +1,4 @@
+// src/components/Contact/index.tsx
 "use client";
 
 import { useRef } from "react";
@@ -7,31 +8,34 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 import Section from "../Utils/Section";
 import { Button } from "@/components/Ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/Ui/card";
-
-const contactDetails = [
-  {
-    icon: <Mail className="h-8 w-8 text-teal-500" />,
-    title: "Email",
-    detail: "your.email@shareproject.com",
-    href: "mailto:your.email@shareproject.com",
-  },
-  {
-    icon: <Phone className="h-8 w-8 text-teal-500" />,
-    title: "Phone",
-    detail: "+62 123 4567 8910",
-    href: "tel:+6212345678910",
-  },
-  {
-    icon: <MapPin className="h-8 w-8 text-teal-500" />,
-    title: "Location",
-    detail: "Magelang, Indonesia",
-    href: "#",
-  },
-];
+import { useTranslations } from "next-intl";
+import PencilTitle from "../Utils/PencilTitle";
 
 export default function Contact() {
+  const t = useTranslations("Contact");
   const containerRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+
+  const contactDetails = [
+    {
+      icon: <Mail className="h-8 w-8 text-teal-500" />,
+      title: t("details.email"),
+      detail: "your.email@shareproject.com",
+      href: "mailto:your.email@shareproject.com",
+    },
+    {
+      icon: <Phone className="h-8 w-8 text-teal-500" />,
+      title: t("details.phone"),
+      detail: "+62 123 4567 8910",
+      href: "tel:+6212345678910",
+    },
+    {
+      icon: <MapPin className="h-8 w-8 text-teal-500" />,
+      title: t("details.location"),
+      detail: "Magelang, Indonesia",
+      href: "#",
+    },
+  ];
 
   useGSAP(
     () => {
@@ -55,25 +59,15 @@ export default function Contact() {
     const message = formData.get("message") as string;
 
     const recipient = "your.email@shareproject.com";
-    const subject = `Pesan dari Portofolio - ${name}`;
-    const body = `
-Halo,
 
-Anda menerima pesan baru dari formulir kontak di website Anda:
+    // Mengambil template dari file JSON
+    const subject = t("form.emailSubject", { name });
+    const body = t("form.emailBody", { name, email, message });
 
---------------------------------
-Nama Pengirim: ${name}
-Email Pengirim: ${email}
---------------------------------
+    const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(body)}`;
 
-Isi Pesan:
-${message}
-    `;
-
-    const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    // 🔥 PERUBAHAN UTAMA DI SINI 🔥
-    // Menggunakan window.location.href agar lebih andal dan tidak diblokir
     window.location.href = mailtoLink;
 
     formRef.current?.reset();
@@ -86,11 +80,14 @@ ${message}
     >
       <div ref={containerRef} className="mx-auto w-full max-w-4xl">
         <div className="text-center">
-          <h1 className="contact-gsap text-4xl font-bold tracking-tight text-black transition-colors duration-300 sm:text-5xl dark:text-white">
-            Get <span className="text-teal-400">In</span> Touch
-          </h1>
+          <PencilTitle>
+            <h1 className="contact-gsap text-4xl font-bold tracking-tight text-black transition-colors duration-300 sm:text-5xl dark:text-white">
+              {t("title").replace(t("titleColored"), "")}
+              <span className="text-teal-400">{t("titleColored")}</span> Touch
+            </h1>
+          </PencilTitle>
           <p className="contact-gsap text-muted-foreground mt-4 text-lg">
-            Kami siap membantu mewujudkan ide Anda. Kirimkan pesan kepada kami.
+            {t("subtitle")}
           </p>
         </div>
         <div className="contact-gsap mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -115,7 +112,7 @@ ${message}
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-medium">
-                  Nama
+                  {t("form.nameLabel")}
                 </label>
                 <input
                   name="name"
@@ -127,7 +124,7 @@ ${message}
               </div>
               <div className="space-y-2">
                 <label htmlFor="email" className="text-sm font-medium">
-                  Email
+                  {t("form.emailLabel")}
                 </label>
                 <input
                   name="email"
@@ -140,7 +137,7 @@ ${message}
             </div>
             <div className="mt-6 space-y-2">
               <label htmlFor="message" className="text-sm font-medium">
-                Pesan
+                {t("form.messageLabel")}
               </label>
               <textarea
                 name="message"
@@ -157,7 +154,7 @@ ${message}
                 size="lg"
                 className="bg-teal-600 text-white hover:bg-teal-700"
               >
-                Kirim Pesan <Send className="ml-2 h-5 w-5" />
+                {t("form.button")} <Send className="ml-2 h-5 w-5" />
               </Button>
             </div>
           </form>

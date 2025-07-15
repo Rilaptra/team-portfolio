@@ -1,3 +1,4 @@
+// src/components/Home/AboutUs/index.tsx
 "use client";
 
 import Section from "@/components/Utils/Section";
@@ -8,18 +9,21 @@ import { useState, useEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslations } from "next-intl";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutUs() {
+  const t = useTranslations("Home.AboutUs");
   const [mounted, setMounted] = useState(false);
   const container = useRef<HTMLDivElement | null>(null);
-  const buttonRef = useRef<HTMLDivElement | null>(null); // 1. Buat ref untuk button
+  const buttonRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Logika GSAP tidak perlu diubah
   useGSAP(
     () => {
       gsap.from(".gsap-about-subtitle", {
@@ -60,7 +64,6 @@ export default function AboutUs() {
         ease: "power2.out",
       });
 
-      // 4. Targetkan animasi ke buttonRef.current
       gsap.from(buttonRef.current, {
         opacity: 0,
         scale: 0.5,
@@ -84,14 +87,14 @@ export default function AboutUs() {
       >
         <div className="flex flex-col gap-4 text-center text-[15px] lg:text-left">
           <h2 className="gsap-about-subtitle text-muted-foreground text-sm font-semibold tracking-widest uppercase">
-            WHO WE ARE
+            {t("subtitle")}
           </h2>
 
           <h3
             className="gsap-about-title-word text-foreground text-3xl leading-tight font-bold md:text-4xl"
             style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)" }}
           >
-            {"Architects of Digital Solutions."
+            {t("title")
               .split(" ")
               .map((word, index) => (
                 <span
@@ -108,7 +111,7 @@ export default function AboutUs() {
             className="gsap-about-desc-word text-onyx dark:text-offwhite mt-2 font-thin"
             style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)" }}
           >
-            {"Kami adalah tim fullstack developer yang bersemangat memecahkan masalah kompleks dengan teknologi terkini. Bagi kami, software terbaik lahir dari kemitraan yang erat dan pemahaman mendalam akan tujuan bisnis Anda."
+            {t("description")
               .split(" ")
               .map((word, index) => (
                 <span
@@ -121,15 +124,12 @@ export default function AboutUs() {
               ))}
           </p>
 
-          <div
-            ref={buttonRef} // 2. Pasang ref ke komponen Button
-          >
+          <div ref={buttonRef}>
             <SwitchPage
               href="/about"
-              // variant="outline"
               className="mx-auto mt-4 flex items-center transition-all duration-300 hover:translate-y-[-5px] hover:scale-105 lg:mx-0 lg:self-start"
             >
-              Learn More <MoveRight className="ml-2 h-4 w-4" />
+              {t("button")} <MoveRight className="ml-2 h-4 w-4" />
             </SwitchPage>
           </div>
         </div>

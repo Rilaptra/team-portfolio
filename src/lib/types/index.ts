@@ -1,3 +1,4 @@
+import React from "react";
 // lib/types.ts
 export type NavItem = {
   title: string;
@@ -5,7 +6,7 @@ export type NavItem = {
   children?: NavItem[]; // Properti 'children' ini yang bikin jadi pohon
 };
 
-export interface SVGLogoProps {
+export interface SVGLogoProps extends React.SVGProps<SVGSVGElement> {
   size: number | { width: number; height: number };
   className?: string;
 }

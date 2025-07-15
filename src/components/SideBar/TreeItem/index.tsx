@@ -1,6 +1,6 @@
 // components/TreeItem.tsx
 import { NavItem } from "@/lib/types";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 type TreeItemProps = {
   item: NavItem;

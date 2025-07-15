@@ -1,18 +1,15 @@
 // src/components/About/teamData.ts
 
-// Definisikan tipe data untuk konsistensi
+// Tipe data tetap sama, tidak perlu diubah
 export interface Project {
-  title: string;
+  id: string; // Tambahkan id unik untuk setiap proyek
   url: string;
-  description: string;
   stack: string[];
-  preview_type?: "iframe" | "image"; // Tambahkan properti ini
+  preview_type?: "iframe" | "image";
 }
 
 export interface TeamMember {
-  name: string;
-  role: string;
-  bio: string;
+  id: string; // Tambahkan id unik untuk setiap member
   image: string;
   socials: {
     github: string;
@@ -23,11 +20,10 @@ export interface TeamMember {
   projects: Project[];
 }
 
-export const teamMembers: TeamMember[] = [
+// Data sekarang lebih ringkas
+export const teamData: TeamMember[] = [
   {
-    name: "Rizqi Lasheva Purnama Putra",
-    role: "Full-Stack Developer",
-    bio: "Seorang developer yang bersemangat dalam menciptakan solusi digital yang fungsional dan simple. Fokus pada clean code dan pengalaman pengguna yang intuitif.",
+    id: "rizqi",
     image: "https://placehold.co/384x384/76ABAE/FFFFFF.webp?text=RL",
     socials: {
       github: "https://github.com/rilaptra",
@@ -46,41 +42,30 @@ export const teamMembers: TeamMember[] = [
     ],
     projects: [
       {
-        title: "Personal Portfolio v1",
+        id: "p1",
         url: "https://erzysh.vercel.app",
-        description:
-          "Portofolio pribadi yang menampilkan proyek-proyek kunci dengan desain interaktif menggunakan Next.js dan GSAP.",
         stack: ["Next.js", "GSAP", "TailwindCSS"],
       },
       {
-        title: "E-Commerce Dashboard",
+        id: "p2",
         url: "https://eshmarket.vercel.app",
-        description:
-          "Panel admin untuk mengelola produk, pesanan, dan analitik penjualan pada platform e-commerce.",
         stack: ["React", "TypeScript", "Recharts"],
       },
-      // Proyek Baru dengan Gambar
       {
-        title: "Old Portfolio Design",
-        url: "/images/Home/botwhatsapp.jpg", // Ganti dengan path gambar Anda
-        preview_type: "image", // Tandai sebagai gambar
-        description: "Mockup desain untuk versi portofolio pribadi sebelumnya.",
+        id: "p3",
+        url: "/images/Home/botwhatsapp.jpg",
+        preview_type: "image",
         stack: ["Figma", "UI/UX"],
       },
       {
-        title: "AI Chatbot Interface",
+        id: "p4",
         url: "https://erzysh.vercel.app",
-        description:
-          "UI untuk chatbot cerdas yang terintegrasi dengan API pemrosesan bahasa alami.",
         stack: ["Vite", "Node.js", "Socket.IO"],
       },
     ],
   },
-  // ... sisa data team member lainnya tidak berubah
   {
-    name: "Solahuddin Ahmad",
-    role: "Back-End & IoT Specialist",
-    bio: "Ahli dalam membangun arsitektur server yang andal dan solusi IoT yang inovatif. Senang mengoprek perangkat keras dan menghubungkannya ke dunia digital.",
+    id: "solahuddin",
     image: "https://placehold.co/384x384/31363F/EEEEEE.webp?text=SA",
     socials: {
       github: "https://github.com/username",
@@ -99,67 +84,53 @@ export const teamMembers: TeamMember[] = [
     ],
     projects: [
       {
-        title: "Smart Home Controller",
+        id: "p1",
         url: "https://erzysh.vercel.app",
-        description:
-          "Sistem kontrol perangkat rumah pintar berbasis ESP32 dengan dashboard web real-time.",
         stack: ["PlatformIO", "Firebase", "React"],
       },
       {
-        title: "WhatsApp API Gateway",
+        id: "p2",
         url: "https://erzysh.vercel.app",
-        description:
-          "Gateway untuk mengirim dan menerima pesan WhatsApp secara terprogram untuk notifikasi otomatis.",
         stack: ["Node.js", "Express", "Baileys"],
       },
       {
-        title: "Inventory Management API",
+        id: "p3",
         url: "https://erzysh.vercel.app",
-        description:
-          "REST API untuk sistem manajemen inventaris gudang dengan autentikasi JWT.",
         stack: ["Python", "Flask", "PostgreSQL"],
       },
       {
-        title: "Weather Station Logger",
+        id: "p4",
         url: "https://erzysh.vercel.app",
-        description:
-          "Mengumpulkan data dari sensor cuaca dan mengirimkannya ke cloud untuk dianalisis.",
         stack: ["C++", "Raspberry Pi", "MongoDB"],
       },
     ],
   },
   {
-    name: "Muhammad Sava Alfarisy.",
-    role: "junior programmer & cyber security enthusiast  ",
-    bio: "mampu membuat web dan mengamankan web ",
+    id: "sava",
     image: "https://placehold.co/384x384/222831/EEEEEE.webp?text=MS",
     socials: {
-      github: "https://github.com/username",
-      linkedin: "https://linkedin.com/in/username",
-      instagram: "https://instagram.com/username",
+      github: "https://github.com/sava990",
+      linkedin: "https://linkedin.com/in/alfarisyx-sava",
+      instagram: "https://instagram.com/alfarisyx",
     },
     skills: [
+      "nextjs",
       "React",
-      "GSAP",
-      "Three.js",
-      "Sass",
-      "JavaScript",
-      "UI/UX",
-      "WebGL",
+      "Tailwindcss",
+      "Burpsuite",
+      "laravel",
+      "windows",
+      "linux",
     ],
     projects: [
       {
-        title: "3D Product Configurator",
-        url: "https://erzysh.vercel.app",
-        description:
-          "Konfigurator produk 3D interaktif yang memungkinkan kustomisasi real-time menggunakan Three.js.",
-        stack: ["Three.js", "React", "Styled-Components"],
+        id: "p1",
+        url: "/images/About/sava/sertifikat.png",
+        stack: ["kali linux"],
       },
       {
-        title: "Interactive Storytelling Site",
+        id: "p2",
         url: "https://erzysh.vercel.app",
-        description:
-          "Website naratif dengan animasi scroll-triggered yang imersif untuk kampanye brand.",
         stack: ["GSAP", "ScrollTrigger", "Barba.js"],
       },
     ],
