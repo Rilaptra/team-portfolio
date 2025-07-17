@@ -53,12 +53,15 @@ export default function Header() {
 
   const handleLinkClick = (href: string) => {
     setBorderRadii(getRandomBorderRadiusValue());
-    setIsMenuOpen(false); // Tutup menu setelah link diklik
+    setIsMenuOpen(false); 
 
+    // yang page in :v
+    // ini kan out
     if (pathname !== href) {
       animatePageOut(href, router);
     }
   };
+  // :v ini trigger juga kan tapi :v
 
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");

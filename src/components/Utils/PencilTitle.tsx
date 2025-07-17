@@ -26,7 +26,7 @@ export default function PencilTitle({
       {children}
       <Line
         size={304}
-        className={`absolute right-3 -bottom-2 left-3 h-[10px] w-[300px] text-white dark:text-teal-400 ${transformClass}`}
+        className={`absolute right-3 -bottom-2 left-3 text-white dark:text-teal-400 ${transformClass}`}
       />
     </div>
   );

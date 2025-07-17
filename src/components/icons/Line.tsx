@@ -14,7 +14,7 @@ export default function Line({ size, ...props }: SVGLogoProps) {
         fillRule: "evenodd",
         clipRule: "evenodd",
       }}
-      viewBox="0 0 1024 1325"
+      viewBox="0 0 300 100"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       width={typeof size === "number" ? size : size.width}
       height={typeof size === "number" ? size : size.height}

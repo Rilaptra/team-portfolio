@@ -137,3 +137,19 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+/* Scrollbar Styling */
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-purple-400), var(--color-purple-400), white);
+  border-radius: 10px;
+}
+
+* {
+  scrollbar-color: var(--color-purple-400)  white;
+}
+
+

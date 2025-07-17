@@ -126,6 +126,12 @@ export default function Projects() {
       techStack: ["coming soon"],
     },
     {
+      title: t("cards.comingsoon2.title"),
+      desc: t("cards.comingsoon2.desc"),
+      image: "https://placehold.co/300x250/bbbbbb/555555.webp?text=Coming soon",
+      techStack: ["coming soon"],
+    },
+    {
       title: t("cards.comingsoon3.title"),
       desc: t("cards.comingsoon3.desc"),
       image: "https://placehold.co/300x250/bbbbbb/555555.webp?text=Coming soon",
@@ -173,15 +179,15 @@ export default function Projects() {
         {t("title")}
       </h1>
 
-      <div className="h-[500px] space-y-6 bg-transparent px-5 lg:h-[570px]">
+      <div className="h-[500px] bg-transparent px-5 lg:h-[570px]">
         <Marquee
           speed={10}
           direction="right"
           pauseOnHover
           play={isMarqueeActive}
         >
-          {cardsTop.map((item) => (
-            <ProjectCard key={item.title} cardData={item} />
+          {cardsTop.map((item, index) => (
+            <ProjectCard key={index} cardData={item} />
           ))}
         </Marquee>
 
@@ -192,8 +198,8 @@ export default function Projects() {
           pauseOnHover
           play={isMarqueeActive}
         >
-          {cardsBottom.map((item) => (
-            <ProjectCard key={item.title} cardData={item} />
+          {cardsBottom.map((item, index) => (
+            <ProjectCard key={index} cardData={item} />
           ))}
         </Marquee>
       </div>
