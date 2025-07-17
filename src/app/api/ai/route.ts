@@ -40,19 +40,28 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ response: response.text });
   } catch (err) {
     console.error((err as Error).message);
-    const parsedError = JSON.parse((err as Error).message);
-    const code = parsedError?.error?.code;
-    if (code === 429) {
+    try {
+      const parsedError = JSON.parse((err as Error).message);
+      const code = parsedError?.error?.code;
+      if (code === 429) {
+        return NextResponse.json(
+          {
+            message: "API rate limit exceeded. Please try again later.",
+            retryDelay: Number(
+              parsedError?.error?.details[2]?.retryDelay.replace("s", ""),
+            ),
+          },
+          { status: 429 },
+        );
+      }
+    } catch (error) {
+      console.error("Failed to parse error message:", error);
       return NextResponse.json(
-        {
-          message: "API rate limit exceeded. Please try again later.",
-          retryDelay: Number(
-            parsedError?.error?.details[2]?.retryDelay.replace("s", ""),
-          ),
-        },
-        { status: 429 },
+        { error: "Internal server error" },
+        { status: 500 },
       );
     }
+
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

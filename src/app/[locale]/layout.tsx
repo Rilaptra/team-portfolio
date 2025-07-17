@@ -49,7 +49,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${montserrat.variable} ${geistSans.variable} antialiased transition-colors duration-500`}
+        className={`${montserrat.variable} ${geistSans.variable} relative antialiased transition-colors duration-500`}
       >
         <NextIntlClientProvider>
           <Providers>

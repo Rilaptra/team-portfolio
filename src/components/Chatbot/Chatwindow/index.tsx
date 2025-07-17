@@ -36,6 +36,15 @@ const MessageRenderer = ({
 
   for (const match of content.matchAll(tagRegex)) {
     if (match.index > lastIndex) {
+      console.log(content.substring(lastIndex, match.index));
+      if (content.substring(lastIndex, match.index).includes(" "))
+        elements.push(
+          ...content
+            .substring(lastIndex, match.index)
+            .split(" ")
+            .map((el) => <span>{el}</span>),
+        );
+
       elements.push(content.substring(lastIndex, match.index));
     }
     const [fullMatch, tagType, jsonString] = match;
@@ -70,11 +79,7 @@ const MessageRenderer = ({
           );
           break;
         default:
-          if (fullMatch.includes(" "))
-            elements.push(
-              ...fullMatch.split(" ").map((el) => <span>{el}</span>),
-            );
-          else elements.push(fullMatch);
+          elements.push(fullMatch);
           break;
       }
     } catch (e) {
@@ -90,7 +95,7 @@ const MessageRenderer = ({
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
+    <div className="flex flex-wrap items-center gap-[2px]">
       {elements.map((el, i) => (
         <React.Fragment key={i}>{el}</React.Fragment>
       ))}

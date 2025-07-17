@@ -22,7 +22,7 @@ import {
   Instagram,
   FileImage,
 } from "lucide-react";
-import { convertToWebP } from "@/lib/utils";
+
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
@@ -193,7 +193,6 @@ export function ProfileCard() {
                         src={member.image}
                         alt={member.name}
                         fill
-                        loader={convertToWebP}
                         unoptimized
                         className="rounded-xl object-cover shadow-2xl"
                       />
@@ -364,7 +363,6 @@ const ProjectPreview = ({
         alt={project.title}
         fill
         className="object-cover transition-transform duration-500 group-hover:scale-110"
-        loader={project.url.startsWith("https") ? undefined : convertToWebP}
         unoptimized={project.url.startsWith("https")}
         onError={() => setImageLoaded(false)}
         onLoad={() => setImageLoaded(true)}

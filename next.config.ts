@@ -5,9 +5,6 @@ import createNextIntlPlugin from "next-intl/plugin";
 // __dirname tidak ada di ES Modules
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  images: {
-    loader: "custom",
-  },
 };
 
 const withNextIntl = createNextIntlPlugin();

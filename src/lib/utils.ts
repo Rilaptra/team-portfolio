@@ -56,11 +56,3 @@ export function getRandomBorderRadiusValue(min = 10, max = 35) {
   const bl = random(min, max);
   return `${tl}px ${tr}px ${br}px ${bl}px`;
 }
-
-export function convertToWebP({ src }: ImageLoaderProps) {
-  if (src.endsWith(".webp")) return src;
-  if (src.startsWith("https://")) return src;
-  if (src.startsWith("/images/"))
-    return src.replace("/images/", "/webp/").replace(/\.[^.-]+$/, ".webp");
-  throw new Error("Invalid image source");
-}

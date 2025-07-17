@@ -9,7 +9,7 @@ import Section from "@/components/Utils/Section";
 import Marquee from "react-fast-marquee";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
-import { convertToWebP } from "@/lib/utils";
+
 import SwitchPage from "@/components/Utils/SwitchPage";
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -35,7 +35,6 @@ const ProjectCard = ({ cardData }: { cardData: CardItem }) => {
         height={250}
         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 group-focus:scale-110"
         loading="lazy"
-        loader={convertToWebP}
         unoptimized
       />
       <div className="absolute inset-0 flex translate-y-1/2 transform flex-col justify-end bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4 opacity-0 transition-all duration-500 ease-in-out group-hover:translate-y-0 group-hover:opacity-100 group-focus:translate-y-0 group-focus:opacity-100">
@@ -124,12 +123,6 @@ export default function Projects() {
       title: t("cards.towork.title"),
       desc: t("cards.towork.desc"),
       image: "/images/Home/toworklist.png",
-      techStack: ["coming soon"],
-    },
-    {
-      title: t("cards.comingsoon2.title"),
-      desc: t("cards.comingsoon2.desc"),
-      image: "https://placehold.co/300x250/bbbbbb/555555.webp?text=Coming soon",
       techStack: ["coming soon"],
     },
     {
