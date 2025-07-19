@@ -121,24 +121,20 @@
       {
         "id": "rizqi",
         "name": "Rizqi Lasheva Purnama Putra",
-        "role": "Full-Stack Developer",
-        "bio": "A developer who is passionate about creating functional and simple digital solutions. Focuses on clean code and intuitive user experience.",
+        "role": "Back-End Specialist",
+        "bio": "A developer who is highly passionate about solving complex problems with the latest technology, as well as learning new technologies.",
         "projects": {
           "p1": {
-            "title": "Personal Portfolio v1",
-            "description": "A personal portfolio showcasing key projects with an interactive design using Next.js and GSAP."
+            "title": "Full-Stack WhatsApp Bot",
+            "description": "A WhatsApp bot equipped with a website-based dashboard and API routes. It also features a command plugins system to allow users to easily add their own custom commands, manageable from the dashboard, with a very practical and easy initial setup."
           },
           "p2": {
-            "title": "E-Commerce Dashboard",
-            "description": "Admin panel to manage products, orders, and sales analytics on an e-commerce platform."
+            "title": "Erzysh DB",
+            "description": "A simple database management system with CRUD (Create, Read, Update, Delete) features and JWT authentication, using Discord as the data storage. It allows users to manage data quickly, easily, and without limits through an attractive UI."
           },
           "p3": {
-            "title": "Old Portfolio Design",
-            "description": "Design mockup for a previous version of the personal portfolio."
-          },
-          "p4": {
-            "title": "AI Chatbot Interface",
-            "description": "UI for a smart chatbot integrated with a natural language processing API."
+            "title": "Eshmarket",
+            "description": "A simple script-selling website using Next.js and Tailwind CSS, with trakteer.id as the payment system. The login feature uses a Discord account, allowing users to purchase scripts easily with direct integration to a Discord bot on the server."
           }
         }
       },
@@ -177,8 +173,8 @@
             "description": "Discovered a security vulnerability on the Indonesian National Armed Forces Headquarters website and reported it ethically."
           },
           "p2": {
-            "title": "Interactive Storytelling Site",
-            "description": "A narrative website with immersive scroll-triggered animations for a brand campaign."
+            "title": "Junior Coder Certificate (BNSP)",
+            "description": "Participated in the BNSP certification exam by developing a car rental application using PHP, including both admin and client layouts, and successfully completed the exam with a satisfying score."
           }
         }
       }
@@ -190,7 +186,9 @@
     "inputPlaceholder": "Type your message...",
     "resetButton": "Reset Conversation",
     "closeButton": "Close Conversation",
-    "errorMessage": "Oops, something went wrong. Please try again later."
+    "errorMessage": "Oops, something went wrong. Please try again later.",
+    "sendFail": "Failed to send message.",
+    "resendButton": "Resend"
   },
   "Footer": {
     "tagline": "Elevate Your Business, Starting with Your Website!",

@@ -82,8 +82,20 @@ export default function Contact() {
         <div className="text-center">
           <PencilTitle>
             <h1 className="contact-gsap text-4xl font-bold tracking-tight text-black transition-colors duration-300 sm:text-5xl dark:text-white">
-              {t("title").replace(t("titleColored"), "")}
-              <span className="text-teal-400">{t("titleColored")}</span> Touch
+              {t("title")
+                .split(" ")
+                .map((word, index) => {
+                  return (
+                    <span
+                      key={index}
+                      className={
+                        index % 2 === 0
+                          ? ""
+                          : "bg-gradient-to-r from-teal-400 to-cyan-600 bg-clip-text text-transparent"
+                      }
+                    >{`${word} `}</span>
+                  );
+                })}
             </h1>
           </PencilTitle>
           <p className="contact-gsap text-muted-foreground mt-4 text-lg">

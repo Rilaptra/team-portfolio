@@ -121,24 +121,20 @@
       {
         "id": "rizqi",
         "name": "Rizqi Lasheva Purnama Putra",
-        "role": "Full-Stack Developer",
-        "bio": "Seorang developer yang bersemangat dalam menciptakan solusi digital yang fungsional dan simpel. Fokus pada clean code dan pengalaman pengguna yang intuitif.",
+        "role": "Back-End Specialist",
+        "bio": "Seorang developer yang sangat bersemangat dalam memecahkan masalah kompleks dengan teknologi terkini, serta mempelajari teknologi baru.",
         "projects": {
           "p1": {
-            "title": "Personal Portfolio v1",
-            "description": "Portofolio pribadi yang menampilkan proyek-proyek kunci dengan desain interaktif menggunakan Next.js dan GSAP."
+            "title": "Full-Stack WhatsApp Bot",
+            "description": "Bot WhatsApp yang dilengkapi fitur dashboard berupa website dan API routes. Serta fitur command plugins untuk memudahkan pengguna dalam menambahkan custom command nya sendiri dan dapat diatur pada dashboard, dengan setup initial yang sangat praktis dan mudah"
           },
           "p2": {
-            "title": "E-Commerce Dashboard",
-            "description": "Panel admin untuk mengelola produk, pesanan, dan analitik penjualan pada platform e-commerce."
+            "title": "Erzysh DB",
+            "description": "Sistem manajemen database sederhana dengan fitur CRUD (Create, Read, Update, Delete) dan autentikasi JWT, menggunakan discord sebagai tempat penyimpanan data. Memungkinkan pengguna untuk mengelola data dengan proses cepat dan mudah dan tanpa batas dengan UI yang menarik."
           },
           "p3": {
-            "title": "Desain Portofolio Lama",
-            "description": "Mockup desain untuk versi portofolio pribadi sebelumnya."
-          },
-          "p4": {
-            "title": "Antarmuka AI Chatbot",
-            "description": "UI untuk chatbot cerdas yang terintegrasi dengan API pemrosesan bahasa alami."
+            "title": "Eshmarket",
+            "description": "Website penjualan script sederhana menggunakan Next.js dan Tailwind CSS, serta menggunakan trakteer.id sebagai sistem pembayaran. Fitur login menggunakan discord account, memungkinkan pengguna untuk membeli script dengan mudah dan langsung terintegrasi dengan Discord bot di server."
           }
         }
       },
@@ -173,12 +169,12 @@
         "bio": "Junior Programmer dan Cyber Security Enthusiast yang fokus pada pengembangan web interaktif dan aman. Memiliki minat dalam keamanan aplikasi dan eksplorasi celah keamanan web.",
         "projects": {
           "p1": {
-            "title": "Sertifikat apresiasi",
+            "title": "Sertifikat Apresiasi",
             "description": "Menemukan celah keamanan pada website mabes TNI dan melaporkannya secara etis "
           },
           "p2": {
-            "title": "Interactive Storytelling Site",
-            "description": "Website naratif dengan animasi scroll-triggered yang imersif untuk kampanye brand."
+            "title": "Sertifikat (BNSP) Junior Coder ",
+            "description": "mengikuti ujian sertifikasi bnsp , membuat aplikasi rental mobil dengan bahasa pemrograman php admin layout + client layout dan berhasil menyelesaikan ujian dengan nilai yang memuaskan "
           }
         }
       }
@@ -190,7 +186,9 @@
     "inputPlaceholder": "Ketik pesan Anda...",
     "resetButton": "Reset Percakapan",
     "closeButton": "Tutup Percakapan",
-    "errorMessage": "Waduh, sepertinya ada masalah. Coba lagi nanti ya."
+    "errorMessage": "Waduh, sepertinya ada masalah. Coba lagi nanti ya.",
+    "sendFail": "Gagal mengirim pesan.",
+    "resendButton": "Kirim Ulang"
   },
   "Footer": {
     "tagline": "Tingkatkan Bisnis, Mulai dari Website Anda!",

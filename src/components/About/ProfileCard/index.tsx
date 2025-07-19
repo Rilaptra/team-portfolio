@@ -215,6 +215,13 @@ export function ProfileCard() {
                           </Link>
                         ))}
                       </div>
+                      <div className="mt-4 flex max-w-sm flex-wrap justify-center gap-4">
+                        {member.skills.map((skill, i) => (
+                          <Badge key={i} variant="outline">
+                            {skill}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   </div>
                   <div className="col-span-1 flex flex-col md:col-span-3">

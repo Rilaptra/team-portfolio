@@ -40,6 +40,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ response: response.text });
   } catch (err) {
     console.error((err as Error).message);
+
     try {
       const parsedError = JSON.parse((err as Error).message);
       const code = parsedError?.error?.code;
@@ -61,11 +62,6 @@ export async function POST(req: NextRequest) {
         { status: 500 },
       );
     }
-
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 },
-    );
   }
 }
 

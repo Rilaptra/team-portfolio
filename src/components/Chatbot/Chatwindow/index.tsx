@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 import React from "react";
 import { Link } from "@/i18n/navigation";
 
-// Definisikan tipe untuk setiap pesan dalam history
 interface Message {
   role: "user" | "model";
   parts: [{ text: string }];
@@ -21,7 +20,6 @@ interface ChatWindowProps {
   className?: string;
 }
 
-// Komponen MessageRenderer tidak ada perubahan
 const MessageRenderer = ({
   content,
   onSuggestionClick,
@@ -29,14 +27,12 @@ const MessageRenderer = ({
   content: string;
   onSuggestionClick: (value: string) => void;
 }) => {
-  // ... (kode MessageRenderer tetap sama)
   const tagRegex = /<(linkToHref|buttonChoose|buttonLink):({.*?})>/g;
   const elements = [];
   let lastIndex = 0;
 
   for (const match of content.matchAll(tagRegex)) {
     if (match.index > lastIndex) {
-      console.log(content.substring(lastIndex, match.index));
       if (content.substring(lastIndex, match.index).includes(" "))
         elements.push(
           ...content
@@ -44,8 +40,6 @@ const MessageRenderer = ({
             .split(" ")
             .map((el) => <span>{el}</span>),
         );
-
-      elements.push(content.substring(lastIndex, match.index));
     }
     const [fullMatch, tagType, jsonString] = match;
     try {
@@ -95,9 +89,9 @@ const MessageRenderer = ({
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-[2px]">
+    <div className="flex flex-wrap items-center">
       {elements.map((el, i) => (
-        <React.Fragment key={i}>{el}</React.Fragment>
+        <React.Fragment key={i}>{el}&nbsp;</React.Fragment>
       ))}
     </div>
   );
@@ -109,7 +103,6 @@ export default function ChatWindow({
   className,
 }: ChatWindowProps) {
   const t = useTranslations("Chatbot");
-  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -117,28 +110,45 @@ export default function ChatWindow({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const [messages, setMessages] = useState<Message[]>(() => {
+    if (typeof window === "undefined") {
+      return [];
+    }
+    try {
+      const savedMessages = window.localStorage.getItem("chatMessages");
+      return savedMessages ? JSON.parse(savedMessages) : [];
+    } catch (err) {
+      console.error("Gagal load pesan dari localStorage:", err);
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem("chatMessages", JSON.stringify(messages));
+    } catch (err) {
+      console.error("Gagal simpan pesan ke localStorage:", err);
+    }
+  }, [messages]);
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // [UBAH BARU] Logika pengiriman pesan di-refactor untuk menangani retry
   const submitMessage = async (messageText: string) => {
     if (!messageText.trim() || isLoading) return;
 
-    // Simpan history SEBELUM pesan baru ditambahkan untuk dikirim ke API
     const historyForAPI = [...messages];
     const userMessage: Message = {
       role: "user",
       parts: [{ text: messageText }],
     };
 
-    // Optimistic UI: Tampilkan pesan user, lalu siapkan untuk respons AI
     setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
     setError(null);
-    if (input) setInput(""); // Hanya kosongkan input jika berasal dari form
+    if (input) setInput("");
 
-    // Helper untuk memproses respons sukses (menghindari duplikasi kode)
     const processSuccessResponse = (responseData: any) => {
       if (responseData.response) {
         try {
@@ -176,17 +186,15 @@ export default function ChatWindow({
         }),
       });
 
-      // [UBAH BARU] Handle status 429 untuk rate limit
       if (res.status === 429) {
         const errorData = await res.json();
-        const retryDelay = Number(errorData.retryDelay) || 5; // Fallback 5 detik
+        const retryDelay = Number(errorData.retryDelay) || 5;
 
         setError(
           errorData.message ||
             `API limit, mencoba lagi dalam ${retryDelay} detik...`,
         );
 
-        // Jadwalkan retry menggunakan setTimeout
         setTimeout(async () => {
           try {
             const retryRes = await fetch("/api/ai", {
@@ -199,23 +207,21 @@ export default function ChatWindow({
             });
 
             if (!retryRes.ok) {
-              // Jika retry tetap gagal, lempar error final
               throw new Error("Gagal mengirim pesan setelah mencoba lagi.");
             }
 
             const retryData = await retryRes.json();
             processSuccessResponse(retryData);
-            setError(null); // Hapus pesan error/retry jika sukses
+            setError(null);
           } catch (retryErr) {
             setError((retryErr as Error).message || t("errorMessage"));
           } finally {
-            // [UBAH BARU] Atur loading & focus setelah proses retry selesai
             setIsLoading(false);
             inputRef.current?.focus();
           }
         }, retryDelay * 1000);
 
-        return; // Keluar dari `try` utama karena retry sedang dijadwalkan
+        return;
       }
 
       if (!res.ok) {
@@ -225,12 +231,10 @@ export default function ChatWindow({
       const data = await res.json();
       processSuccessResponse(data);
 
-      // [UBAH BARU] Atur loading & focus setelah sukses pada percobaan pertama
       setIsLoading(false);
       inputRef.current?.focus();
     } catch (err) {
       setError(t("errorMessage"));
-      // [UBAH BARU] Atur loading & focus jika terjadi error pada percobaan pertama
       setIsLoading(false);
       inputRef.current?.focus();
     }
@@ -248,10 +252,15 @@ export default function ChatWindow({
   const resetConversation = () => {
     setMessages([]);
     setError(null);
+
+    try {
+      window.localStorage.removeItem("chatMessages");
+    } catch (err) {
+      console.error("Gagal hapus pesan dari localStorage:", err);
+    }
   };
 
   return (
-    // ... sisa JSX tidak ada perubahan ...
     <div
       className={cn(
         "bg-card flex h-[70vh] max-h-[600px] w-[90vw] max-w-[400px] flex-col overflow-hidden rounded-2xl shadow-2xl transition-all duration-500 ease-in-out",

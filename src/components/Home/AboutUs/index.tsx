@@ -1,31 +1,27 @@
-// src/components/Home/AboutUs/index.tsx
 "use client";
 
 import Section from "@/components/Utils/Section";
-import { Blob } from "../Hero/SVGBlobs";
 import { MoveRight } from "lucide-react";
 import SwitchPage from "@/components/Utils/SwitchPage";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslations } from "next-intl";
+import Image from "next/image"; // Impor komponen Image
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutUs() {
   const t = useTranslations("Home.AboutUs");
-  const [mounted, setMounted] = useState(false);
   const container = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLDivElement | null>(null);
+  const imageRef = useRef<HTMLDivElement | null>(null); // Ref untuk gambar
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Logika GSAP tidak perlu diubah
+  // Animasi untuk teks dan tombol
   useGSAP(
     () => {
+      // Animasi untuk teks subtitle
       gsap.from(".gsap-about-subtitle", {
         opacity: 0,
         y: 20,
@@ -38,6 +34,7 @@ export default function AboutUs() {
         ease: "power2.out",
       });
 
+      // Animasi untuk judul
       gsap.from(".gsap-about-title-word .word", {
         y: "100%",
         opacity: 0,
@@ -51,6 +48,7 @@ export default function AboutUs() {
         ease: "power3.out",
       });
 
+      // Animasi untuk deskripsi
       gsap.from(".gsap-about-desc-word .word", {
         y: "100%",
         opacity: 0,
@@ -64,6 +62,7 @@ export default function AboutUs() {
         ease: "power2.out",
       });
 
+      // Animasi untuk tombol
       gsap.from(buttonRef.current, {
         opacity: 0,
         scale: 0.5,
@@ -75,6 +74,20 @@ export default function AboutUs() {
         duration: 0.5,
         ease: "back.out",
       });
+
+      // Animasi baru untuk rotasi gambar
+      if (imageRef.current) {
+        gsap.to(imageRef.current, {
+          rotation: 360,
+          ease: "none",
+          scrollTrigger: {
+            trigger: container.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+      }
     },
     { scope: container },
   );
@@ -85,6 +98,7 @@ export default function AboutUs() {
         ref={container}
         className="relative mx-auto grid max-w-[550px] grid-cols-1 items-center gap-12 lg:max-w-screen-lg lg:grid-cols-2"
       >
+        {/* --- SEMUA KONTEN TEKS ANDA DIKEMBALIKAN DI SINI --- */}
         <div className="flex flex-col gap-4 text-center text-[15px] lg:text-left">
           <h2 className="gsap-about-subtitle text-muted-foreground text-sm font-semibold tracking-widest uppercase">
             {t("subtitle")}
@@ -102,7 +116,7 @@ export default function AboutUs() {
                   className="word inline-block"
                   style={{ willChange: "transform, opacity" }}
                 >
-                  {word}&nbsp;
+                  {word} 
                 </span>
               ))}
           </h3>
@@ -119,7 +133,7 @@ export default function AboutUs() {
                   className="word inline-block"
                   style={{ willChange: "transform, opacity" }}
                 >
-                  {word}&nbsp;
+                  {word} 
                 </span>
               ))}
           </p>
@@ -133,16 +147,20 @@ export default function AboutUs() {
             </SwitchPage>
           </div>
         </div>
-        <div className="absolute mx-auto flex w-full items-center justify-center lg:relative lg:mx-0 lg:ml-auto">
-          {mounted && (
-            <Blob
-              blobIndex={100}
-              gradientIndex={0}
-              size={320}
-              animated
-              className="top-1/2 right-1/2 -z-[1] mx-auto translate-x-1/2 -translate-y-1/2 ease-in-out lg:right-0 lg:translate-x-0"
+
+        <div className="absolute -z-100 mx-auto flex w-full items-center justify-center lg:relative lg:mx-0 lg:ml-auto">
+          <div
+            ref={imageRef}
+            className="h-[80px] w-[80px] md:h-[180px] md:w-[180px] lg:h-[280px] lg:w-[280px]"
+          >
+            <Image
+              src="/images/Logo/SHR_logo.png"
+              alt="SHR Project Logo"
+              width={320}
+              height={320}
+              className="object-contain"
             />
-          )}
+          </div>
         </div>
       </div>
     </Section>

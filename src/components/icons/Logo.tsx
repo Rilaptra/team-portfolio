@@ -1,12 +1,24 @@
 // src/components/icons/Logo.tsx
-import { SVGLogoProps } from "@/lib/types";
+import { SVGIconProps } from "@/lib/types";
 
-export default function Logo({ size, className }: SVGLogoProps) {
+export default function Logo({ size, className }: SVGIconProps) {
   return (
     <svg
       className={className}
-      width={typeof size === "number" ? size : size.width}
-      height={typeof size === "number" ? size : size.width}
+      width={
+        typeof size === "number"
+          ? size
+          : typeof size === "object"
+            ? size.width
+            : "736"
+      }
+      height={
+        typeof size === "number"
+          ? size
+          : typeof size === "object"
+            ? size.height
+            : "681"
+      }
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 736 681"

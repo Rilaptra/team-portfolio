@@ -24,10 +24,10 @@ export interface TeamMember {
 export const teamData: TeamMember[] = [
   {
     id: "rizqi",
-    image: "https://placehold.co/384x384/76ABAE/FFFFFF.webp?text=RL",
+    image: "/images/About/rizqi/profile.jpg",
     socials: {
       github: "https://github.com/rilaptra",
-      linkedin: "https://linkedin.com/in/username",
+      linkedin: "https://linkedin.com/in/rizqi-lasheva",
       instagram: "https://instagram.com/rzq.lasv",
     },
     skills: [
@@ -38,29 +38,24 @@ export const teamData: TeamMember[] = [
       "Node.js",
       "GSAP",
       "TailwindCSS",
-      "Figma",
+      "Lua",
     ],
     projects: [
       {
         id: "p1",
-        url: "https://erzysh.vercel.app",
-        stack: ["Next.js", "GSAP", "TailwindCSS"],
+        url: "/images/Home/botwhatsapp.jpg",
+        preview_type: "image",
+        stack: ["Express", "Socket.IO", "React", "Node.js", "Local Database"],
       },
       {
         id: "p2",
-        url: "https://eshmarket.vercel.app",
-        stack: ["React", "TypeScript", "Recharts"],
+        url: "https://erzysh.vercel.app",
+        stack: ["Next.js", "TypeScript", "GSAP"],
       },
       {
         id: "p3",
-        url: "/images/Home/botwhatsapp.jpg",
-        preview_type: "image",
-        stack: ["Figma", "UI/UX"],
-      },
-      {
-        id: "p4",
-        url: "https://erzysh.vercel.app",
-        stack: ["Vite", "Node.js", "Socket.IO"],
+        url: "https://eshmarket.vercel.app",
+        stack: ["Next.js", "TypeScript", "Discord API", "MongoDB"],
       },
     ],
   },
@@ -114,19 +109,19 @@ export const teamData: TeamMember[] = [
       instagram: "https://instagram.com/alfarisyx",
     },
     skills: [
-      "nextjs",
+      "Next.js",
       "React",
-      "Tailwindcss",
+      "Tailwind CSS",
       "Burpsuite",
-      "laravel",
-      "windows",
-      "linux",
+      "Laravel",
+      "Windows",
+      "Linux",
     ],
     projects: [
       {
         id: "p1",
         url: "/images/About/sava/sertifikat.png",
-        stack: ["kali linux"],
+        stack: ["Kali Linux"],
       },
       {
         id: "p2",
