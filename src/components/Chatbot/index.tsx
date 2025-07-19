@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -7,7 +6,7 @@ import ChatWindow from "./Chatwindow";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-const DRAG_THRESHOLD = 5; 
+const DRAG_THRESHOLD = 5;
 
 export default function Chatbot() {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -31,7 +30,7 @@ export default function Chatbot() {
       }
     };
     // Timeout kecil untuk memastikan elemen sudah dirender sepenuhnya
-    setTimeout(setInitialPosition, 100);
+    setInitialPosition();
     window.addEventListener("resize", setInitialPosition);
     return () => window.removeEventListener("resize", setInitialPosition);
   }, []);
@@ -95,50 +94,51 @@ export default function Chatbot() {
         duration: 0,
       });
     }
-};
+  };
 
   const handlePointerUp = () => {
-  if (isDragging.current) {
-    wasDragging.current = true; // Ini penting untuk cegah klik setelah drag
+    if (isDragging.current) {
+      wasDragging.current = true; // Ini penting untuk cegah klik setelah drag
 
-    // Ambil posisi terakhir
-    const finalPos = {
-      x: gsap.getProperty(chatbotRef.current, "x") as number,
-      y: gsap.getProperty(chatbotRef.current, "y") as number,
-    };
+      // Ambil posisi terakhir
+      const finalPos = {
+        x: gsap.getProperty(chatbotRef.current, "x") as number,
+        y: gsap.getProperty(chatbotRef.current, "y") as number,
+      };
 
-    const currentX = finalPos.x;
-    const currentY = finalPos.y;
-    const screenWidth = window.innerWidth;
-    const chatbotWidth = chatbotRef.current!.offsetWidth;
-    const margin = 16;
+      const currentX = finalPos.x;
+      const currentY = finalPos.y;
+      const screenWidth = window.innerWidth;
+      const chatbotWidth = chatbotRef.current!.offsetWidth;
+      const margin = 16;
 
-    // Hitung snap ke kiri atau kanan
-    const isCloserToLeft = currentX < screenWidth / 2;
-    const snapX = isCloserToLeft ? margin : screenWidth - chatbotWidth - margin;
+      // Hitung snap ke kiri atau kanan
+      const isCloserToLeft = currentX < screenWidth / 2;
+      const snapX = isCloserToLeft
+        ? margin
+        : screenWidth - chatbotWidth - margin;
 
-    // Gunakan animasi snap dengan GSAP
-    gsap.to(chatbotRef.current, {
-      x: snapX,
-      y: currentY,
-      duration: 0.3,
-      ease: "power2.out",
-    });
+      // Gunakan animasi snap dengan GSAP
+      gsap.to(chatbotRef.current, {
+        x: snapX,
+        y: currentY,
+        duration: 0.3,
+        ease: "power2.out",
+      });
 
-    // Tetap update state posisi (untuk sinkronisasi)
-    setPosition({ x: snapX, y: currentY });
-  }
+      // Tetap update state posisi (untuk sinkronisasi)
+      setPosition({ x: snapX, y: currentY });
+    }
 
-  // Reset state drag
-  isDragging.current = false;
-  chatbotRef.current!.style.cursor = "grab";
-  chatbotRef.current!.style.transition = "";
+    // Reset state drag
+    isDragging.current = false;
+    chatbotRef.current!.style.cursor = "grab";
+    chatbotRef.current!.style.transition = "";
 
-  // Hapus event listener
-  window.removeEventListener("pointermove", handlePointerMove);
-  window.removeEventListener("pointerup", handlePointerUp);
-};
-
+    // Hapus event listener
+    window.removeEventListener("pointermove", handlePointerMove);
+    window.removeEventListener("pointerup", handlePointerUp);
+  };
 
   useEffect(() => {
     if (isChatOpen && chatbotRef.current) {
@@ -152,7 +152,6 @@ export default function Chatbot() {
       // Set state seperti: setOpenDirection({ horizontal: 'left', vertical: 'up' })
     }
   }, [isChatOpen]);
-
 
   return (
     <>
@@ -181,14 +180,16 @@ export default function Chatbot() {
           />
         </div>
       </div>
-      {isChatOpen && <div className="fixed z-[998] inset-0 flex justify-center items-center">
-        <div className="absolute inset-0 bg-black/80 z-[999]"></div>
-        <ChatWindow
-          onClose={() => setIsChatOpen(false)}
-          isChatOpen={isChatOpen}
-          className={'z-[1000]'}
-        />
-      </div>}
+      {isChatOpen && (
+        <div className="fixed inset-0 z-[998] flex items-center justify-center">
+          <div className="absolute inset-0 z-[999] bg-black/80"></div>
+          <ChatWindow
+            onClose={() => setIsChatOpen(false)}
+            isChatOpen={isChatOpen}
+            className={"z-[1000]"}
+          />
+        </div>
+      )}
     </>
   );
 }

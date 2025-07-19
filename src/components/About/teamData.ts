@@ -27,7 +27,7 @@ export const teamData: TeamMember[] = [
     image: "/images/About/rizqi/profile.jpg",
     socials: {
       github: "https://github.com/rilaptra",
-      linkedin: "https://linkedin.com/in/rizqi-lasheva",
+      linkedin: "https://linkedin.com/in/rizqi-lasheva-purnama-putra-219a0a375",
       instagram: "https://instagram.com/rzq.lasv",
     },
     skills: [
@@ -60,8 +60,8 @@ export const teamData: TeamMember[] = [
     ],
   },
   {
-    id: "solahuddin",
-    image: "https://placehold.co/384x384/31363F/EEEEEE.webp?text=SA",
+    id: "huddin",
+    image: "/images/About/huddin/profile.jpg",
     socials: {
       github: "https://github.com/username",
       linkedin: "https://linkedin.com/in/username",
@@ -102,7 +102,7 @@ export const teamData: TeamMember[] = [
   },
   {
     id: "sava",
-    image: "https://placehold.co/384x384/222831/EEEEEE.webp?text=MS",
+    image: "/images/About/sava/profile.jpg",
     socials: {
       github: "https://github.com/sava990",
       linkedin: "https://linkedin.com/in/alfarisyx-sava",
@@ -116,6 +116,7 @@ export const teamData: TeamMember[] = [
       "Laravel",
       "Windows",
       "Linux",
+      "framer motion",
     ],
     projects: [
       {

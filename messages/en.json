@@ -139,26 +139,26 @@
         }
       },
       {
-        "id": "solahuddin",
-        "name": "Solahuddin Ahmad",
-        "role": "Back-End & IoT Specialist",
-        "bio": "An expert in building reliable server architectures and innovative IoT solutions. Enjoys tinkering with hardware and connecting it to the digital world.",
+        "id": "huddin",
+        "name": "Sholahuddin Ahmad",
+        "role": "Frontend Expert and UI/UX Designer",
+        "bio": "A web dev who fell more in love with the design and feel of a website than with complex, impact-less numbers. Currently pursuing a balance between technology, art, and the meaning of life. Coding is important, but if it's not aesthetic and mindful... I'll pass.",
         "projects": {
           "p1": {
-            "title": "Smart Home Controller",
-            "description": "An ESP32-based smart home device control system with a real-time web dashboard."
+            "title": "Toworklist",
+            "description": "A Discord-flavored todolist — work on tasks together, in real-time, and groups auto-expire to avoid clutter."
           },
           "p2": {
-            "title": "WhatsApp API Gateway",
-            "description": "A gateway to programmatically send and receive WhatsApp messages for automated notifications."
+            "title": "Forisma",
+            "description": "Attendance system using GPT & QR — has been used for 2 years at SMAN 3 Magelang. Practical, modern, and data can be printed directly."
           },
           "p3": {
-            "title": "Inventory Management API",
-            "description": "A REST API for a warehouse inventory management system with JWT authentication."
+            "title": "North Magelang WhatsApp Bot",
+            "description": "An instant WhatsApp bot for the government. Sold for IDR 700k overnight & helped the client get a promotion. Simple but powerful."
           },
           "p4": {
-            "title": "Weather Station Logger",
-            "description": "Collects data from weather sensors and sends it to the cloud for analysis."
+            "title": "My First Coding Certificate",
+            "description": "The first project that became the initial proof of falling in love with the coding world. The starting point of my digital journey."
           }
         }
       },

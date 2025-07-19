@@ -10,6 +10,7 @@ import { Button } from "@/components/Ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/Ui/card";
 import { useTranslations } from "next-intl";
 import PencilTitle from "../Utils/PencilTitle";
+import Link from "next/link";
 
 export default function Contact() {
   const t = useTranslations("Contact");
@@ -20,14 +21,14 @@ export default function Contact() {
     {
       icon: <Mail className="h-8 w-8 text-teal-500" />,
       title: t("details.email"),
-      detail: "your.email@shareproject.com",
-      href: "mailto:your.email@shareproject.com",
+      detail: "shrshareproject@gmail.com",
+      href: "mailto:shrshareproject@gmail.com",
     },
     {
       icon: <Phone className="h-8 w-8 text-teal-500" />,
       title: t("details.phone"),
-      detail: "+62 123 4567 8910",
-      href: "tel:+6212345678910",
+      detail: "+62 877 4545 7767",
+      href: "https://wa.me/6287745457767",
     },
     {
       icon: <MapPin className="h-8 w-8 text-teal-500" />,
@@ -104,7 +105,13 @@ export default function Contact() {
         </div>
         <div className="contact-gsap mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
           {contactDetails.map((item, index) => (
-            <a key={index} href={item.href} className="group">
+            <Link
+              key={index}
+              href={item.href}
+              target={item.href === "#" ? "_self" : "_blank"}
+              rel={item.href === "#" ? "" : "noopener noreferrer"}
+              className="group"
+            >
               <Card className="h-full transform-gpu text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl dark:hover:border-teal-500/50">
                 <CardHeader>
                   <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 transition-colors duration-300 group-hover:bg-teal-500/10 dark:bg-neutral-800">
@@ -116,7 +123,7 @@ export default function Contact() {
                   <p className="text-muted-foreground mt-2">{item.detail}</p>
                 </CardContent>
               </Card>
-            </a>
+            </Link>
           ))}
         </div>
         <Card className="contact-gsap mt-12 w-full p-8">

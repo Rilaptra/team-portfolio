@@ -139,26 +139,26 @@
         }
       },
       {
-        "id": "solahuddin",
-        "name": "Solahuddin Ahmad",
-        "role": "Back-End & IoT Specialist",
-        "bio": "Ahli dalam membangun arsitektur server yang andal dan solusi IoT yang inovatif. Senang mengoprek perangkat keras dan menghubungkannya ke dunia digital.",
+        "id": "huddin",
+        "name": "Sholahuddin Ahmad",
+        "role": "Frontend Expert and UI/UX Designer",
+        "bio": "Web dev yang lebih jatuh cinta sama desain dan feel website daripada angka-angka rumit yang nggak ngasih impact. Lagi ngejar balance antara teknologi, seni, dan makna hidup. Coding itu penting, tapi kalau nggak estetik dan mindful… skip dulu.",
         "projects": {
           "p1": {
-            "title": "Smart Home Controller",
-            "description": "Sistem kontrol perangkat rumah pintar berbasis ESP32 dengan dashboard web real-time."
+            "title": "Toworklist",
+            "description": "Todolist rasa Discord — bisa bareng-bareng nugas, real-time, dan grupnya auto expired biar nggak nyampah."
           },
           "p2": {
-            "title": "WhatsApp API Gateway",
-            "description": "Gateway untuk mengirim dan menerima pesan WhatsApp secara terprogram untuk notifikasi otomatis."
+            "title": "Forisma",
+            "description": "Absensi pakai GPT & QR — udah dipakai 2 tahun di SMAN 3 Magelang. Praktis, modern, dan bisa langsung print datanya."
           },
           "p3": {
-            "title": "Inventory Management API",
-            "description": "REST API untuk sistem manajemen inventaris gudang dengan autentikasi JWT."
+            "title": "WhatsApp Bot Magelang Utara",
+            "description": "Bot WhatsApp instan buat pemerintah. Terjual 700 ribu semalam & bantu klien naik jabatan. Simple but powerful."
           },
           "p4": {
-            "title": "Weather Station Logger",
-            "description": "Mengumpulkan data dari sensor cuaca dan mengirimkannya ke cloud untuk dianalisis."
+            "title": "My First Coding Certificate",
+            "description": "Proyek pertama yang jadi bukti awal jatuh cinta sama dunia ngoding. Titik awal perjalanan digitalku."
           }
         }
       },

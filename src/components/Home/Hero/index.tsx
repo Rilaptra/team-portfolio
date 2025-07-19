@@ -18,7 +18,7 @@ export default function Hero() {
       </div>
       {/* blobs bikin laptopku lag. bentar ku disable */}
       {/* solusi : animated = false */}
-      <Blobs amount={10} animated={false} floating />
+      <Blobs amount={7} animated={true} floating />
     </Section>
   );
 }
