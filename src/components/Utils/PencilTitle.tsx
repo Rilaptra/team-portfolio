@@ -32,13 +32,13 @@ export default function PencilTitle({
     <div className={cn("relative pb-2", className)}>
       {title && <h1 className={cn("text-xl", titleClassName)}>{title}</h1>}
       {children}
-      <Line
+      {/* <Line
         size={{ width: 300, height: 210 }}
         className={cn(
           "absolute right-3 -bottom-2 left-3 text-white transition-transform duration-300 dark:text-teal-400",
           transformClass, // Gunakan state di sini
         )}
-      />
+      /> */}
     </div>
   );
 }

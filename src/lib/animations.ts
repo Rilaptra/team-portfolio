@@ -49,7 +49,7 @@ export const animatePageOut = (href: string, router: AppRouterInstance) => {
       xPercent: 0,
       stagger: 0.25,
       ease: "power2.inOut",
-      onComplete: () => router.push(href), 
+      onComplete: () => router.push(href),
     });
   }
 };
