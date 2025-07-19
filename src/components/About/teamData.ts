@@ -80,12 +80,12 @@ export const teamData: TeamMember[] = [
     projects: [
       {
         id: "p1",
-        url: "https://erzysh.vercel.app",
+        url: "/images/Home/toworklist.png",
         stack: ["PlatformIO", "Firebase", "React"],
       },
       {
         id: "p2",
-        url: "https://erzysh.vercel.app",
+        url: "/images/About/huddin/absensi.png",
         stack: ["Node.js", "Express", "Baileys"],
       },
       {
@@ -126,7 +126,7 @@ export const teamData: TeamMember[] = [
       },
       {
         id: "p2",
-        url: "https://erzysh.vercel.app",
+        url: "/images/About/sava/sertifikat2.jpg",
         stack: ["GSAP", "ScrollTrigger", "Barba.js"],
       },
     ],
