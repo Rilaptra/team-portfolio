@@ -80,72 +80,54 @@ export function ProfileCard() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Logika GSAP tetap sama
+  // GSAP hanya untuk desktop
   useGSAP(
     () => {
       let mm = gsap.matchMedia();
-      mm.add(
-        { isDesktop: "(min-width: 768px)", isMobile: "(max-width: 767px)" },
-        (context) => {
-          let { isDesktop } = context.conditions as { isDesktop: boolean };
-          if (isDesktop) {
-            const sections = gsap.utils.toArray<HTMLElement>(
-              ".horizontal-section",
-            );
-            const wrapper = wrapperRef.current;
-            if (!wrapper || sections.length === 0) return;
-            const totalWidth = wrapper.scrollWidth;
-            const viewWidth = window.innerWidth;
-            const horizontalScroll = gsap.to(wrapper, {
-              x: () => `-${totalWidth - viewWidth}px`,
-              ease: "none",
-              scrollTrigger: {
-                trigger: containerRef.current,
-                pin: true,
-                scrub: 1,
-                end: () => `+=${totalWidth - viewWidth}`,
-              },
-            });
-            sections.forEach((section) => {
-              gsap.from(section.querySelectorAll(".gsap-reveal"), {
-                y: 50,
-                opacity: 0,
-                stagger: 0.07,
-                ease: "power3.out",
-                scrollTrigger: {
-                  trigger: section,
-                  containerAnimation: horizontalScroll,
-                  start: "left 85%",
-                  end: "right 15%",
-                  toggleActions: "play reverse play reverse",
-                },
-              });
-            });
-          } else {
-            const sections = gsap.utils.toArray<HTMLElement>(
-              ".horizontal-section",
-            );
-            sections.forEach((section) => {
-              gsap.from(section.querySelectorAll(".gsap-reveal"), {
-                y: 50,
-                opacity: 0,
-                stagger: 0.1,
-                duration: 0.8,
-                ease: "power3.out",
-                scrollTrigger: {
-                  trigger: section,
-                  start: "top 85%",
-                  toggleActions: "play reverse play reverse",
-                },
-              });
-            });
-          }
-        },
-      );
+
+      // Menambahkan animasi hanya untuk layar dengan lebar minimum 768px (desktop)
+      mm.add("(min-width: 768px)", () => {
+        const sections = gsap.utils.toArray<HTMLElement>(".horizontal-section");
+        const wrapper = wrapperRef.current;
+        if (!wrapper || sections.length === 0) return;
+
+        const totalWidth = wrapper.scrollWidth;
+        const viewWidth = window.innerWidth;
+
+        const horizontalScroll = gsap.to(wrapper, {
+          x: () => `-${totalWidth - viewWidth}px`,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            pin: true,
+            scrub: 1,
+            end: () => `+=${totalWidth - viewWidth}`,
+          },
+        });
+
+        sections.forEach((section) => {
+          gsap.from(section.querySelectorAll(".gsap-reveal"), {
+            y: 50,
+            opacity: 0,
+            stagger: 0.07,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: section,
+              containerAnimation: horizontalScroll,
+              start: "left 85%",
+              end: "right 15%",
+              toggleActions: "play reverse play reverse",
+            },
+          });
+        });
+      });
+
+      // Tidak ada blok "else" atau kondisi untuk mobile, sehingga tidak ada GSAP yang berjalan di mobile.
     },
     { scope: containerRef },
   );
 
+  // GSAP untuk animasi modal (tetap aktif di semua perangkat)
   useGSAP(() => {
     if (modalData) {
       gsap.set(modalRef.current, { display: "flex" });
