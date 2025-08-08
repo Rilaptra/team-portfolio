@@ -102,7 +102,7 @@ export default function Projects() {
       desc: t("cards.venice.desc"),
       image: "/webp/Home/venice_porto1.webp",
       techStack: ["Next.js", "Tailwind CSS"],
-      href: "https://klinik-venice.vercel.app",
+      href: "https://www.klinikvenice.com/",
     },
     {
       title: t("cards.whatsapp.title"),
@@ -115,6 +115,7 @@ export default function Projects() {
       desc: t("cards.suksesmulya.desc"),
       image: "webp/Home/suksesmulya.webp",
       techStack: ["Tailwindcss", "Nextjs", "React"],
+        href: "https://www.suksesmulyamagelang.com/",
     },
   ];
 
